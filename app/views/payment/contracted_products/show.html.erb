@@ -1,0 +1,102 @@
+<% unless notice.nil? %>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+<div class="title-center">
+  <h1 class="space-title">Datos de la orden de compra </h1>
+</div>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+     <strong>Orden de compra</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @payment_plan.number_plan %>
+    </div>
+  </div>
+</div>
+  <% unless @payment_plan.customer.nil? %>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Titular</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @payment_plan.nombre_titular%>
+    </div>
+  </div>
+</div>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Cédula de identidad</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @payment_plan.cedula_titular%>
+    </div>
+  </div>
+</div>
+  <%else%>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+    <strong>Titular</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @payment_plan.business_company.name%>
+    </div>
+  </div>
+</div>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+    <strong>RIF</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @payment_plan.business_company.rif%>
+    </div>
+  </div>
+</div>
+  <% end %>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Fecha de Pago</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+    <%= @payment_plan.created_at.strftime("%d-%m-%Y")%>
+    </div>
+  </div>
+</div>
+  <div class="col-lg-12 col-lg-12 col-sm-12 col-md-12 col-xs-12">  
+    <h3 class="sub-title title-center">Producto</h3>
+  </div>
+<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 center-flex">
+  <section class=" col-lg-10">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Centro médico</th>
+          <th>Estatus</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% @payment_contracted_product.each do |payment_contracted_product| %>
+        <tr>
+          <td><%= payment_contracted_product.product_product.name%></td>
+          <td><%= payment_contracted_product.product_product.proveedor %></td>
+          <td><%= payment_contracted_product.status %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </section>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+<%= link_to 'Cancelar', '/payment/contracted_products',class: "hvr-skew-backward"  %>
+</div>
+

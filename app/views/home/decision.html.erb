@@ -1,0 +1,9 @@
+<section class="col-lg-10 col-lg-offset-1">
+  <h1 align="center">Elige el segmento al que perteneces para continuar con la operación.</h1>
+  <br>
+  <div class="col-lg-12 center">
+    <%= link_to "#{I18n.t ('.activerecord.models.people.one')}", { controller: "home", :action => :redireccionamiento_verificar,cliente: "persona"}, class: "hvr-skew-backward" %>
+ 
+    <%= link_to "#{I18n.t ('.activerecord.models.companies.one')}", { controller: "home", :action => :redireccionamiento_verificar,cliente: "empresa"}, class: "hvr-skew-backward" %>
+  </div>  
+</section>

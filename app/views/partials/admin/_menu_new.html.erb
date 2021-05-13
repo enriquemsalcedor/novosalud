@@ -1,0 +1,13 @@
+<% if user_signed_in? %>
+<section class="menu_new">
+	<div class="container">
+		<ul class="list-inline">
+			<li><div class="circle"><span class="glyphicon glyphicon-user"></span></div></li>
+			<li><%= link_to "#{current_user.employee.first_name.upcase}", profile_path %></li>
+			<li><%= link_to "CAMBIO DE CONTRASEÑA", edit_user_registration_path %></li>
+			<li><%= link_to "CERRAR SESIÓN", destroy_user_session_path(:layout => 'admin'), method: :delete %></li>
+
+		</ul>
+	</div>
+</section>
+<% end -%>

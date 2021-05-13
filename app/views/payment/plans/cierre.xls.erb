@@ -1,0 +1,47 @@
+
+<table border="0">
+  <% @payment_plans.each do |payment_plan| %>
+  <tr>
+  </tr>
+  <tr>
+    <p>
+    Número de orden de compra:
+    <%= payment_plan.number_plan %>
+  </p>
+    <% unless payment_plan.customer.nil? %>
+    <p>
+     Cédula del cliente:
+     <%= payment_plan.customer.identificacion_usuario %>
+    </p>
+    <p>
+     Nombre del cliente:
+     <%= payment_plan.customer.nombre_usuario %>
+    </p>
+    <%else%>
+    <p>
+     RIF cliente:
+     <%= payment_plan.business_company.rif %>
+    </p>
+    <p>
+     Nombre de la empresa:
+     <%= payment_plan.business_company.name %>
+    </p>
+    <% end %>
+    <p>
+      Modalidad de pago:
+      <%= payment_plan.method_payment.name %>
+    </p>
+  </tr>
+  <% end %>
+  <tr>
+    <table border="0">
+      <tr>
+        <th>Item</th>
+        <th>Catidad</th>
+        <th>Precio unitario</th>
+        <th>Subtotal</th>
+      </tr>
+    </table>
+  </tr>
+
+</table>

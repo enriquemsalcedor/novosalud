@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html class="no-js js_active vc_desktop vc_transform vc_transform vc_transform " lang="es-ES">
+<%= render "partials/admin/cab"%>
+<body class="page-template-default page page-id-9 page-parent site_layout_1 header_style_2 sticky_menu title_box_image_added wpb-js-composer js-comp-ver-4.11.2 vc_responsive" style="width: auto;">
+<% if current_user %>
+  <%= auto_session_timeout_js %> <!-- me ejecutara la gema auto-session-timeout-->
+<%end%>  
+  <div id="wrapper">
+    <div class="content_wrapper">
+      <%= render "partials/admin/header"%>
+       <% if params[:action] == "index" or params[:action] == "quotation_history" or params[:action] == "plan_history" or params[:action] == "list" or params[:action] == "plist" or   params[:action] == "list_search" or  params[:action] == "promotions" or params[:action] == "pymes_promotions" or params[:action] == "clinics" or params[:action] == "details" or params[:action] == "clinics_details"%>
+        <%= render "partials/admin/search" %>
+        <% else %>
+        <%= render "partials/admin/search_empty" %>
+        <% end %>
+        <% if params[:action] == "index" %>
+        <%= render "partials/admin/banner"%>
+        <% end %>
+      <div id="main">
+        <div class="container padding_right_none">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+      <%= render "partials/admin/footer"%>
+</body>
+</html>

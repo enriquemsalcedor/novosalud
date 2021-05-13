@@ -1,0 +1,73 @@
+ 
+<%if @user.client_type == "empleado" && !@user.password.nil?%>
+	<p>¡Saludos Sr(a), <%= @user.employee.first_name %> <%= @user.employee.surname %>!</p>
+
+	<p>Le informamos que usted podrá ingresar al sistema Novo en Línea con los siguientes datos. </p>
+
+	<p>Usuario: <%= @user.username %></p>
+	<p>Contraseña: <%= @user.password %></p>
+
+	<p>Para ello, debe finalizar su registro y habilitar el inicio de sesión.</p>
+	<p>Haga clic aquí para confirmar su correo electrónico:</p>
+	<p><%= link_to 'Confirmar correo', confirmation_url(@resource, confirmation_token: @token,:user => @user.username ) %></p>
+
+	<p>Si desea hacer cambio de contraseña lo puede hacer sin ningún problema ingresando al menú Mi cuenta, submenú Cambie su contraseña</p>
+<%elsif @user.client_type == "empleado" && @user.password.nil?%>
+	<p>¡Saludos Sr(a), <%= @user.employee.first_name %> <%= @user.employee.surname %>!</p>
+
+	<p>Le informamos que usted podrá ingresar al sistema Novo en Línea con los siguientes datos. </p>
+
+	<p>Usuario: <%= @user.username %></p>
+	<p>Debe finalizar su actualización de correo y habilitar el inicio de sesión.</p>
+	<p>Haga clic aquí para confirmar su correo electrónico:</p>
+
+	<p><%= link_to 'Confirmar correo', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+	<p>Mantendra la misma contraseña, si desea hacer cambio de contraseña lo puede hacer sin ningún problema ingresando al menú Mi cuenta, submenú Cambie su contraseña</p>
+<%elsif @user.client_type == "persona" %>
+	<p>¡Saludos Sr(a), <%= @user.customer.people.first_name %> <%= @user.customer.people.surname %>!</p>
+
+	<p>Le informamos que usted podrá ingresar al sistema Novo en Línea con los siguientes datos. </p>
+
+	<p>Usuario: <%= @email %></p>
+	<%if @user.password.nil?%>	
+		<p>Debe finalizar su actualización de correo y habilitar el inicio de sesión.</p>
+		<p>Haga clic aquí para confirmar su correo electrónico:</p>
+
+		<p><%= link_to 'Confirmar correo', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+		<p>Mantendra la misma contraseña, si desea hacer cambio de contraseña lo puede hacer sin ningún problema ingresando al menú Mi cuenta, submenú Cambie su contraseña</p>
+	<%else%>	
+		<p>Contraseña: <%= @user.password %></p>
+
+		<p>Para ello, debe finalizar su registro y habilitar el inicio de sesión.</p>
+		<p>Haga clic aquí para confirmar su correo electrónico:</p>
+
+		<p><%= link_to 'Confirmar correo', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+		<p>Si desea hacer cambio de contraseña lo puede hacer sin ningún problema ingresando al menú Mi cuenta, submenú Cambie su contraseña</p>
+	<%end%>	
+<%elsif @user.client_type == "empresa" %>
+	<p>¡Saludos, <%= @user.company.name %>!</p>
+
+	<p>Le informamos que usted podrá ingresar al sistema Novo en Línea con los siguientes datos. </p>
+
+	<p>Usuario: <%= @email %></p>
+	<%if @user.password.nil?%>	
+		<p>Debe finalizar su actualización de correo y habilitar el inicio de sesión.</p>
+		<p>Haga clic aquí para confirmar su correo electrónico:</p>
+
+		<p><%= link_to 'Confirmar correo', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+		<p>Mantendra la misma contraseña, si desea hacer cambio de contraseña lo puede hacer sin ningún problema ingresando al menú Mi cuenta, submenú Cambie su contraseña</p>
+	<%else%>	
+		<p>Contraseña: <%= @user.password %></p>
+
+		<p>Para ello, debe finalizar su registro y habilitar el inicio de sesión.</p>
+		<p>Haga clic aquí para confirmar su correo electrónico:</p>
+
+		<p><%= link_to 'Confirmar correo', confirmation_url(@resource, confirmation_token: @token) %></p>
+
+		<p>Si desea hacer cambio de contraseña lo puede hacer sin ningún problema ingresando al menú Mi cuenta, submenú Cambie su contraseña</p>
+	<%end%>	
+<%end%>

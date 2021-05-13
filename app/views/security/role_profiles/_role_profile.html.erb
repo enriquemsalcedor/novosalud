@@ -1,0 +1,7 @@
+<tr>
+  <td><%= role_profile.security_role.name %></td>
+  <td><%= role_profile.security_role_type.name %></td>
+  <td><%= role_profile.start_date %></td>
+  <td><%= role_profile.end_date %></td>
+  <td><%= link_to 'Eliminar', role_profile, remote: true, :class => 'delectRolProfile', method: :delete, data: { confirm: '¿Desea eliminar este rol para este perfil?' } %></td>
+</tr>

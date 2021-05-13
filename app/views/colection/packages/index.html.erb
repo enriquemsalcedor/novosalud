@@ -1,0 +1,72 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.packages') %></h1>
+  <table id="datatable"  class="table table-hover">
+   <thead>
+    <%- @colection_packages.each do |colection_package| -%>
+    <tr>
+      <th><%= raw I18n.t('.general.attribute.code') %></th>
+      <th><%= raw I18n.t('.general.attribute.description') %></th>
+      <th><%=raw I18n.t ('.products.attributes.category') %></th>
+      <th><%= raw I18n.t('.products.attributes.publication_date') %></th>
+      <th><%= raw I18n.t('.products.attributes.expiration_date') %></th>
+      <th><%= raw I18n.t('.general.attributes.actions') %></th>
+    </tr>
+    <%- end -%>
+  </thead>
+  <tbody>
+    <%- @colection_packages.each do |colection_package| -%>
+    <tr>
+      <td><%= colection_package.code %></td>
+      <td><%= colection_package.description %></td>
+      <td><%= colection_package.category %></td>
+      <td><%= colection_package.valid_since.strftime("%d-%m-%Y") %></td>
+      <td><%= colection_package.valid_until.strftime("%d-%m-%Y") %></td>
+      <td>
+        <% if @permiso_consultar == true %>
+        <%= link_to colection_package, class: "hvr-skew-backward" , :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.see")) %>
+        <% end %>
+        <% end -%>
+        <% if @permiso_modificar == true %>
+        <%= link_to edit_colection_package_path(colection_package), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+        <% end %>
+        <% end -%>
+        <% if @permiso_activar == true %>
+        <% if colection_package.may_inhabilitar? %>
+        <%= link_to "/colection/packages/#{colection_package.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.package.disable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+        <% end %>
+        <%else%>
+        <%= link_to "/colection/packages/#{colection_package.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.package.enable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Activar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+        <% end %>
+        <% end -%>
+        <%end%>
+      </td> 
+    </tr>
+    <%- end -%>
+  </tbody>
+</table>
+<% if @permiso_crear == true %>
+<%= link_to new_colection_package_path,  class: "hvr-skew-backward"  do %>
+<%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.package')) %>
+<% end %>
+<% end -%>
+<% if !@colection_packages.present? %>
+<div class="alert alert-danger notice col-lg-12 ml-0">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+</div>
+<% end %>
+</section>

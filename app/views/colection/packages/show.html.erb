@@ -1,0 +1,152 @@
+<%unless notice.nil?%>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<%end%>
+
+<div class="title-center">
+  <h1 class="space-title"><%=raw I18n.t ('.packages.actions.show_package') %></h1>
+</div>
+<div class="col-lg-12">
+  <div class="col-lg-12 col-xs-12 img-center pro-img">
+    <% if @colection_package.image_file_name.nil? %>
+    <i class="fa fa-cube"></i>
+    <%else%>
+    <%= image_tag @colection_package.image.url(:medium) %>
+    <%end%>
+  </div>
+</div>
+<div class="col-lg-4">
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.code')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.code %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.description')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.description %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.category')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.category %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.terms')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown area">
+      <div class="col-lg-10 ">
+        <%= @colection_package.terms %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-4">
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.valid_since')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.valid_since.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.valid_until')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.valid_until.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.price')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 coin">
+        <%= number_with_precision(@colection_package.total_amount.to_f , precision: 2, precision: 2,delimiter:'.',separator: ',') %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12">
+    <div class="col-lg-4  col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.created_at')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.created_at.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-4  col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.updated_at')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.updated_at.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.packages.attributes.status')%></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @colection_package.status %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-4">
+  <table class="table table-bordered">
+    <thead>
+      <tr >
+        <th class="text-center"> <strong>Productos</strong></th>
+        <th class="text-center"> <strong>Cantidad</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @package_products.each do |colection_package_product| %>
+      <tr>
+        <td><%= colection_package_product.product_products.armar_nombre %></td>
+        <td><%= colection_package_product.quantity %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+  <% if @permiso_modificar == true %>      
+  <%= link_to I18n.t('.general.action.edit'), edit_colection_package_path(@colection_package),class: "hvr-skew-backward" %>
+  <% end -%>
+  <%= link_to I18n.t('.general.action.cancel'), colection_packages_path, class: "hvr-skew-backward"  %>
+</div>

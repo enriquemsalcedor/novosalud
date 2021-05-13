@@ -1,0 +1,168 @@
+<%unless notice.nil?%>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+  <%end%>
+  <div class="title-center">
+    <h1 class="space-title"><%=raw I18n.t ('.general.titles.plan_data') %></h1>
+  </div>
+  <div class="col-lg-10">
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+      <strong>Número:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.number_plan %>
+        </div>
+      </div>
+    </div>
+    <% unless @payment_plan.customer.nil? %>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Cédula del cliente:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.customer.identificacion_usuario %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Nombre del cliente:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.customer.nombre_usuario %>
+        </div>
+      </div>
+    </div>
+    <%else%>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>RIF cliente:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.business_company.rif %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Nombre de la empresa:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.business_company.name %>
+        </div>
+      </div>
+    </div>
+    <% end -%>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Monto total:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= number_with_precision(@payment_plan.total_amount , :precision => 2, delimiter:'.',separator: ',') %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Modalidad de pago:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.method_payment.name %>
+        </div>
+      </div>
+    </div>
+    <%unless @payment_plan.bank.nil?%>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Banco:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.bank.name %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Número de referencia:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.reference %>
+        </div>
+      </div>
+    </div>
+    <%end%>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Fecha de Pago:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.created_at.strftime("%d-%m-%Y") %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-xs-5 text-right">
+        <strong>Estatus:</strong>
+      </div>
+      <div class="col-lg-8 col-xs-7 rdown">
+        <div class="col-lg-10 ">
+          <%= @payment_plan.status %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-lg-12 col-sm-12 col-md-12 col-xs-12">  
+    <h3 class="sub-title title-center"><%=raw I18n.t ('.general.titles.plan_ditail') %></h3>
+  </div>
+  <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 center-flex">
+    <section class="col-lg-10">
+      <table class="table table-responsive">
+        <thead>
+          <tr>
+            <th>Servicio</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @buscar_precio.each do |payment_plan| %>
+          <% @product_quotations.each do |product_quotation| %>
+<!--      <% if payment_plan.product_product_id == product_quotation.product_product_id %> -->
+            <tr>
+              <td><%= payment_plan.product_product.armar_nombre %></td>
+              <td align="left"><%= product_quotation.quantity%></td>
+              <td align="left" class="coin"><%= number_with_precision(payment_plan.price_contracted , :precision => 2, delimiter:'.',separator: ',')%></td>
+              <td align="left" class="coin"><%= number_with_precision(payment_plan.price_contracted * product_quotation.quantity , :precision => 2, delimiter:'.',separator: ',') %></td>
+            </tr>
+<!--          <%end%>   -->
+          <%end%>
+          <%end%>
+          <% @package_quotations.each do |package_quotation| %>
+          <tr>
+            <td><%= package_quotation.colection_package.description %></td>
+            <td align="left"><%= package_quotation.quantity %></td>
+            <td align="left" class="coin"><%= number_with_precision(package_quotation.colection_package.total_amount , :precision => 2, delimiter:'.',separator: ',') %></td>
+            <td align="left" class="coin"><%= number_with_precision(package_quotation.colection_package.total_amount * package_quotation.quantity , :precision => 2 , delimiter:'.',separator: ',') %></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+    </section>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">      
+    <%= link_to I18n.t('.general.action.cancel'), payment_plans_path, class: "hvr-skew-backward"  %>
+  </div>

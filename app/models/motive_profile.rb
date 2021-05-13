@@ -1,0 +1,2 @@
+class MotiveProfile < ApplicationRecord
+end

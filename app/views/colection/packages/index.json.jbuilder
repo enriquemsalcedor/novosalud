@@ -1,0 +1,1 @@
+json.array! @colection_packages, partial: 'colection_packages/colection_package', as: :colection_package

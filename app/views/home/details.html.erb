@@ -1,0 +1,50 @@
+<div class="container">
+	<div class="row breadcrumbs">
+		<%= render_breadcrumbs :separator => ' / '%>
+	</div>
+	<div class="row">
+		<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+			<div class="details-title"><%= @product.name %></div>
+			<div class="flex-viewport" style="overflow: hidden; position: relative;">
+				<% if @product.image_file_name.nil? %>
+				<i class="fa fa-stethoscope"></i>
+				<%else%>
+				<%= image_tag @product.image.url(:medium) %>
+				<%end%>
+			</div>
+		</div>
+		<div class="col-lg-6 col-md-9 col-sm-9 col-xs-12">
+			<nav class="nav-sidebar details-product">
+				<ul class="nav tabs">
+					<li class="active"><a href="#tab1" data-toggle="tab">Datos del proveedor</a>
+					</li>
+					<li class=""><a href="#tab2" data-toggle="tab">Descripción</a>
+					</li>
+					<li class=""><a href="#tab3" data-toggle="tab">Términos y condiciones legales</a>
+					</li>
+				</ul>
+			</nav>
+			<div class="tab-content one">
+				<div class="tab-pane active text-style" id="tab1">
+					<p class="p-0 m-0"><i class="fa fa-ambulance" aria-hidden="true"></i><%=" #{@product.proveedor}" %></p>
+					<p class="p-0 m-0"><i class="fa fa-phone" aria-hidden="true"></i>  <%= "#{@product.provider_provider.phone}" %></p>
+					<p class="p-0 m-0"> <i class="fa fa-map-marker" aria-hidden="true"></i> <%= " #{@product.provider_provider.address}" %></p>
+				</div>
+				<div class="tab-pane text-style item_name" id="tab2">
+					<p class="p-0 ml-0"><%= @product.description %></p>
+				</div>
+				<div class="tab-pane text-style tab-margin-top" id="tab3">
+					<p class="p-0 ml-0"><%= @product.terms %></p>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-offset-0 col-lg-3   col-sm-offset-8 col-sm-4 col-md-offset-9 col-md-3 col-xs-12 form_cart">
+			<div>
+				<p class="in-para">Precio: <span class="price coin"><%= "#{number_with_precision(@product.price, precision: 2, delimiter:'.',separator: ',')}" %></span></p>
+			</div>
+			<div>
+				<%= render "sale/product_quotations/form" %>
+			</div>
+		</div>
+	</div>
+</div>

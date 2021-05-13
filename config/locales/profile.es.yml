@@ -1,0 +1,70 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      security/profiles:
+        one: "Perfil"
+        other: "Perfiles"
+
+    attributes:
+      security/profiles:
+        name: "Nombre"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+        action: "Acciones"
+    errors:
+      models:
+        security/profile:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+            security_role_id:
+              blank: "Debe seleccionar un rol."
+
+  profiles: 
+    title: "Perfiles"
+    attributes:
+      name: "Nombre"
+      name_show: "Perfil"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+      action: "Acciones"
+    actions:
+      new_profile: "Registrar Perfil"
+      edit_profile: "Editar Perfil"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      back: "Regresar"
+      accept: "Aceptar"
+      motive_description: "Motivos Desactivar"
+      question:
+        disable: "¿Desea inhabilitar este perfil?"
+        enable: "¿Desea habilitar este perfil?"
+    controller:
+      create: "Se creó con éxito el perfil."
+      update: "Se actualizó con éxito el perfil."
+      disable: "Se inhabilitó con éxito el perfil."
+      enable: "Se habilitó con éxito el perfil"

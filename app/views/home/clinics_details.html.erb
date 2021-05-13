@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="col-lg-12">
+    <div class="breadcrumbs">
+      <%= render_breadcrumbs :separator => ' / '%>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+      <div class="details-title"><%= @provider_providers.name %></div>
+      <div class="flex-viewport" style="overflow: hidden; position: relative;">
+        <% if @provider_providers.image_file_name.nil? %>
+        <i class="fa fa-stethoscope"></i>
+        <%else%>
+        <%= image_tag @provider_providers.image.url(:medium) %>
+        <%end%>
+      </div>
+    </div>
+
+    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <nav class="nav-sidebar">
+        <ul class="nav tabs">
+          <li class="active"><a href="#tab1" data-toggle="tab">Información</a>
+          </li>
+          <li class=""><a href="#tab2" data-toggle="tab">Equipo Médico</a>
+          </li>        </ul>
+        </nav>
+        <div class="tab-content one tab-clinic">
+          <div class="tab-pane active text-style" id="tab1">
+            <p class="ml-0"><img src="<%= asset_path 'pin_map.png' %>" alt="Novosalud"/> </i><%= @provider_providers.address %></p>
+            <p class="ml-0"><img src="<%= asset_path 'phone_icon.png' %>" alt="Novosalud"/> <%= "#{@provider_providers.phone}"%> </p>
+            <% unless !@provider_providers.phone2.present? %>
+            <p class="ml-0"><img src="<%= asset_path 'phone_icon.png' %>" alt="Novosalud"/> 
+              <%= "#{@provider_providers.phone2}" %>
+            </p>
+            <%end%>
+            <% unless !@provider_providers.phone3.present?%>
+            <p class="ml-0"><img src="<%= asset_path 'phone_icon.png' %>" alt="Novosalud"/> 
+             <%= " #{@provider_providers.phone3}" %>
+           </p>
+           <% end %>
+           <p class="ml-0"> <i class="fa fa-envelope" aria-hidden="true"></i><%= @provider_providers.email %></p>
+         </div>
+         <div class="tab-pane text-style" id="tab2">
+          <ul class="pl-0">
+           <% @provider_providers.provider_medico_providers.each do |provider_provider| %>
+           <% unless provider_provider.nil? %>
+           <li class="list-unstyled pl-0"><img src="<%= asset_path 'avatar.png' %>"> Dr. <%= provider_provider.provider_medico.people.first_name %><%= provider_provider.provider_medico.people.surname %> - <%= provider_provider.provider_medico.speciality.name %></li>
+           <% end %>
+           <%end%>
+         </ul>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>

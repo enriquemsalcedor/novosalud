@@ -1,0 +1,75 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+en:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      motives:
+        one: "Producto"
+        other: "Productos"
+
+    attributes:
+      productos:
+        name: "Nombre"
+        image: "Imagen"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+
+    errors:
+      models:
+        motive:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+
+  productos:
+    title: "Productos"
+    attributes:
+      code: "Código"
+      name: "Nombre"
+      image: "Imagen"
+      speciality: "Especialidad"
+      product_type: "Tipo de Producto"
+      status: "Estatus"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+      terms: "Términos y condiciones legales"
+      category: "Categoría"
+    actions:
+      new_motive: "Registar Producto"
+      edit_motive: "Editar Producto"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este producto?"
+        enable: "¿Desea habilitar este producto?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el producto."
+      update: "Se actualizó con éxito el producto."
+      destroy: "Se eliminó con éxito el producto."
+      disable: "Se inhabilitó con éxito el producto."
+      enable: "Se habilitó con éxito el producto"

@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  valid_since: 2017-01-25
+  valid_until: 2017-01-25
+  user_created_id: 1
+  user_updated_id: 1
+
+two:
+  valid_since: 2017-01-25
+  valid_until: 2017-01-25
+  user_created_id: 1
+  user_updated_id: 1

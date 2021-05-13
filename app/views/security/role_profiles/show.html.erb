@@ -1,0 +1,29 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+
+<p>
+  <strong>Security profile:</strong>
+  <%= @security_role_profile.security_profile %>
+</p>
+
+<p>
+  <strong>Security role:</strong>
+  <%= @security_role_profile.security_role %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @security_role_profile.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @security_role_profile.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_security_role_profile_path(@security_role_profile) %> |
+<%= link_to 'Back', security_role_profiles_path %>

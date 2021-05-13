@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  type_identification: MyString
+  rif: MyString
+  email: MyString
+  status: MyString
+  business_company_type: one
+  territory_country: one
+  territory_state: one
+  territory_city: one
+
+two:
+  name: MyString
+  type_identification: MyString
+  rif: MyString
+  email: MyString
+  status: MyString
+  business_company_type: two
+  territory_country: two
+  territory_state: two
+  territory_city: two

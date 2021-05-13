@@ -1,0 +1,26 @@
+<%if @resource.username.nil? %>
+  <%if @resource.client_type == "empleado"%>
+    <p>Hola <%= @resource.employee.nombre_apellido %>!</p>
+  <%elsif @resource.client_type == "persona"%>
+    <p>Hola <%= @resource.customer.people.nombre_apellido %>!</p>
+  <%else%>
+    <p>Hola <%= @resource.company.name %>!</p>
+  <% end -%>
+	<p>Su cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión.</p>
+
+	<p>Haz clic en el enlace de abajo para desbloquear tu cuenta:</p>
+	<p><%= link_to 'Desbloquear mi cuenta', unlock_url(@resource, unlock_token: @token) %></p>
+<%else%>	
+  <%if @resource.client_type == "empleado"%>
+    <p>Hola <%= @resource.employee.nombre_apellido %>!</p>
+  <%elsif @resource.client_type == "persona"%>
+    <p>Hola <%= @resource.customer.people.nombre_apellido %>!</p>
+  <%else%>
+    <p>Hola <%= @resource.company.name %>!</p>
+  <% end -%>
+
+	<p>Su cuenta ha sido bloqueada debido a un número excesivo de intentos fallidos de inicio de sesión.</p>
+	<p>Haz clic en el enlace de abajo para solicitud de desbloqueo de tu cuenta</p>
+	<p><%= link_to "Solicitud de desbloqueo de cuenta", new_unlock_url(@resource) %></p>
+
+<%end%>

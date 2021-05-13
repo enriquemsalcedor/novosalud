@@ -1,0 +1,8 @@
+$('.deletePackageQuotation').bind('ajax:success', function() {
+   $(this).closest('tr').addClass('hide');
+   $('#notice').addClass('hide');
+   $('span#total_cotizacion').html('<%= @quotation.total_cotizacion %>');
+   $('#cantidad').html('<%= @quotation.cant_total %>');
+});
+
+

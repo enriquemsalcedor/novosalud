@@ -1,0 +1,161 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  general:
+    attribute:
+      number: "Número"
+      rif: "RIF"
+      image: "Imagen"
+      code: "Código"
+      name: "Nombre"
+      surname: "Apellido"
+      first_name: "Primer nombre"
+      last_name: "Segundo Nombre"
+      action: "Acción"
+      phone: "Teléfono"
+      created_by: "Creado por"
+      total_amount: "Cantidad total"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      phone: "Teléfono"
+      description: "Descripción"
+      created_at: "Fecha de creación"
+      valid_since: "Válido desde"
+      valid_until: "Válido hasta"
+      status: "Estatus"
+    attributes:
+      numbers: "Números"
+      names: "Nombres"
+      list_empty: "No se han encontrado resultados."
+      surnames: "Apellidos"
+      see: "Ver"
+      editing: "Editar"
+      enable: "Habilitar"
+      disable: "Inhabilitar"
+      actions: "Acciones"
+    model:
+      login: "Inicio de Sesión"
+      role: "Rol"
+      role_type: "Tipo de Rol"
+      profile: "Perfil"
+      bank: "Banco"
+      companie: "Empresa"
+      quotation: "Cotización"
+      beneficiary: "Beneficiario"
+      employee: "Empleado"
+      doctor: "Médico"
+      person: "Persona"
+      package: "Paquete"
+      specialty: "Especialidad"
+      organization: "Organización"
+      provider: "Proveedor"
+      motive: "Motivo"
+      customer: "Cliente"
+      method_payment: "Modalidad de Pago"
+      product: "Producto"
+      product_type: "Tipo de Producto"
+      provider_type: "Tipo de Proveedor"
+    models:
+      roles: "Roles"
+      roles_types: "Tipos de Roles"
+      profiles: "Perfiles"
+      companies: "Empresas"
+      banks: "Bancos"
+      quotations: "Cotizaciones"
+      beneficiaries: "Beneficiarios"
+      employees: "Empleados"
+      doctors: "Médicos"
+      persons: "Personas"
+      packages: "Paquetes"
+      specialities: "Especialidades"
+      providers: "Proveedores"
+      motives: "Motivos"
+      customers: "Clientes"
+      methods_payment: "Modalidades de Pago"
+      products: "Productos"
+      products_types: "Tipos de Productos"
+      providers_types: "Tipos de Proveedores"
+    action:
+      see: "Ver"
+      new: "Nuevo"
+      examine: "Examinar"
+      back: "Atrás"
+      register: "Registrar"
+      return: "Regresar"
+      edit: "Editar"
+      enable: "Habilitar"
+      disable: "Inhabilitar"
+      question:
+        profile:
+          enable: "¿Desea habilitar este perfíl?"
+          disable: "¿Desea inhabilitar este perfíl?"
+        role:
+          enable: "¿Desea habilitar este rol?"
+          disable: "¿Desea inhabilitar este rol?"
+        role_type:
+          enable: "¿Desea habilitar este tipo de rol?"
+          disable: "¿Desea inhabilitar este tipo de rol?"
+        specialty:
+          enable: "¿Desea habilitar esta especialidad?"
+          disable: "¿Desea inhabilitar esta especialidad?"
+        package:
+          enable: "¿Desea habilitar este paquete?"
+          disable: "¿Desea inhabilitar este paquete?"
+        product:
+          enable: "¿Desea habilitar este producto?"
+          disable: "¿Desea inhabilitar este producto?"
+        product_type:
+          enable: "¿Desea habilitar este tipo de producto?"
+          disable: "¿Desea inhabilitar este tipo de producto?"
+        doctor:
+          enable: "¿Desea habilitar este médico?"
+          disable: "¿Desea inhabilitar este médico?"
+        role_type:
+          enable: "¿Desea habilitar este típo de rol?"
+          disable: "¿Desea inhabilitar este típo de rol?"
+        method_payment:
+          enable: "¿Desea habilitar esta modalidad de pago?"
+          disable: "¿Desea inhabilitar esta modalidad de pago?"
+        bank:
+          enable: "¿Desea habilitar este banco?"
+          disable: "¿Desea inhabilitar este banco?"
+        employee:
+          enable: "¿Desea habilitar este empleado?"
+          disable: "¿Desea inhabilitar este empleado?"
+        customer:
+          enable: "¿Desea habilitar este cliente?"
+          disable: "¿Desea inhabilitar este cliente?"
+        beneficiary:
+          enable: "¿Desea habilitar este beneficiario?"
+          disable: "¿Desea inhabilitar este beneficiario?"
+        provider:
+          enable: "¿Desea habilitar este proveedor?"
+          disable: "¿Desea inhabilitar este proveedor?"
+        provider_type:
+          enable: "¿Desea habilitar este tipo de proveedor?"
+          disable: "¿Desea inhabilitar este tipo de proveedor?"
+        motive:
+          enable: "¿Desea habilitar este motivo?"
+          disable: "¿Desea inhabilitar este motivo?"
+        quotation:
+          enable: "¿Desea habilitar esta cotización?"
+          disable: "¿Desea inhabilitar esta cotización?"
+          delete: "¿Desea eliminar esta cotización?"

@@ -1,0 +1,103 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      medicos:
+        one: "Médico"
+        other: "Médicos"
+    attributes:
+      medicos:
+        first_name: "Nombres"
+        surname: "Apellidos"
+        type_identification: "Tipo de identificación"
+        identification_document: "Cédula de identidad"
+        email: "Correo electrónico"
+        date_birth: "Fecha de nacimiento"
+        sex: "Sexo"
+        phone: "Teléfono de contacto"
+        cellphone: "Celular"
+        territory_country_id: "País"
+        territory_state_id: "Estado"
+        territory_city_id: "Ciudad"
+        address: "Dirección"
+        speciality_id: "Especialidad"
+        code_medico: "MSDS"
+        c_m_l: "C.M.L"
+        providers: "Proveedores"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+    errors:
+      models:
+        people:
+          attributes:
+            first_name:
+              blank: "Debe ingresar un nombre."
+            surname:
+              blank: "Debe ingresar un apellido."
+            identification_document:
+              blank: "Debe ingresar una cédula de identidad."
+              taken: "Existe un registro con esta cédula de identidad."
+            phone:
+              blank: "Debe ingresar una Teléfono"
+  medicos:
+    title: "Médicos"
+    attributes:
+      first_name: "Nombres"
+      surname: "Apellidos"
+      type_identification: "Tipo de identificación"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      date_birth: "Fecha de nacimiento"
+      sex: "Sexo"
+      phone: "Teléfono de contacto"
+      cellphone: "Celular"
+      phones: "Teléfonos"
+      territory_country_id: "País"
+      territory_state_id: "Estado"
+      territory_city_id: "Ciudad"
+      address: "Dirección"
+      code_medico: 'M.S.D.S'
+      c_m_l: 'C.M.L'
+      speciality_id: "Especialidad"
+      providers: "Proveedores"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+    actions:
+      new_medico: "Registrar Médico"
+      edit_medico: "Editar Médico"
+      show_medico: "Datos del Médico"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este médico?"
+        enable: "¿Desea habilitar este médico?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el médico."
+      update: "Se actualizó con éxito el médico."
+      destroy: "Se eliminó con éxito el médico."
+      disable: "Se inhabilitó con éxito el médico."
+      enable: "Se habilitó con éxito el médico."

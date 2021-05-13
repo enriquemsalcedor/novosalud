@@ -1,0 +1,82 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<div class="title-center">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.initial_values') %></h1>
+</div>
+<div class="col-lg-10">
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.days_validity') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.days_validity %>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.max_refech_service') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.max_refech_service %>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.max_quantity_product') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.max_quantity_product %>
+    </div>
+  </div>
+    <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.email_max_quantity') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.email_max_quantity %>
+    </div>
+  </div>
+    <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.email_security') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.email_security %>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.administration_email') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.administration_email %>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.call_center_email') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.call_center_email %>
+    </div>
+  </div>
+  
+<div class="col-lg-12">
+    <div class="col-lg-6 col-xs-5 text-right">
+      <strong><%= raw I18n.t ('.initial_value.attributes.days_validity_service') %> </strong>
+    </div>
+    <div class="col-lg-6 col-xs-7 rdown">
+      <%= @initial_value.days_validity_service %>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+<% if @permiso_modificar == true %>      
+  <%= link_to I18n.t('.general.action.edit'), edit_initial_value_path(@initial_value),class: "hvr-skew-backward" %>
+<% end -%> 
+  <%= link_to I18n.t('.general.action.cancel'), root_path,class: "hvr-skew-backward" %>
+</div>

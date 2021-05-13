@@ -1,0 +1,15 @@
+<h1>Recuperación de usuario </h1>
+
+<p>
+	Saludos, Sr(a). <%= @employee.first_name%> <%= @employee.surname%>
+	El presente es para notificar que ha recuperado satisfactoriamente su usuario:</p>
+<p>
+	Usuario:<%=@employee.user.username%>.
+</p>
+
+<p>Mantendra la misma contraseña.</p>
+
+<p>  Para verificar la solicitud puede ingresar al sistema a través del siguiente enlace:
+   <%= link_to "Ingresar", admin_url, class: "hvr-skew-backward" %>
+
+</p>

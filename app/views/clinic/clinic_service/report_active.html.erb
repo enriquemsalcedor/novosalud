@@ -1,0 +1,125 @@
+<% unless @noticia.nil? %>
+<div class="alert alert-danger notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>   
+  <p id="notice margin_left_none"><%= @noticia %></p>
+</div>
+<%end%>
+<form>
+  <section>
+    <h1 class="space-title"><%=raw I18n.t ('.general.titles.service_activates') %></h1>
+    <div class="col-lg-12 col-sm-12 col-md-12 form-group flex-search">
+      <div class="col-lg-5  col-sm-5">
+        <label class="label-form col-lg-4 col-sm-4 col-md-4 center-v mt-0 pl-0">Fecha desde:</label>
+        <div class="input-daterange calendar">
+          <input type="text"  name="fechaDesde"   <%= @fechaDesde %> />
+        </div>
+        <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon"></span></div>
+      </div>
+      <div class="col-lg-5  col-sm-5">
+        <label class="label-form col-lg-4 col-sm-4 col-md-4 center-v mt-0 pl-0">Fecha hasta:</label>
+        <div class="input-daterange calendar">
+          <input type="text"  name="fechaHasta"   <%= @fechaHasta %> />
+        </div>
+        <div class="icon-fecha"> <span class="glyphicon glyphicon-calendar icon"></span></div>
+      </div>  
+      <div class="col-lg-2  col-sm-2">
+        <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 pull-right">
+          <button class="hvr-skew-backward" type="submit" data-disable-with="Buscando ..."} >Buscar</button>
+        </div>  
+      </div>
+    </div>
+  </section>
+</form>
+<% if !@service_services.present?%>
+<div class="row space-title">
+  <div class="col-lg-12">
+    <div class="alert alert-danger notice">
+      <p id="notice margin_left_none">No se han encontrado resultados.</p>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="col-lg-12  pr-0">
+  <% if $desde=='' || $hasta=='' %>
+  <div class="col-lg-12 text-center">
+    <h5><%=raw I18n.t ('.general.titles.service_activates') %> <strong> desde: </strong> <%= Date.today.strftime("%d-%m-%Y")%><strong> hasta: </strong> <%= Date.today.strftime("%d-%m-%Y")%></h5>
+  </div>
+  <%else %>
+  <div class="col-lg-12 text-center">
+    <h5><%=raw I18n.t ('.general.titles.service_activates') %> <strong>desde: </strong><%=$desde%> <strong>hasta: </strong><%= $hasta %></h5>
+  </div>
+  <%end%>
+  <div class="col-lg-12 pr-0">
+    <div id="descarga" class="icon-download">
+      <%= link_to "Exportar a Excel", service_reports_path(format: "xlsx",fechaDesde: params[:fechaDesde], fechaHasta: params[:fechaHasta]), class:"fa fa-download space-1xl" %> 
+      <!--
+      <%= link_to "Exportar a PDF", service_reports_path(format: "pdf", fechaDesde: params[:fechaDesde], fechaHasta: params[:fechaHasta]) , :target => "_blank", class:"fa fa-download" %>  -->
+    </div>
+  </div>
+</div>
+<div class="container tabla-responsive">
+  <table class="table service">
+    <thead>
+      <tr>
+        <th>Número del servicio</th>
+        <th>Número orden de compra</th>
+        <th>Código cotización</th>
+        <th>Cédula de identidad/RIF</th>
+        <th>Nombre(s) y apellido(s)/Razón social</th>
+        <th>Cédula de identidad (beneficiario)</th>
+        <th>Nombre del beneficiario</th>
+        <th>Teléfono del beneficiario</th>
+        <th>Fecha de nacimiento del beneficiario</th>
+        <th>Servicio</th>
+        <th>Centro médico</th>
+        <th>Fecha de cita</th>
+        <th>Precio</th>
+
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @service_services.each do |service_service| %>
+      <tr align="center">
+        <td><%= service_service.code %></td>
+        <td><%= service_service.payment_contracted_product.payment_plan.number_plan %></td>
+        <td><%= service_service.payment_contracted_product.payment_plan.sale_quotation.quoting_number%></td>        
+        <% unless service_service.payment_contracted_product.payment_plan.customer.nil? %>
+        <td><%= service_service.payment_contracted_product.payment_plan.customer.identificacion_usuario %></td>
+        <td><%= service_service.payment_contracted_product.payment_plan.customer.nombre_usuario %></td>
+        <%else%>
+        <td><%= service_service.payment_contracted_product.payment_plan.business_company.rif %></td>
+        <td><%= service_service.payment_contracted_product.payment_plan.business_company.name %></td>
+        <% end %>
+        <%unless service_service.beneficiary.nil?%>
+        <td><%= service_service.beneficiary.people.type_identification%>-<%= service_service.beneficiary.people.identification_document%></td>
+        <td><%= service_service.beneficiary.people.first_name%> <%= service_service.beneficiary.people.surname%></td>
+        <td><%= service_service.beneficiary.people.phone%></td>
+        <td><%= service_service.beneficiary.people.date_birth.strftime("%d-%m-%Y")%></td>
+        <%else%>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <%end%>
+        <td><%= service_service.payment_contracted_product.product_product.name %></td>
+        <td><%= service_service.payment_contracted_product.product_product.provider_provider.name %></td>
+        <% if service_service.appointment_date.nil? %>
+        <td></td>
+        <%else%>
+        <td><%= service_service.appointment_date.strftime("%d-%m-%Y") %></td>
+        <% end -%>
+        <td class="coin"><%= number_with_precision(service_service.payment_contracted_product.price_contracted.to_f, precision: 2, delimiter:'.',separator: ',') %></td>
+
+        <td></td>
+
+      </tr>
+      <%end%>
+      
+    </tbody>
+  </table>
+  <div class="text-right">
+    <p class="total_servicio">Total servicios activados <span class="coin"> <%=  number_with_precision($total_servicios_activados.to_f, precision: 2, delimiter:'.',separator: ',') %></span> </p>
+  </div>
+</div>
+<% end %>

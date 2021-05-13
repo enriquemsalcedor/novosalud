@@ -1,0 +1,37 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<section class="container table_flex_five">
+  <h1><%=raw I18n.t ('.company_types.title')%></h1>
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @business_company_types.each do |business_company_type| %>
+      <tr>
+        <th><%=raw I18n.t ('.company_types.attributes.name') %></th>
+        <th><%=raw I18n.t ('.company_types.attributes.limit') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @business_company_types.each do |business_company_type| %>
+      <tr>
+        <td><%= business_company_type.name %></td>
+        <td><%= business_company_type.limit %></td>
+        <td><%= link_to I18n.t('.general.action.see'), business_company_type  %>
+        <%= link_to I18n.t('.general.action.edit'), edit_business_company_type_path(business_company_type)%>
+          <% if business_company_type.may_inhabilitar? %>
+          <%= link_to 'Inhabilitar', "/business/company_types/#{business_company_type.id}/inhabilitar",method: :put , data: { confirm: '¿Desea inhabilitar este tipo de empresa?"' } %>
+          <% else %>
+          <%= link_to 'Habilitar', "/business/company_types/#{business_company_type.id}/habilitar",method: :put, data: { confirm: 'Desea habilitar este tipo de empresa?' } %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to I18n.t('.company_types.actions.new_company_type'), new_business_company_type_path %>
+</section>

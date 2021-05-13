@@ -1,0 +1,71 @@
+<p id="notice"><%= notice %></p>
+<div class="col-lg-10">
+<h1 class="space-title"><%=raw I18n.t ('.beneficiaries.actions.show_beneficiary') %></h1>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.beneficiaries.attributes.first_name') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @beneficiary.people.first_name %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.beneficiaries.attributes.surname') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @beneficiary.people.surname %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.beneficiaries.attributes.identification_document') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @beneficiary.people.type_identification %> - <%= @beneficiary.people.identification_document %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.beneficiaries.attributes.date_birth') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @beneficiary.people.date_birth.strftime("%d-%m-%Y")  %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.beneficiaries.attributes.sex')%>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @beneficiary.people.sex %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.beneficiaries.attributes.cellphone') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @beneficiary.people.cellphone %>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+    <%= link_to I18n.t('.general.action.edit'), edit_beneficiary_path(@beneficiary),class: "hvr-skew-backward" %>
+	<%= link_to I18n.t('.general.action.cancel'), beneficiaries_path,class: "hvr-skew-backward"  %>
+</div>
+
+
+

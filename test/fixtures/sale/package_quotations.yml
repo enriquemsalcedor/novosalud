@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  colection_package: one
+  sale_quotation: one
+  quantity: 1
+
+two:
+  colection_package: two
+  sale_quotation: two
+  quantity: 1

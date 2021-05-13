@@ -1,0 +1,1 @@
+json.partial! "business_companies/business_company", business_company: @business_company

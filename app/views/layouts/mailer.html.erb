@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body style="margin:0;">
+    <section style="width: 83%;height: 80vh;border-bottom: 1px solid #E7E7E7;margin: 0 auto;">
+        <p align="center" style="width:96.5%;background-color:#02A1E3;color:#ffffff;padding:0.7rem;justify-content:center;align-items:center;font-size:25px;font-weight:600;">0501-NOVO-911
+        </p>
+    
+    <section style="width: 100%;
+      height: 7vh;
+      border-bottom: 1px solid #E7E7E7;
+      margin: 0 auto;">
+    <%= image_tag attachments['novo_enlinea.png'].url, style: "margin: 0 auto;
+
+      display: flex;
+      width: 245px;
+      height: auto;
+      align:center;
+      margin-top: 2vh;
+      " %>
+    </section>
+    <section style="    color: #656565;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+     font-size: 15px;
+     ">
+      <%= yield %>
+      </section>
+    <section style="    width: 100%;
+    height: 6vh;
+    background-color: #E7E9E8;
+    position: absolute;
+    color: #656565;
+    bottom: 10.7vh;
+    display: flex;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+     padding-top: 2vh;
+     padding-bottom: 2vh;
+     font-size: 1.4em;
+     ">
+      <p style="margin: 0 auto;"><a href="" style="color: #656565;
+      ">Políticas de Privacidad</a> | <a href="" style="color: #656565;
+      ">Términos y Condiciones</a></p> 
+    </section>
+    <footer style="    width: 100%;
+      height: 6vh;
+      background-color: #02A1E3;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      text-align: center;
+      font-weight: bold; 
+      ">
+      <p style="margin: 0 auto; padding-top: 1.1em; ">
+        Derechos Reservados 2017 &copy;. Novosalud, Medicina Prepagada, S.A. Barquisimeto-Venezuela
+      </p>  
+    </footer>
+  </body>
+</html>

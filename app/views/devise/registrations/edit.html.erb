@@ -1,0 +1,96 @@
+<% unless alert.nil? %>
+<div class="alert alert-danger notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>   
+  <p id="notice margin_left_none"><%= alert %></p>
+</div>
+<%end%>
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>   
+  <p id="notice margin_left_none"><%= notice %></p> 
+</div>
+<%end%> 
+<!-- <h2>Editar < %= resource_name.to_s.humanize %></h2> -->
+<div class="title-center">
+  <h2 class="space-title">Cambiar contraseña</h2>
+</div>
+<div class="center-flex">
+  <div class="col-lg-8">
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }, validate: true) do |f| %> 
+    <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+    <% end %>
+
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-12 input_100">
+      <label class="label-form"><%= I18n.t ('.devise.edit.current_password')%></label>
+    <i>(Necesitamos su contraseña actual para confirmar sus cambios)</i>
+      <%if session[:current_password].present?%>
+        <%= f.password_field :current_password, autocomplete: "off", value: session[:reference] %>
+      <%else%>
+        <%= f.password_field :current_password, autocomplete: "off" %>
+      <%end%>
+        <% unless flash[:errors_current_password].nil? %>
+          <span class="help-block1"><%= flash[:errors_current_password] %></span> 
+        <%else%>
+          <span class="help-block"></span>
+        <%end%>
+      </div>
+    </div>
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-12 input_100">
+       <label class="label-form"><%=  I18n.t ('.devise.edit.password')%></label>
+        <% if @minimum_password_length %>
+        <em><%= @minimum_password_length %> caracteres mínimos</em>
+        <% end %>
+        <%if session[:password].present?%>
+          <%= f.password_field :password, autocomplete: "off", value: session[:password] %>
+        <%else%>
+          <%= f.password_field :password, autocomplete: "off" %>
+        <%end%>
+        <% unless flash[:errors_password].nil? %>
+          <span class="help-block1"><%= flash[:errors_password] %></span> 
+        <%else%>
+          <span class="help-block"><%= flash[:errors] %></span>
+        <%end%> 
+      </div>
+    </div>
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-12 input_100">
+       <label class="label-form"><%=  I18n.t ('.devise.edit.password_confirmation') %></label>
+       <%if session[:password_confirmation].present?%>
+        <%= f.password_field :password_confirmation, autocomplete: "off", value: session[:password_confirmation] %>
+       <%else%>
+        <%= f.password_field :password_confirmation, autocomplete: "off" %>
+       <%end%>
+        <% unless flash[:errors_confirmation].nil? %>
+          <span class="help-block1"><%= flash[:errors_confirmation] %></span> 
+        <%else%>
+          <span class="help-block"></span>
+        <%end%> 
+      </div>
+    </div>
+
+    <div id="btns"> 
+      <div class="col-lg-12 form-group">
+        <div  class="col-x-12 col-xs-6 col-sm-3 col-sm-offset-6 col-md-6 col-md-offset-6 col-lg-3 col-lg-offset-6 ml-03">
+          <%= link_to I18n.t('.general.action.cancel'), root_path,class: "hvr-skew-backward w-100 min-hg-45" %>
+        </div>
+        <div class="col-x-12 col-xs-6 col-sm-3 col-md-3 col-lg-3">
+           <%= f.submit "Aceptar", data: {disable_with: "Guardando ...",confirm: I18n.t('.devise.edit.password_update')},class:"hvr-skew-backward w-100 min-hg-45" %>   
+        </div>
+      </div>
+
+    </div>
+
+    <!--<div class="col-lg-12 form-group">
+      <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+        <%= link_to "Cancelar", root_path, class:"hvr-skew-backward" %>
+      </div>
+      <div class="col-lg-3 pull-right">
+        <%= f.submit "Aceptar", data: {disable_with: "Guardando ...",confirm: I18n.t('.devise.edit.password_update')},class:"hvr-skew-backward" %>     
+      </div>
+    </div>-->
+    <% end %>
+  </div>
+</div>

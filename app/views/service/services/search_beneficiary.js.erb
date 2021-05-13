@@ -1,0 +1,49 @@
+
+$(".notice").hide();
+$("#capa").click(function(){
+	$('#myModal').remove();
+	$(".modal-backdrop").remove();
+	$("body").removeClass("modal-open");
+});
+$("#close").click(function(){
+	$(".modal").remove();
+	$(".modal-backdrop").remove();
+	$('#myModal').remove();
+	$("body").removeClass("modal-open");
+});
+$("#mensaje-beneficiario-creado").hide();
+$("#mensajeBeneficiario").hide();
+<% unless @beneficiary.nil? %>
+$('#beneficiary').show();
+$('#beneficiary input').prop("disabled", true);
+$('#formService').show();
+$('#Cedula').html('<%=@beneficiary.cedula_beneficiario %>');
+$('#Nombre').html('<%=@beneficiary.people.first_name.capitalize %> <%=@beneficiary.people.surname.capitalize %>');
+$('#service_service_beneficiary_id').val('<%=@beneficiary.id %>')
+$('#searchBeneficiary').val('');
+$('#mensajeBeneficiario span').html('');
+$("#mensaje-beneficiario-creado").hide();
+$('#btn-beneficiario').hide();
+<% else %>
+$("#mensaje-beneficiario-creado").hide();
+$('#mensajeBeneficiario').show();
+$('#mensajeBeneficiario').html("<div class='errors col-lg-12'>"+'<%= "No existe el beneficiario."%>'+"</div>"+'</div>');
+$('#btn-beneficiario').show();
+$('#btn-beneficiario').html('<%= link_to "Registrar Beneficiario", { controller: "/beneficiaries", :action =>:new},  remote: true, class: "btn btn-primary pull-right fa fa-key",  class: "hvr-skew-backward" %>')
+$('#mensajeBeneficiario').append('');
+$('#beneficiary').hide();
+$('#formService').hide();
+  $("#capa").click(function(){
+    $('#myModal').remove();
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+  });
+  $("#close").click(function(){
+    $(".modal").remove();
+    $(".modal-backdrop").remove();
+    $('#myModal').remove();
+    $("body").removeClass("modal-open");
+  });
+<% end %>	
+
+

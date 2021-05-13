@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  payment_checkout: 1
+  method_payment_id: 1
+  bank_id: 1
+
+two:
+  payment_checkout: 1
+  method_payment_id: 1
+  bank_id: 1

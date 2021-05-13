@@ -1,0 +1,146 @@
+<%= form_for @sale_quotation, validate: true  do |f| %>
+<div class="col-lg-12 form-group space-2x">
+  <div class="col-lg-4  col-sm-4">
+    <label class="label-form"><%= I18n.t ('general.attribute.valid_since')%></label>
+    <div class="input-daterange calendar div-calendar e1">
+      <%= f.text_field :valid_since, validate: true,:value=>"#{f.object.valid_since.strftime("%d-%m-%Y") unless f.object.new_record?}"  %>
+    </div>
+    <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon" ></span></div>
+  </div>
+  <div class="col-lg-4 col-sm-4 pr-0">
+    <label class="label-form"><%= I18n.t ('general.attribute.valid_until')%></label>
+    <div class="input-daterange calendar div-calendar e2">
+      <%= f.text_field :valid_until, validate: true,:value=>"#{f.object.valid_until.strftime("%d-%m-%Y") unless f.object.new_record?}" %>
+    </div>
+    <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon"></span></div>
+  </div>
+  <div  class="col-lg-4 pull-left">
+    <%= f.submit 'Aceptar' , data: {disable_with: "Guardando ..."},class: "hvr-skew-backward pull-left pt" %>
+  </div>
+</div>
+<div class="col-lg-12">
+</div>
+<p style= "color: red;">
+  <%= @noticia %>
+</p>
+<% end %>
+<div class="col-lg-8">
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong>Código de cotización:</strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @sale_quotation.quoting_number %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+     <strong>Cotización valida: </strong>
+   </div>
+   <div class="col-lg-8 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <strong> desde &nbsp;</strong>  <%= @sale_quotation.valid_since.strftime("%d-%m-%Y") %> <strong> &nbsp;&nbsp;hasta &nbsp; </strong>
+     <%= @sale_quotation.valid_until.strftime("%d-%m-%Y") %>
+   </div>
+ </div>
+</div>
+<% unless @sale_quotation.user.customer.nil? %>
+<div class="col-lg-12 col-xs-12">
+  <div class="col-lg-4 col-xs-5 text-right">
+   <strong>Cédula del cliente:</strong>
+ </div>
+ <div class="col-lg-8 col-xs-7 rdown">
+  <div class="col-lg-10 ">
+   <%= @sale_quotation.identificacion_usuario %>
+ </div>
+</div>
+</div>
+<div class="col-lg-12 col-xs-12">
+  <div class="col-lg-4 col-xs-5 text-right">
+   <strong>Nombre del cliente:</strong>
+ </div>
+ <div class="col-lg-8 col-xs-7 rdown">
+  <div class="col-lg-10 ">
+    <%= @sale_quotation.nombre_usuario %>
+  </div>
+</div>
+</div>
+<%else%>
+<div class="col-lg-12 col-xs-12">
+  <div class="col-lg-4 col-xs-5 text-right">
+    <strong>RIF del cliente:</strong>
+  </div>
+  <div class="col-lg-8 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+      <%= @sale_quotation.user.company.rif %>
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12">
+  <div class="col-lg-4 col-xs-5 text-right">
+    <strong>Nombre de la empresa:</strong>
+  </div>
+  <div class="col-lg-8 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @sale_quotation.user.company.name %>
+   </div>
+ </div>
+</div>
+<% end -%>
+<div class="col-lg-12 col-xs-12">
+  <div class="col-lg-4 col-xs-5 text-right">
+    <strong>Estatus:</strong>
+  </div>
+  <div class="col-lg-8 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+     <%= @sale_quotation.status %>
+   </div>
+ </div>
+</div>
+<div class="col-lg-12 col-xs-12">
+  <div class="col-lg-4 col-xs-5 text-right">
+   <strong>Monto total de la cotización:</strong>
+ </div>
+ <div class="col-lg-8 col-xs-7 rdown">
+  <div class="col-lg-10 coin">
+  <%= (number_with_precision(@sale_quotation.sumar_montos , :precision => 2,delimiter:'.',separator: ',') || 0) %>
+ </div>
+</div>
+</div>
+</div>
+<div class="col-lg-12 pl-0">
+  <h2>Detalle de la cotización</h2>
+</div>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Item</th>
+      <th>Estatus</th>
+      <th>Cantidad</th>
+      <th>Precio unitario</th>
+      <th>Total</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sale_quotation.sale_product_quotations.each do |product_quotation| %>
+    <tr>
+      <td><%= product_quotation.product_product.armar_nombre %></td>
+      <td><%= product_quotation.product_product.status %></td>
+      <td><%= product_quotation.quantity %></td>
+      <td><%= (number_with_precision(product_quotation.product_product.price , :precision => 2) || 0) %></td>
+      <td><%= (number_with_precision(product_quotation.product_product.price * product_quotation.quantity , :precision => 2) || 0) %></td>
+    </tr>
+    <%end%>
+    <% @sale_quotation.sale_package_quotation.each do |package_quotation| %>
+    <tr>
+      <td><%= package_quotation.colection_package.description %></td>
+      <td><%= package_quotation.colection_package.status  %></td>
+      <td><%= package_quotation.quantity %></td>
+      <td><%= (number_with_precision(package_quotation.colection_package.total_amount , :precision => 2) || 0) %></td>
+      <td><%= (number_with_precision(package_quotation.colection_package.total_amount * package_quotation.quantity , :precision => 2) || 0)%></td>
+    </tr>
+    <%end%>
+  </tbody>
+</table>

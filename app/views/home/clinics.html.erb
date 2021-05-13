@@ -1,0 +1,71 @@
+ <div class="row">
+   <% if !@provider_providers.present? %>
+   <div class="alert alert-danger notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>   
+    <p id="notice margin_left_none">No se han encontrado resultados.</p>
+  </div>
+  <% end %>
+</div>
+
+<% unless notice.nil? %>
+<div class="row">
+  <div class="alert alert-danger notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice margin_left_none"><%= notice %></p>
+  </div>
+</div>
+<% end -%>
+<div class="row">
+  <div class="col-lg-12"> 
+    <div class="breadcrumbs">
+      <%= render_breadcrumbs :separator => ' / '%>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12"> 
+      <h2>Centros Médicos</h2>
+  </div>
+</div>
+<div class="row">
+  <% @provider_providers.each do |provider_provider| %>
+  <div class="col-sm-6 col-md-3">
+    <div class="thumbnail clinic-list">
+      <%= link_to controller: "home" , action: "clinics_details", id: provider_provider do %>
+      <div class="cont-img">
+        <% if provider_provider.image_file_name.nil? %>
+        <i class="fa fa-cube"></i>
+        <%else%>
+        <%= image_tag provider_provider.image.url(:large) %>
+        <%end%>
+      </div>
+
+      <div class="mid-1">
+        <div class="special_produc">
+        </div>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i><%= "#{provider_provider.address}" %></p>
+        <p><i class="fa fa-phone" aria-hidden="true"></i><%= "#{provider_provider.phone.at(0..15)}" %>
+          <% unless !(provider_provider.phone2.present? || provider_provider.phone3.present?) %>
+          ...
+          <%end%>
+        </p>
+        <p> <i class="fa fa-envelope" aria-hidden="true"></i><%= "#{provider_provider.email}" %></p>
+      </div>
+      <%end%>
+    </div>
+  </div>
+  <%end%>
+  <div class="col-lg-12">
+    <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+      <%= will_paginate @provider_providers %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <% if !@provider_providers.present? %>
+  <div class="alert alert-danger notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>   
+    <p id="notice margin_left_none">No se han encontrado resultados.</p>
+  </div>
+  <% end %>
+</div>

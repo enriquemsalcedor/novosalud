@@ -1,0 +1,66 @@
+<% unless notice.nil? %>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end %>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.accounts') %></h1>
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.bank') %></th>
+        <th><%= raw I18n.t('.general.attribute.account_number') %></th>
+        <th><%= raw I18n.t('.general.attribute.account_type') %></th>
+        <th><%= raw I18n.t('.general.attribute.email') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @accounts.each do |account| %>
+        <tr>
+          <td><%= account.bank.name %></td>
+          <td><%= account.formato_cuenta %></td>
+          <td><%= account.account_type %></td>
+          <td class="correo"><%= account.email %></td>
+          <td>
+            <% if @permiso_consultar == true %>
+              <%= link_to account, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+                <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+                <%= content_tag(:span, I18n.t(".general.action.see")) %>
+              <% end %>
+            <% end -%>
+            <% if @permiso_modificar == true %>
+              <%= link_to edit_account_path(account), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+                <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+                <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+              <% end %>
+            <% end -%>
+            <% if @permiso_activar == true %>
+              <% if account.may_inhabilitar? %>
+                <%= link_to "/accounts/#{account.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.account.disable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+                  <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+                  <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+                <% end %>
+              <%else%>
+                <%= link_to "/accounts/#{account.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.account.enable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Activar" do %>
+                  <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+                  <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+                  <% end %>
+              <% end %>
+            <%end%>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<br>
+<% if @permiso_crear == true %>
+  <%= link_to new_account_path,  class: "hvr-skew-backward"  do %>
+    <%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.account')) %>
+  <% end %>
+<% end -%>
+
+</section>

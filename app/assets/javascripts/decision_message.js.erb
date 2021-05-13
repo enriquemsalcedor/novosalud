@@ -1,0 +1,22 @@
+$('#colection_package_category').change(function(){
+  $.ajax({
+    url: 'verificar_productos',
+    dataType: "JSON",
+    success: function(res){
+      var ask = res.respuesta;
+      if (ask == 2) {
+        var respuesta = confirm("Ya existe producto(s) con la categoría anterior,estos se eliminarán si procede a cambiar de categoría.");
+        if (respuesta == true) {
+          $('#variable').val(1);
+        }else{
+          $('#variable').val(0);
+           $('#colection_package_category').val(res.categoria);
+        }
+      }else{
+         $('#variable').val(0);
+      }
+    }
+  })
+})
+
+

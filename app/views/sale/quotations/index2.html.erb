@@ -1,0 +1,46 @@
+<section class="container table_flex_file">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.code') %></th>
+        <th><%= raw I18n.t('.general.attribute.identification_document') %></th>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.valid_since') %></th>
+        <th><%= raw I18n.t('.general.attribute.valid_until') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @quotation_venc.each do |quotation| %>
+      <tr>
+        <td><%= quotation.quoting_number %></td>
+        <td><%= quotation.identificacion_usuario %></td>
+        <td><%= quotation.nombre_usuario %></td>
+        <td><%= quotation.valid_since.strftime("%d-%m-%Y") %></td>
+        <td><%= quotation.valid_until.strftime("%d-%m-%Y") %></td>
+        <td><%= link_to 'Ver', quotation %></td>
+        <% if quotation.may_reactivar? %>
+        <td>
+          <%= link_to 'Reactivar', "/sale/quotations/#{quotation.id}/reactivar",method: :put, data: { confirm: '¿Desea reactivar esta cotización' } %>
+
+          <%= link_to edit_sale_quotation_path(product_product), class: "hvr-skew-backward" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+          <% end %>
+        </td>
+        <% end %>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if !@quotation_venc.present? %>
+  <div class="alert alert-danger notice col-lg-12 ml-0">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+  </div>
+  <% end %>
+  <div class="">
+    <%= will_paginate @quotation_venc %>
+  </div>
+</section>

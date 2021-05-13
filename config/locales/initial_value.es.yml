@@ -1,0 +1,85 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      initial_value:
+        one: "Valor inicial"
+        other: "as"
+    attributes:
+      initial_value:
+        days_validity: "Días válido de cotización"
+        max_refech_service: "Número máximo de días para refechar"
+        number_employee: "Número de empleados en PYMES"
+        max_quantity_product: "Número máximo de productos a vender"
+        email_max_quantity: "Correo electrónico para notificación de cantidad máxima superada"
+        email_security: "Correo electrónico del administrador de seguridad"
+        administration_email: "Correo electrónico para notificación de transferencias(Administración)"
+        call_center_email: "Correo electrónico para notificación de transferencias(Central telefónica)"
+        days_validity_service: "Días de validez del servicio agendado"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+    errors:
+      models:
+        initial_value:
+          attributes:
+            days_validity:
+              blank: "Debe ingresar cantidad de días de cotización."
+            max_refech_service:
+              blank: "Debe ingresar cantidad de veces a refechar"
+            number_employee:
+              blank: "Debe ingresar número máximo de empleados para PYMES."
+            max_quantity_product:
+              blank: "Debe ingresar número máximo da cantidad de productos a vender."
+  initial_value:
+    title: "Valores iniciales"
+    attributes:
+      days_validity: "Días válido de cotización"
+      max_refech_service: "Número máximo de días para refechar"
+      number_employee: "Número de empleados en PYMES"
+      max_quantity_product: "Número máximo de productos a vender"
+      email_max_quantity: "Correo electrónico para notificación de cantidad máxima superada"
+      email_security: "Correo electrónico del administrador de seguridad"
+      administration_email: "Correo electrónico para notificación de transferencias (Administración)"
+      call_center_email: "Correo electrónico para notificación de transferencias (Central telefónica)"
+      days_validity_service: "Días de validez del servicio agendado"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+    actions:
+      new_initial_value: "Registar Valor inicial"
+      show_initial_value: "Datos Iniciales"
+      edit_initial_value: "Editar Valor inicial"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este valor inicial?"
+        enable: "¿Desea habilitar este valor inicial?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el valor inicial."
+      update: "Se actualizó con éxito el valor inicial."
+      destroy: "Se eliminó con éxito el  valor inicial."
+      disable: "Se inhabilitó con éxito el valor inicial."
+      enable: "Se habilitó con éxito el valor inicial."

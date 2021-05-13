@@ -1,0 +1,2 @@
+module SalesChannel::QuotationHelper
+end

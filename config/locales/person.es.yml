@@ -1,0 +1,122 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      people:
+        one: "Persona"
+        other: "as"
+    attributes:
+      people:
+        first_name: "Primer nombre"
+        name: "Nombre"
+        last_name: "Apellido"
+        second_name: "Segundo nombre"
+        surname: "Primer apellido"
+        second_surname: "Segundo apellido"
+        type_identification: "Cédula de identidad"
+        identification_document: "Cédula de identidad"
+        email: "Correo electrónico"
+        date_birth: "Fecha de nacimiento"
+        code_employee: "Código del Empleado"
+        sex: "Sexo"
+        phone: "Teléfono de contacto"
+        cellphone: "Celular"
+        territory_country_id: "País"
+        territory_state_id: "Estado"
+        territory_city_id: "Ciudad"
+        address: "Dirección"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+        business_company: "Centro médico"
+        password: "Contraseña"
+    errors:
+      models:
+        people:
+          attributes:
+            first_name:
+              blank: "Debe ingresar nombre(s)."
+            second_name:
+              blank: "Debe ingresar segundo nombre"
+            surname:
+              blank: "Debe ingresar apellido(s)."
+            second_surname:
+              blank: "Debe ingresar segundo apellido"
+            identification_document:
+              blank: "Debe ingresar una cédula de identidad."
+              taken: "Existe un registro con esta cédula de identidad."
+            phone:
+              not_a_number: "Solo se admiten números."
+              blank: "Debe ingresar un teléfono"
+            usuario:
+              blank: "Usuario"
+            email:
+              blank: "Debe ingresar un correo electrónico."
+              uniqueness: "Existe un registro con este correo electrónico."
+            date_birth:
+              blank: "Debe ingresar una fecha de nacimiento."
+            sex:
+              blank: "Debe seleccionar un sexo."
+  people:
+    title: "Personas"
+    attributes:
+      first_name: "Primer nombre"
+      second_name: "Segundo nombre"
+      name: "Nombre"
+      last_name: "Apellido"
+      surname: "Primer apellido"
+      second_surname: "Segundo apellido"
+      type_identification: "Cédula de identidad"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      date_birth: "Fecha de nacimiento"
+      sex: "Sexo"
+      phone: "Teléfono de contacto"
+      cellphone: "Celular"
+      territory_country_id: "País"
+      territory_state_id: "Estado"
+      territory_city_id: "Ciudad"
+      address: "Dirección"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+      name: "Nombre(s)"
+      lastname: "Apellido(s)"
+      business_company: "Centro médico"
+      password: "Contraseña"
+    actions:
+      new_provider: "Registar Persona"
+      edit_provider: "Editar Persona"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este Persona?"
+        enable: "¿Desea habilitar este Persona?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el Persona."
+      update: "Se actualizó con éxito el Persona."
+      destroy: "Se eliminó con éxito el  Persona."
+      disable: "Se inhabilitó con éxito el Persona."
+      enable: "Se habilitó con éxito el Persona."

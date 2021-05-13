@@ -1,0 +1,1 @@
+json.array! @initial_values, partial: 'initial_values/initial_value', as: :initial_value

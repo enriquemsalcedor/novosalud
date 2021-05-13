@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf"%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages' >
+  <table width="1000" class="cab-header ">
+    <tr>
+      <td width="800">
+        <%= image_tag wicked_pdf_asset_base64('logo-web.png') %>
+      </td>
+      <td width="200">
+        <table width="200">
+          <tr class="pdf-td">
+            <td>
+              <div align="right">
+                <p>
+                  <strong>Fecha:</strong>
+                  <%= Date.today.strftime("%d-%m-%Y")%>
+                </p>
+                <p>
+                  <strong>Hora:</strong>
+                  <%= DateTime.now.strftime("%H:%M") %>
+                </p>
+                <p>
+                  <strong>Usuario:</strong>
+                  <%= current_user.username %>
+                </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <% if params[:desde]=='' || params[:hasta]=='' %>
+  <div align="center">
+    <h3 class="space-title"> <%=raw I18n.t ('.general.titles.service_activates') %> desde el <%= Date.today.strftime("%d-%m-%Y")%> hasta el <%= Date.today.strftime("%d-%m-%Y")%></h3>
+  </div>
+  <%else %>
+  <div align="center">
+    <h3 class="space-title"> <%=raw I18n.t ('.general.titles.service_activates') %> desde el <%=$desde %> hasta el <%= $hasta %></h3>
+  </div>
+  <%end%>
+  <table class="report service">
+    <thead>
+    <tr class="cab-thead cab-service">
+        <th>Nro. del servicio</th>
+        <th>Nro. orden de compra</th>
+        <th>Cédula de identidad/RIF</th>
+        <th>Nombre(s) y apellido(s)/Razón social</th>
+        <th>Servicio</th>
+        <th>Centro médico</th>
+        <th>Precio</th>
+        <th>Fecha de cita</th>
+        <th>Cédula de identidad (Beneficiario)</th>
+        <th>Nombre del beneficiario</th>
+        <th>Teléfono del beneficiario</th>
+        <th>Fecha de Nacimiento del beneficiario</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @service_services.each do |service_service|%>
+
+      <tr class="pdf-td service">
+        <td><%= service_service.code %></td>
+        <td><%= service_service.payment_contracted_product.payment_plan.number_plan %> </td>
+        <% unless service_service.payment_contracted_product.payment_plan.customer.nil? %>
+        <td><div><%= service_service.payment_contracted_product.payment_plan.customer.identificacion_usuario %> </td>
+        <td><%= service_service.payment_contracted_product.payment_plan.customer.nombre_usuario %></td>
+        <%else%>
+        <td><%= service_service.payment_contracted_product.payment_plan.business_company.identificacion_company %> </td>
+        <td><%= service_service.payment_contracted_product.payment_plan.business_company.name %> </td>
+        <% end %>
+        <td><%= service_service.payment_contracted_product.product_product.name %></td>
+        <td><%= service_service.payment_contracted_product.product_product.provider_provider.name %></td>
+        <td><%= number_with_precision(service_service.payment_contracted_product.price_contracted.to_f, precision: 2, delimiter:'.',separator: ',') %></td>
+        <%unless service_service.appointment_date.nil?%>
+        <td><%= service_service.appointment_date.strftime("%d-%m-%Y") %></td>
+        <%else%>
+        <td>-</td>
+        <%end%>
+        <%unless service_service.beneficiary.nil?%>
+        <td><%= service_service.beneficiary.people.type_identification%>-<%= service_service.beneficiary.people.identification_document%></td>
+        <td><%= service_service.beneficiary.people.first_name%> <%= service_service.beneficiary.people.surname%></td>
+        <td><%= service_service.beneficiary.people.phone%></td>
+        <td><%= service_service.beneficiary.people.date_birth.strftime("%d-%m-%Y")%></td>
+        <% else -%>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td
+          <% end -%>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+  <footer>
+    <table width="1000">
+      <tr class="pdf-td">
+        <td width="125"></td>
+        <td width="750" align="right">
+          <p>
+            <strong>Total servicios activados:</strong>
+          </p>
+        </td>
+        <td width="30" align="right">
+          <p>
+            <%= @service_services.count %>
+          </p>
+        </td>
+      </tr>
+    </table>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,2 @@
+json.extract! provider_provider, :id, :name, :rif, :phone, :email, :territory_address_id, :provider_provider_type_id, :created_at, :updated_at
+json.url provider_provider_url(provider_provider, format: :json)

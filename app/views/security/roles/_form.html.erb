@@ -1,0 +1,24 @@
+<%= form_for(security_role) do |f| %>
+<% if security_role.errors.any? %>
+<% end %>
+<div class="form-group col-lg-12">
+  <div class=" <%= @security_role.errors[:name].any? ? "has-error has-feedback" : "" %> ">
+    <%= f.label I18n.t('roles.attributes.name'), class:"label-form col-lg-12"%>
+    <div class="controls col-lg-12 input_100">
+      <%= f.text_field :name , minlength: '3', maxlength: '50'%>
+      <span   class="help-inline">
+        <%= @security_role.errors[:name].any? ? @security_role.errors[:name].to_s[/\w([^"]*)/] : "" %></span>
+      </div>
+    </div>
+  </div>
+  <div id="divAceptarProduct" class="form-group col-lg-12">
+    <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+      <%= link_to I18n.t('.general.action.cancel'), security_roles_path,class: "hvr-skew-backward" %>
+    </div>
+    <div   class="col-lg-3 pull-right">
+    <% if @permiso_modificar == true || @permiso_crear == true%> 
+      <%= f.submit I18n.t('roles.actions.accept'),class: "hvr-skew-backward",data: {disable_with: "Guardando ..."} %>
+    <% end -%>
+    </div>
+  </div>
+  <% end %>

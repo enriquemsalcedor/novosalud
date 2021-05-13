@@ -1,0 +1,39 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<div class="title-center">
+<h1 class="space-title"><%=raw I18n.t ('.positions.actions.show_position') %></h1>
+</div>
+<div class="col-lg-10">
+  <div class="col-lg-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.general.attributes.name') %></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @position.name %>
+      </div>
+      
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-4 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.general.attributes.description') %></strong>
+    </div>
+    <div class="col-lg-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @position.description %>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center"> 
+  <% if @permiso_modificar == true %> 
+    <%= link_to I18n.t('.general.action.edit'), edit_position_path(@position),class: "hvr-skew-backward" %>    
+  <% end -%>
+  <%= link_to I18n.t('.general.action.cancel'), positions_path,class: "hvr-skew-backward" %>
+</div>

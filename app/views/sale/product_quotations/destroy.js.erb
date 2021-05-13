@@ -1,0 +1,11 @@
+$('.deleteProductQuotation').bind('ajax:success', function() {
+   $(this).closest('article').addClass('hide');
+   $('#notice').addClass('hide');
+   var cantidad=<%= @product.sale_quotation.cant_total %>;
+   $('#total_cotizacion').html('<%= @product.sale_quotation.total_cotizacion %>');
+   $('.cantidad').html('<%= @product.sale_quotation.cant_total %>');
+   if(cantidad==0){
+   	$(".cont-cart-mobile").hide();
+   	$("#mensaje").html("<div class='alert alert-success notice'>Debe Agregar un Producto para generar la cotizacion</div><div class='center'><a href='/' class='hvr-skew-backward'>Volver</a></div>");
+   }
+});

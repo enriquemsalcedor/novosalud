@@ -1,0 +1,18 @@
+<fieldset>
+  <div class="field">
+    <%= f.label :territory_country_id %>
+    <%= f.collection_select :territory_country_id, Territory::Country.order(:name), :id, :name, include_blank: true %>
+  </div>
+
+  <div id="div_state" class="field">
+    <%= f.label :territory_state_id %>
+    <%= f.grouped_collection_select :territory_state_id, Territory::Country.order(:name), 
+    :territory_states, :name, :id, :name, include_blank: true %>
+  </div>
+
+  <div id="div_city" class="field">
+    <%= f.label :territory_city_id %>
+    <%= f.grouped_collection_select :territory_city_id, Territory::State.order(:name), 
+    :territory_cities , :name, :id, :name, include_blank: true %>
+  </div>
+<fieldset> 

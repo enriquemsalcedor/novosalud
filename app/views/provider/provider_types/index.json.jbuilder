@@ -1,0 +1,1 @@
+json.array! @provider_provider_types, partial: 'provider_provider_types/provider_provider_type', as: :provider_provider_type

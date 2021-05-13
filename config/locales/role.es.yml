@@ -1,0 +1,69 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      security/roles:
+        one: "Rol"
+        other: "Roles"
+
+    attributes:
+      security/roles:
+        name: "Nombre"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+        action: "Acciones"
+
+    errors:
+      models:
+        security/role:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+
+  roles: 
+    title: "Roles"
+    attributes:
+      name: "Nombre"
+      name_show: "Rol"
+      select: "Seleccione un rol"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+      action: "Acciones"
+    actions:
+      new_role: "Registrar Rol"
+      edit_role: "Editar Rol"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      back: "Regresar"
+      accept: "Aceptar"
+      question:
+        disable: "¿Desea inhabilitar este rol?"
+        enable: "¿Desea habilitar este rol?"
+    controller:
+      create: "Se creó el rol exitosamente." 
+      update: "Se actualizó con éxito el rol."
+      disable: "Se inhabilitó con éxito el rol."
+      enable: "Se habilitó con éxito el rol"

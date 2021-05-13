@@ -1,0 +1,73 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.providers') %></h1>
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @provider_providers.each do |provider_provider| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.rif') %></th>
+        <th><%= raw I18n.t('.general.attribute.phone') %></th>
+        <th><%= raw I18n.t('.general.attribute.email') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+     <% @provider_providers.each do |provider_provider| %>
+     <tr>
+      <td><%= provider_provider.name %></td>
+      <td><%= provider_provider.type_identification %>-<%= provider_provider.rif %></td>
+      <td><%= provider_provider.phone[1,30] %></td>
+      <td class="correo"><%= provider_provider.email %></td>
+
+      <td>
+        <% if @permiso_consultar == true %>
+        <%= link_to provider_provider, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver"  do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.see")) %>
+        <% end %>
+        <% end -%>
+        <% if @permiso_modificar == true %>
+        <%= link_to edit_provider_provider_path(provider_provider), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+        <% end %>
+        <% end -%>
+        <% if @permiso_activar == true %>
+        <% if provider_provider.may_inhabilitar? %>
+        <%= link_to "/provider/providers/#{provider_provider.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.provider.disable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+        <% end %>
+        <%else%>
+        <%= link_to "/provider/providers/#{provider_provider.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.provider.enable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Activar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+        <% end %>
+        <% end -%>
+        <%end%>
+      </td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @permiso_crear == true %>
+<%= link_to new_provider_provider_path,  class: "hvr-skew-backward"  do %>
+<%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.provider')) %>
+<% end %>
+<% end -%>
+<% if !@provider_providers.present? %>
+<div class="alert alert-danger notice col-lg-12 ml-0">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+</div>
+<% end %>
+</section>
+
+

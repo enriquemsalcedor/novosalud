@@ -1,0 +1,2 @@
+module Product::ProductTypesHelper
+end

@@ -1,0 +1,78 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.services') %></h1>
+  <% if @service_services.present? %>
+  <div class="pull-right col-lg-12 icon-download">
+  <%= link_to " Exportar a Excel", service_services_path(format: "xlsx",fechaDesde: params[:fechaDesde], fechaHasta: params[:fechaHasta]), class:"fa fa-download" %>
+ </div>
+ <%end%>
+ <table id="datatable" class="table table-hover">
+  <thead>
+    <% @service_services.each do |service_service| %>
+    <tr>
+      <th><%= raw I18n.t('.general.attribute.plan') %></th>
+      <th><%= raw I18n.t('.general.attribute.cotizacion') %></th>
+      <th><%= raw I18n.t('.general.attribute.headline') %></th>
+      <th><%= raw I18n.t('.general.attribute.product') %></th>
+      <th><%= raw I18n.t('.general.attribute.service_number') %></th>
+      <th><%= raw I18n.t('.general.attribute.status') %></th>
+      <th><%= raw I18n.t('.general.attributes.actions') %></th>
+    </tr>
+      <% end %>
+  </thead>
+<tbody>
+  <% @service_services.each do |service_service| %>
+  <tr>
+    <td><%= service_service.payment_contracted_product.payment_plan.number_plan%></td>
+    <td><%= service_service.payment_contracted_product.payment_plan.sale_quotation.quoting_number%></td>
+
+    <% unless service_service.payment_contracted_product.payment_plan.customer.nil? %>
+      <td><%= service_service.payment_contracted_product.payment_plan.nombre_titular %></td>
+    <%else%>
+      <td><%= service_service.payment_contracted_product.payment_plan.business_company.name %></td>
+    <% end %>
+    <td><%= service_service.payment_contracted_product.product_product.name%></td>
+    <td><%= service_service.code %></td>
+    <td><%= service_service.status %></td>
+
+    <td>
+      <% if @permiso_consultar == true %>
+        <%= link_to service_service,  class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.see")) %>
+        <% end %> 
+      <% end -%>
+      <% if @permiso_reagendar == true %>
+        <% if service_service.may_reagendar? %>
+          <%= link_to "/service/services/#{service_service.id}/reagendar" , method: :put, data: { confirm: I18n.t('.general.action.question.service.reschedule')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Reagendar"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-calendar"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.reschedule")) %>
+          <% end %>
+        <%end%>
+      <% end -%>
+      <% if @permiso_cancelar == true %>
+       <% if service_service.may_cancelar? %>
+          <%= link_to  "/service/services/#{service_service.id}/cancelar", method: :put, data: { confirm: I18n.t('.general.action.question.service.cancel')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Cancelar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-remove"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.cancel")) %>
+          <% end %>
+        <%end%>
+       <% end -%>
+       <% if @permiso_anular == true %>
+        <% if service_service.may_anular? %>
+          <%= link_to "/service/services/#{service_service.id}/anular", method: :put, data: { confirm: I18n.t('.general.action.question.service.annul')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Anular"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-ban-circle" ] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.annul")) %>
+        <%end%>
+      <% end -%>
+  <%end%>
+  </tr>
+<% end %>
+</tbody>
+</table>
+</section>

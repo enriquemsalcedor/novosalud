@@ -1,0 +1,2 @@
+json.extract! sale_quotation, :id, :quoting_number, :status, :user_id, :valid_since, :valid_until, :user_created_id, :user_updated_id, :created_at, :updated_at
+json.url sale_quotation_url(sale_quotation, format: :json)

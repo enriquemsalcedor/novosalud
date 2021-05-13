@@ -1,0 +1,2 @@
+module Territory::AddressesHelper
+end

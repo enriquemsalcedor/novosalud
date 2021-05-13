@@ -1,0 +1,114 @@
+<%= form_for(business_company,validate: true) do |f| %>
+<% if business_company.errors.any? %>
+<% end %>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.name') %></label>
+    <%= f.text_field :name , minlength: '3', maxlength: '50' %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <label class="col-lg-12 label-form"><%= I18n.t ('.companies.attributes.rif') %></label>
+  <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2 input_100 select-regist">
+    <%= f.select :type_identification, Business::Company::TYPE_COMPANY_OPTIONS ,class: "input-text"%>
+    <span class="help-block"></span>
+  </div>
+  <div class="col-xs-9 col-sm-10 col-md-10 col-lg-10  input_100  input_44">
+    <%= f.text_field :rif , minlength: '3', maxlength: '15' %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.address') %></label>
+    <%= f.text_area :address , minlength: '0', maxlength: '140'%>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.email') %></label>
+    <%= f.text_field :email,class: "input-text" , validate: true, minlength: '10', maxlength: '60',  validate: { presence: true } %>
+    <% unless flash[:email_empleado].nil? %>
+    <span class="help-block1"><%= flash[:email_empleado] %></span>
+    <%end%>  
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.business_company_type_id') %></label>
+    <%= f.collection_select :business_company_type_id, Business::CompanyType.order(:name), :id, :name %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 pl-0">
+  <h1 class="space-title">Datos del responsable</h1> 
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.firt_name_responsable') %></label>
+    <%= f.text_field :firt_name_responsable %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.last_name_responsable') %></label>
+    <%= f.text_field :last_name_responsable %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 col-xs-12 form-group p-0">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.companies.attributes.phone_responsable') %></label>
+    <%= f.text_field :phone , minlength: '3', maxlength: '15'%>
+    <span class="help-block"></span>
+  </div>
+</div>
+<%if params[:action] == "new" || params[:action] == "create" %>
+<div id="btns"> 
+  <div class="col-lg-12 col-xs-12 form-group p-0">
+    <div  class="col-x-12 col-xs-6 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6 ml-03">
+      <%= link_to I18n.t('.general.action.cancel'), root_path,class: "hvr-skew-backward w-100 min-hg-45" %>
+    </div>
+
+    <div class="col-x-12 col-xs-6 col-sm-4 col-md-3 col-lg-3">
+      <%= f.submit :Aceptar, class: "hvr-skew-backward w-100 min-hg-45", data: {disable_with: "Registrando ..."} %>
+    </div>
+  </div>
+</div>
+<%end%>
+<%if params[:action] == "edit" || params[:action] == "update"%>  
+<div id="btns"> 
+  <div class="col-lg-12 col-xs-12 form-group btn-x p-0">
+    <div  class="col-x-12 col-xs-6 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6 ml-03">
+      <%= link_to I18n.t('.general.action.cancel'), business_company_path,class: "hvr-skew-backward w-100 min-hg-45" %>
+    </div>
+    <div class="col-x-12 col-xs-6 col-sm-4 col-md-3 col-lg-3">
+      <div class="hvr-skew-backward w-100 min-hg-45" id="btnAceptarActualizacionBusiness">Aceptar</div>
+    </div>
+  </div>
+  
+</div>
+<div id="divPassword">    
+  <div class="col-lg-12 col-xs-12 form-group p-0 ">
+    <div class="col-lg-12 input_100">
+      <label class="label-form"><%= I18n.t ('.people.attributes.password') %></label>
+      <i>(Necesitamos su contraseña actual para confirmar sus cambios)</i>
+      <%= f.password_field :password_company,  :input_html => {:maxlength => 50, :size => 60},  class: "input-text", validate: true  %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12 form-group p-0">
+    <div  class="col-x-12 col-xs-4 col-xs-offset-4 col-sm-4 col-sm-offset-4 col-md-3 col-md-offset-6 col-lg-3 col-lg-offset-6">
+      <div class="btn hvr-skew-backward w-100" id="btnCancelarActualizacionBusiness">Cancelar</div>
+    </div>
+    <div class="col-x-12 col-xs-4 col-sm-4 col-md-3 col-lg-3">
+      <%= f.submit I18n.t('.companies.actions.accept'),class: "btn hvr-skew-backward w-100", data: { disable_with: "Registrando ..."} %>
+    </div>
+  </div>
+</div>
+<%end%>
+<% end %>

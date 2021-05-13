@@ -1,0 +1,44 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<section class="container table_flex_five">
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @business_companies.each do |business_company| %>
+      <tr>
+        <th><%= raw I18n.t('.companies.attributes.name') %>  </th>
+        <th><%= raw I18n.t('.companies.attributes.rif') %>  </th>
+        <th><%= raw I18n.t('.companies.attributes.email') %>  </th>  
+        <th><%= raw I18n.t('.companies.attributes.responsable') %>  </th>
+        <th><%= raw I18n.t('.companies.attributes.phone_responsable') %>  </th>
+        <th><%= raw I18n.t('.companies.attributes.business_company_type_id') %>  </th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody> 
+     <% @business_companies.each do |business_company| %>
+     <tr>
+      <td><%= business_company.name %></td>
+      <td><%= business_company.type_identification %>-<%= business_company.rif %></td>
+      <td><%= business_company.email %></td>
+      <td><%= business_company.firt_name_responsable %> <%= business_company.last_name_responsable%></td>
+      <td><%= business_company.phone %></td>
+      <td><%= business_company.business_company_type.name %></td>
+      <td><%= link_to I18n.t('.general.action.see'), business_company %></td>
+      <td><%= link_to I18n.t('.general.action.edit'), edit_business_company_path(business_company) %></td>
+      <% if business_company.may_inhabilitar? %>          
+      <%= link_to I18n.t('.general.action.disable'), "/business/companies/#{business_company.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.disable')},class: "hvr-skew-backward"  %> 
+      <%else%>
+      <%= link_to I18n.t('.general.action.enable'), "/business/companies/#{business_company.id}/habilitar", method: :put, data: { confirm:  I18n.t('.general.action.question.enable')} , class: "hvr-skew-backward" %> </td> 
+      <%end%>
+    </tr>
+      <% end %>
+    </tbody>
+    
+  </table>
+  <%= link_to I18n.t('.companies.actions.new_company'), new_business_company_path %>
+</section>

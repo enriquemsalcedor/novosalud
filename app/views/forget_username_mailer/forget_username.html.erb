@@ -1,0 +1,9 @@
+<h1>Solicitud de usuario </h1>
+
+<p>Saludos, Administrador(a). <%= @mail.email_security%>,</p><br/>
+<p>El presente es para notificar que <%=@user.email%>,solicita recuperación de usuario para poder ingresar nuevamente al sistema.</p><br/>
+
+<p>Para verificar la solicitud por favor ingrese siguiente enlace:
+   <%= link_to "Reenviar usuarios", forget_username_list_url, class: "hvr-skew-backward" %></p>
+
+

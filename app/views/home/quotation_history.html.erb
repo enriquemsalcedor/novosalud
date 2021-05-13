@@ -1,0 +1,153 @@
+ <div class="container">
+  <div class="col-lg-12">
+    <h1 class="space-title texs">Historial de cotizaciones</h1>
+  </div>
+</div>
+<% if !@quotation.present? %>
+<div class="container">
+  <div class="alert alert-danger notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>   
+    <p id="notice margin_left_none">No se han encontrado resultados.</p>
+  </div>
+</div>
+<%end%>
+<% unless @noticia.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= @noticia%></p>
+</div>
+<% end -%>
+<% unless @quotation.empty? %>
+<% @quotation.each do |quotation|  %>
+<section class="table_custom">
+  <% @payment_transference = Payment::Transference.find_by(sale_quotation_id: quotation.id) %>
+  <%if @payment_transference.nil?%>
+  <div  class="col-lg-3 pull-right ">
+    <%= link_to "/#{quotation.id}/transference", { controller: "home", action: "transference", :target => "_blank", id: quotation, class: "hvr-skew-backward" }  do %>
+    <%= content_tag(:span, 'Pago por transferencia') %>
+    <% end %>
+  </div>
+  <%end%>
+  <div class="col-lg-12 col-lg-offset-1 ml-0 p-0">
+    <div class="col-lg-12 col-xs-12">
+      <div class="col-lg-3 col-xs-5 container-movil">
+        <strong>Código de cotización</strong>
+      </div>
+      <div class="col-lg-9 col-xs-7 rdown container-movil">
+        <div class="col-lg-10 ">
+          <%= quotation.quoting_number %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 col-xs-12">
+      <div class="col-lg-3 col-xs-5 container-movil">
+        <strong>Cotización válida </strong>
+      </div>
+      <div class="col-lg-9 col-xs-7 rdown container-movil">
+        <div class="col-lg-10 mt-1 dis-bl">
+          <strong>desde:</strong> <%= quotation.valid_since.strftime("%d-%m-%Y") %>
+          <strong> - hasta : </strong><%= quotation.valid_until.strftime("%d-%m-%Y") %>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!--DIV QUE SE MUESTRA CUANDO ESTA EN MOVIL-->
+  <div class="col-lg-12 col-xs-12 hidden-md hidden-lg cotizacion-movil">
+     <% quotation.sale_package_quotation.each do |package_quotation| %>
+        <div class="col-lg-12 cont-cotizacion display-flex">
+          <div class="col-xs-4"><strong>Producto</strong></div>
+          <div class="col-xs-8"><%= package_quotation.colection_package.description %></div>
+          <div class="col-xs-4"><strong>Cantidad</strong></div>
+          <div class="col-xs-8"><%= package_quotation.quantity%></div>
+          <div class="col-xs-4"><strong>Precio unitario</strong></div>
+          <div class="col-xs-8"><%= number_with_precision(package_quotation.colection_package.total_amount , :precision => 2, delimiter:'.',separator: ',') %></div>
+          <div class="col-xs-4"><strong>Sub total</strong></div>
+          <div class="col-xs-8"><%= number_with_precision(package_quotation.colection_package.total_amount * package_quotation.quantity , :precision => 2, delimiter:'.',separator: ',')%></div>
+        </div>
+      <% end %>
+      <% quotation.sale_product_quotations.each do |product_quotation| %>
+        <div class="col-lg-12 cont-cotizacion display-flex">
+          <div class="col-xs-4"><strong>Producto</strong></div>
+          <div class="col-xs-8"><%= product_quotation.product_product.armar_nombre %></div>
+          <div class="col-xs-4"><strong>Cantidad</strong></div>
+          <div class="col-xs-8"><%= product_quotation.quantity %></div>
+          <div class="col-xs-4"><strong>Precio unitario</strong></div>
+          <div class="col-xs-8"><%= number_with_precision(product_quotation.product_product.price , :precision => 2, delimiter:'.',separator: ',') %></div>
+          <div class="col-xs-4"><strong>Sub total</strong></div>
+          <div class="col-xs-8"> <%= number_with_precision(product_quotation.product_product.price * product_quotation.quantity , :precision => 2, delimiter:'.',separator: ',') %></div>
+        </div>
+      <% end %>
+      <div class="col-lg-12 divider">
+      </div>
+      <div class="col-xs-4"><strong>Total a Pagar:</strong></div>
+      <div class="col-xs-8 total" id="total_cotizacion"><%= number_with_precision(quotation.total_cotizacion , :precision => 2, delimiter:'.',separator: ',') %></div>
+
+  </div>
+
+   <!--CONTENIDO QUE SE MUESTRA EN TABLE Y DESKTOP-->
+  <div class="col-lg-12 col-xs-12 hidden-xs hidden-sm">
+    <table class="table table-responsive response-quotation">
+      <thead>
+        <tr>
+          <th><strong>Producto</strong></th>
+          <th><strong>Cantidad</strong></th>
+          <th><strong>Precio unitario</strong></th>
+          <th><strong>Sub total</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% quotation.sale_package_quotation.each do |package_quotation| %>
+        <tr>
+          <td>
+            <%= package_quotation.colection_package.description %>
+          </td>
+          <td>
+            <%= package_quotation.quantity%>
+          </td>
+          <td>
+            <%= number_with_precision(package_quotation.colection_package.total_amount , :precision => 2, delimiter:'.',separator: ',') %>
+          </td>
+          <td>
+            <%= number_with_precision(package_quotation.colection_package.total_amount * package_quotation.quantity , :precision => 2, delimiter:'.',separator: ',')%>
+          </td>
+        </tr>
+        <% end %>
+        <% quotation.sale_product_quotations.each do |product_quotation| %>
+        <tr>
+          <td><%= product_quotation.product_product.armar_nombre %></td>
+          <td>
+            <%= product_quotation.quantity %>
+          </td>
+          <td>
+            <%= number_with_precision(product_quotation.product_product.price , :precision => 2, delimiter:'.',separator: ',') %>
+          </td>
+          <td>
+            <%= number_with_precision(product_quotation.product_product.price * product_quotation.quantity , :precision => 2, delimiter:'.',separator: ',') %>
+          </td>
+        </tr>
+        <% end %>
+        
+      </tbody>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td><strong>Total a Pagar:</strong></td>
+          <td id="total_cotizacion"><%= number_with_precision(quotation.total_cotizacion , :precision => 2, delimiter:'.',separator: ',') %></td>
+        </tr>
+      </tbody>
+    </table>
+    <% end %>
+    <% end %>
+  </div>
+  <div class="col-md-4 simpleCart_shelfItem">
+    <%= will_paginate @quotation %>
+  </div>
+</div>
+
+</section>
+
+</table>
+
+

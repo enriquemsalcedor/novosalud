@@ -1,0 +1,41 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+
+<h1>Rol-Menú</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Rol</th>
+      <th>Menú</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @security_role_menus.each do |security_role_menu| %>
+      <tr>
+        <td><%= security_role_menu.security_role %></td>
+        <td><%= security_role_menu.security_menu %></td>
+        <% if @permiso_consultar == true %>
+          <td><%= link_to 'Ver', security_role_menu %></td>
+        <% end -%>
+        <% if @permiso_modificar == true %>
+          <td><%= link_to 'Modificar', edit_security_role_menu_path(security_role_menu) %></td>
+        <% end -%>
+        <% if @permiso_eliminar == true %>
+          <td><%= link_to 'Eliminar', security_role_menu, method: :delete, data: { confirm: '¿Está seguro de eliminar?' } %></td>
+        <% end -%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if @permiso_crear == true %>
+  <%= link_to 'Registrar Rol-Menú', new_security_role_menu_path %>
+<% end -%>

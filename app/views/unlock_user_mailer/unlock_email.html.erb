@@ -1,0 +1,12 @@
+<h1>Solicitud de desbloqueo </h1>
+
+<p>
+	Saludos, Administrador(a). <%= @mail.email_security%>.</p><br/>
+<p>	EL presente es para notificar que <%=@user.email%> solicita desbloqueo de su cuenta para poder ingresar nuevamente al sistema.</p><br/>
+
+<p>  Para verificar la solicitud por favor ingrese siguiente enlace:
+   <%= link_to "Desbloquear usuario", blocked_user_url, class: "hvr-skew-backward" %>
+
+</p>
+
+

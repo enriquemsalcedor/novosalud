@@ -1,0 +1,11 @@
+es:
+  contact: 
+    title: "Contacto"
+    attributes:
+      name: "Nombre y Apellido"
+      email: "Correo electrónico"
+      subject: "Asunto"
+      message: "Mensaje"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+      action: "Acciones"

@@ -1,0 +1,1 @@
+json.array! @security_role_menus, partial: 'security_role_menus/security_role_menu', as: :security_role_menu

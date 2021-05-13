@@ -1,0 +1,8 @@
+<h1>Editing Colection Package Product</h1>
+
+<%= render 'form', colection_package_product: @colection_package_product %>
+<% if @permiso_consultar == true %>
+  <%= link_to 'Ver', @colection_package_product %>
+<% end -%> |
+<%= link_to 'Regresar', colection_package_products_path %>
+

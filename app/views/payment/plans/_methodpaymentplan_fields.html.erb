@@ -1,0 +1,14 @@
+    <fieldset id="methodpaymentplans">
+      <%= f.fields_for :methodpaymentplans do |pay_form| %>
+        <div class="field">
+          <%= pay_form.label "Modalidad de pago:"%>
+          <%= pay_form.collection_select :method_payment_id, MethodPayment.order(:name), :id, :name, prompt: true %>
+        </div>
+        <div class="field">
+          <%= pay_form.label "Banco:"%>
+          <%= pay_form.collection_select :bank_id, Bank.order(:name), :id, :name, prompt: true %>
+        </div>
+        <%= pay_form.link_to_remove "Eliminar" %>
+      <% end %>
+      <p><%= f.link_to_add "Agregar modalidad de pago", :methodpaymentplans %></p>
+    </fieldset>

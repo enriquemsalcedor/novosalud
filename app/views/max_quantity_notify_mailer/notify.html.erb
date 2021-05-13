@@ -1,0 +1,11 @@
+<h1>Advertencia de cotización que supera el máximo establecido</h1>
+
+<p>La cotización <%= @quotation.quoting_number %> ha sido generada y esta poseé producto(s) cuya cantidad(es) es mayor permitida establecida.</p>
+
+<h2>Los productos que no cumplen con la condición son los siguientes:</h2>
+<p>
+
+  <% @hash_producto.each do |key,value|%>
+    Producto: <%= key.armar_nombre %> - Cantidad: <%= value %> 
+  <%end%>
+</p>

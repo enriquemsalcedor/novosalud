@@ -1,0 +1,21 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<p>
+  <strong>Provider provider:</strong>
+  <%= @provider_medico_provider.provider_provider %>
+</p>
+
+<p>
+  <strong>Provider medico:</strong>
+  <%= @provider_medico_provider.provider_medico %>
+</p>
+
+<%= link_to 'Edit', edit_provider_medico_provider_path(@provider_medico_provider) %> |
+<%= link_to 'Back', provider_medico_providers_path %>
+ 
+
+ 

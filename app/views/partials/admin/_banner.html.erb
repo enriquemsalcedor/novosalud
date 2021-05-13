@@ -1,0 +1,17 @@
+<div class="theme-dark">
+<div class="container">
+		<% unless notice.nil? %>
+		<div class="alert alert-success notice msj-banner">
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+			<p id="notice"><%= notice %></p>
+		</div>
+		<% end -%>
+	</div>
+	<%= nivo_slider id: "slider" do %>
+	<%= image_tag "banners/banner_1.jpg" %>
+	<%= image_tag "banners/banner_2.jpg" %>
+	<%= image_tag "banners/banner_3.jpg" %>
+	<%= image_tag "banners/banner_4.jpg" %>
+	<%= image_tag "banners/banner_5.jpg" %>
+	<% end %>
+</div>

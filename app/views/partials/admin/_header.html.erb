@@ -1,0 +1,336 @@
+<header id="header">
+  <div class="header_top clearfix affix-top hidden-xs">
+    <div class="container">
+      <div class="col-lg-4 col-md-4 col-sm-12 logo media-left media-middle float_left padding_left_none">
+        <a href="<%= root_path %>" title="Novosalud">
+          <img src="<%= asset_path 'logo-web-w-1.png' %>" alt="Novosalud"/> 
+          <!--   <span class="icon-logo-novosalud">
+            <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span>
+          </span> -->
+        </a>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-8 top_nav media-middle affix-top float_right">
+        <div class="top_nav_wrapper clearfix">
+          <ul id="menu-main-menu" class="main_menu_nav">
+            <li class="menu-item">
+              <a href="#">Servicios</a>
+              <ul class="sub-menu">
+                <li class="menu-item">
+                  <%= link_to "Personas", list_path %>
+                </li>
+                <li class="menu-item">
+                  <%= link_to "Empresas", plist_path %>
+                  <!--<ul>
+                    <li class="menu-item">
+                      < %= link_to "PYMES", plist_path %>
+                    </li>
+                    <li class="menu-item">
+                      <a href="http://novosalud.com.ve/sitio/plan-optimo/">Corporativos</a>
+                    </li>
+                  </ul>-->
+                </li>
+              </ul>
+            </li>
+            <!--<li class="menu-item">
+              <a href="#">Paquetes y promociones</a>
+              <ul class="sub-menu">
+                <li class="menu-item">
+                  < %= link_to "Personas", promotions_path %>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" >Empresas</a>
+                  <ul>
+                    <li class="menu-item">
+                      < %= link_to "PYMES", pymes_promotions_path %>
+                    </li>
+                    <li class="menu-item">
+                      <a href="http://novosalud.com.ve/sitio/plan-optimo/">Corporativos</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li> -->
+            <li class="menu-item">
+              <%= link_to "Centros médicos", clinics_path%>
+            </li>
+            <li class="menu-item">
+              <%= link_to  "Contacto", new_contact_path %>
+            </li>
+            <li class="menu-item">
+              <%= link_to  "Acceso Proveedores", admin_path %>
+            </li>
+            <% if user_signed_in? %>
+            <% if session[:customer_id].nil? && session[:client_type] == "persona"%>
+            <li class="menu-item">
+              <%= link_to "Mi cuenta", new_customer_path%>
+            </li>
+            <% elsif !session[:customer_id].nil? %>
+            <li class="menu-item">
+              <a href="#">Mi cuenta</a>
+              <ul class="sub-menu">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" >Configuración de cuenta</a>
+                  <ul>
+                    <li>
+                      <%= link_to "Cambiar contraseña", edit_user_registration_path %>
+                    </li>
+                    <li>
+                      <%= link_to "Actualizar mis datos",customer_path( session[:customer_id]) %>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="#">Mis planes</a>
+                  <ul class="sub-menu menu_invert">
+                    <li>
+                      <%= link_to "Historial",plan_history_path%>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <%= link_to "Mis cotizaciones", quotation_history_path %>
+                </li>
+                <li class="menu-item">
+                  <%= link_to "Activar servicio", new_service_service_path%>
+                </li>
+                <%else%>
+                <% if session[:company_id].nil? && session[:client_type] == "empresa"%>
+                <li class="menu-item">
+                  <%= link_to "Mi cuenta", new_business_company_path%>
+                </li>
+                <% elsif !session[:company_id].nil? %>
+                <li class="menu-item">
+                  <a href="#">Mi cuenta</a>
+                  <ul class="sub-menu">
+                    <li class="menu-item">
+                      <a href="javascript:void(0);" >Configuración de cuenta</a>
+                      <ul>
+                        <li>
+                          <%= link_to "Cambiar contraseña", edit_user_registration_path %>
+                        </li>
+                        <li>
+                          <%= link_to "Actualizar mis datos",business_company_path( session[:company_id]) %>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item">
+                      <%= link_to "Mis planes", new_user_session_path(:cliente => "empresa") %>
+                      <ul class="sub-menu menu_invert">
+                        <li>
+                          <%= link_to "Historial",plan_history_path%>
+                        </li>
+                      </ul>
+                    </li>
+                    <li class="menu-item">
+                      <%= link_to "Mis cotizaciones", quotation_history_path %>
+                    </li>
+                    <li class="menu-item">
+                      <%= link_to "Activar servicio", new_service_service_path%>
+                    </li>
+                    <%end%>
+                    <%end%>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <%= link_to destroy_user_session_path, method: :delete do %>
+                  <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+                  <% end %>
+                </li>
+                <%else%>
+                <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+                  <a href="#">Acceso clientes</a>
+                  <ul class="sub-menu">
+                    <li class="menu-item">
+                      <%= link_to "Individual" , new_user_session_path(:cliente => "persona",:layout => 'application')%>
+                    </li>
+                    <li class="menu-item">
+                      <%= link_to "Empresa", new_user_session_path(:cliente => "empresa",:layout => 'application') %>
+                    </li>
+                  </ul>
+                  <%end%>
+                </li>
+                <li class="menu-item cart-item">
+                  <%= link_to cart_path do %>
+                  <%= content_tag(:i, nil ) %>
+                  <img src="<%= asset_path 'shopping_cart.png' %>" alt="Novosalud"/>
+                  <% unless session[:cart].nil? %>
+                    <div id="cantidad" class="cantidad">
+                      <%= session[:cart].cant_total  %>
+                    </div>
+                  <%end%>
+                  <% end %>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mobile_header visible-xs">
+        <div class="logo_wrapper clearfix">
+         <div class="col-xs-12 col-sm-9">
+            <div class="logo">
+              <a href="<%= root_path %>" title="Novosalud">
+                <!-- <img src="<%= asset_path 'logo-novosalud.svg' %>" alt="Novosalud"/> -->
+                <img src="<%= asset_path 'logo-web-w-1.png' %>" alt="Novosalud"/> 
+              </a>
+            </div>
+         </div>
+          <div class="col-xs-6 col-sm-2 cart-item mobile-icon">
+            <%= link_to cart_path do %>
+            <%= content_tag(:i, nil ) %>
+            <img src="<%= asset_path 'shopping_cart.png' %>" alt="Novosalud"/>
+            <% unless session[:cart].nil? %>
+            <div id="cantidad" class="cantidad">
+              <%= session[:cart].cant_total  %>
+            </div>
+            <%end%>
+            <% end %>
+          </div>
+          <div class="col-xs-6 col-sm-1">
+            <div id="menu_toggle">
+              <button></button>
+            </div>
+          </div>
+        </div>
+        <div class="header_info">
+          <div class="top_nav_mobile">
+            <ul id="menu-main-menu-1" class="main_menu_nav">
+              <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+                <a href="#">Servicios</a>
+                <ul class="sub-menu">
+                  <li class="menu-item">
+                    <%= link_to "Personas", list_path %>
+                  </li>
+                  <li class="menu-item">
+                    <%= link_to "Empresas", plist_path %>
+                    <ul>
+                      <!--<li class="menu-item">
+                        <%= link_to "PYMES", plist_path %>
+                      </li>
+                      <li class="menu-item">
+                        <a href="http://novosalud.com.ve/sitio/plan-optimo/">Corporativos</a>
+                      </li>-->
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+             <!-- <li class="mmenu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+                <a href="#">Paquetes y promociones</a>
+                <ul class="sub-menu">
+                  <li class="menu-item">
+                    <%= link_to "Personas", promotions_path %>
+                  </li>
+                  <li class="menu-item">
+                    <a href="javascript:void(0);" >Empresas</a>
+                    <ul>
+                      <li class="menu-item">
+                        <%= link_to "PYMES", pymes_promotions_path %>
+                      </li>
+                      <li class="menu-item">
+                        <a href="http://novosalud.com.ve/sitio/plan-optimo/">Corporativos</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>-->
+              <li class="menu-item">
+                <%= link_to "Centros médicos", clinics_path%>
+              </li>
+              <li>
+                <%= link_to  "Contacto", new_contact_path %>
+              </li>
+              <% if user_signed_in? %>
+              <% if session[:customer_id].nil? && session[:client_type] == "persona"%>
+              <li class="menu-item">
+                <%= link_to "Mi cuenta", new_customer_path%>
+              </li>
+              <% elsif !session[:customer_id].nil? %>
+              <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+                <a href="#">Mi cuenta</a>
+                <ul class="sub-menu">
+                  <li class="menu-item">
+                    <a href="javascript:void(0);" >Configuración de cuenta</a>
+                    <ul class="sub-menu mostrar">
+                      <li>
+                        <%= link_to "Cambiar contraseña", edit_user_registration_path %>
+                      </li>
+                      <li>
+                        <%= link_to "Actualizar mis datos",customer_path( session[:customer_id]) %>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item">
+                    <%= link_to "Mis planes", new_user_session_path(:cliente => "persona") %>
+                    <ul class="sub-menu menu_invert mostrar">
+                      <li>
+                        <%= link_to "Historial",plan_history_path%>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="menu-item">
+                      <%= link_to "Mis cotizaciones", quotation_history_path %>
+                  </li>
+                  <li class="menu-item">
+                    <%= link_to "Activar servicio", new_service_service_path%>
+                  </li>
+                  <%else%>
+                  <% if session[:company_id].nil? && session[:client_type] == "empresa"%>
+                  <li class="menu-item">
+                    <%= link_to "Mi cuenta", new_business_company_path%>
+                  </li>
+                  <% elsif !session[:company_id].nil? %>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+                    <a href="#">Mi cuenta</a>
+                    <ul class="sub-menu">
+                      <li class="menu-item">
+                        <a href="javascript:void(0);" >Configuración de cuenta</a>
+                        <ul class="sub-menu mostrar">
+                          <li>
+                            <%= link_to "Cambiar contraseña", edit_user_registration_path %>
+                          </li>
+                          <li>
+                            <%= link_to "Actualizar mis datos",business_company_path( session[:company_id]) %>
+                          </li>
+
+                        </ul>
+                      </li>
+                      <li class="menu-item">
+                        <%= link_to "Mis planes", new_user_session_path(:cliente => "empresa") %>
+                        <ul class="sub-menu menu_invert mostrar">
+                          <li>
+                            <%= link_to "Historial",plan_history_path%>
+                          </li>
+                        </ul>
+                      </li>
+                      <li class="menu-item">
+                         <%= link_to "Mis cotizaciones", quotation_history_path %>
+                     </li>
+                      <%end%>
+                      <%end%>
+                    </ul>
+                  </li>
+                  <li class="menu-item">
+                    <%= link_to destroy_user_session_path, method: :delete do %>
+                    <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+                    <% end %>
+                  </li>
+                  <%else%>
+                  <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+                    <a href="#">Acceso clientes</a>
+                    <ul class="sub-menu">
+                      <li class="menu-item">
+                        <%= link_to "Individual" , new_user_session_path(:cliente => "persona")%>
+                      </li>
+                      <li class="menu-item">
+                        <%= link_to "Empresa", new_user_session_path(:cliente => "empresa") %>
+                      </li>
+                    </ul>
+                    <%end%>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>

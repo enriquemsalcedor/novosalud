@@ -1,0 +1,32 @@
+<h1>Editar Rol Menú</h1>
+
+      <%= form_for @security_role_menu,remote: true do |f| %>
+      <% if @security_role_menu.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@security_role_menu.errors.count, "error") %> prohibited this @security_role_menu from being saved:</h2>
+
+        <ul>
+          <% @security_role_menu.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+      <% end %>
+      <% @security_role_type_menu.each do |role_types| %>
+      <li>
+      <tr>
+        <td><%= h role_types.security_role_type.name -%></td>
+        <td><%= link_to 'Eliminar', role_types, remote: true, :class => 'deleteRoleMenu', method: :delete, data: { confirm: '¿Desea eliminar este menú para este rol?' } %></td>
+      </tr>
+      </li>
+      <% end %>
+
+        <%= f.hidden_field :id_menu, value: params[:id_menu], hidden: false %>
+
+        <%= f.hidden_field :id_role, value: params[:id_role], hidden: false %>
+
+      <% end %>
+<% if @permiso_consultar == true %>
+  <%= link_to 'Ver', @security_role_menu %>
+<% end -%> |
+<%= link_to 'Regresar', security_role_menus_path %>

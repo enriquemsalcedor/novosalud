@@ -1,0 +1,49 @@
+<p>
+
+  ¡Saludos,  
+  <% if @payment_contracted_products[0].payment_plan.customer.nil? %>
+    <%= @people.name %>
+  <%else%>
+    Sr(a). <%= @people.nombre_apellido %>
+  <%end%>
+    , le informamos que su(s) producto(s) ha(n) sido pagados satisfactoriamente, según se detalla a continuación:
+  </p>
+    <table class="table table-hover" style="width: 100%;">
+      <thead>
+        <tr>
+          <th style="width: 120px;">Producto</th>
+          <th style="width: 120px;">Descripción</th>
+          <th style="width: 120px;">Centro médico</th>
+          <th style="width: 120px;">Certificado</th>
+          <th style="width: 120px;">Fecha límite de uso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @payment_contracted_products.each do |payment_contracted_product| %>
+          <tr>
+            <td align="center"><%= payment_contracted_product.product_product.nombre  %></td>
+            <td align="center" style="text-align: justify;"><%= payment_contracted_product.product_product.description  %></td>
+            <td align="center"><%= payment_contracted_product.product_product.proveedor %> </td>
+            <td align="center"><%= payment_contracted_product.code %></td>
+            <td align="center"><%= payment_contracted_product.valid_until.strftime("%d-%m-%Y") %></td>
+          </tr>
+          <%end%>
+      </tbody>
+    </table>
+
+<p>
+  Para hacer uso del(los) mismo(s) siga los siguientes pasos:
+</p>
+  <p>
+    1- Active su producto a través del 0501NOVO911 o use la opcion Activar Servicio a travez del menu Mi cuenta.
+  </p>
+  <p>
+    2- En un lapso no mayor a veinticuatro (24) horas Usted o su beneficiario recibirá la llamada de un operador para agendar su cita.
+  </p>
+  <p>
+    3- Acuda en la fecha y hora de la cita al centro médico proveedor del servicio adquirido.
+  </p>
+  <p>
+    Atentamente:
+    Novosalud, Medicina Prepagada, S.A.
+  </p>

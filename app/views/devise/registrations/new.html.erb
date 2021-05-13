@@ -1,0 +1,53 @@
+<% unless notice.nil? %>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end -%>
+<% unless alert.nil? %>
+  <div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end -%>
+<div class="login">
+<% @email = params[:email]%>
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= devise_error_messages! %>
+<div class="col-md-6 login-do">
+  <div class="login-mail">
+    <%= f.email_field :email, autofocus: true,:value => @email%>
+    <i class="glyphicon glyphicon-envelope"></i>
+  </div>
+  <div class="login-mail">
+    <%= f.password_field :password, autocomplete: "off", placeholder: true %>
+    <i class="glyphicon glyphicon-lock"></i>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> caracteres mínimos)</em>
+    <% end %>
+  </div>
+  <div class="login-mail">
+    <%= f.password_field :password_confirmation, autocomplete: "off", placeholder: true %>
+    <i class="glyphicon glyphicon-lock"></i>
+
+  </div>
+  <div class="actions hvr-skew-backward">
+    <%= f.submit "Registrar", data: {disable_with: "Guardando ..."} %>
+  </div>
+  <div class="news-letter">
+    <%= render "devise/shared/links" %>
+  </div>
+</div>
+<div class="col-md-6 login-right">
+  <h3>Únete a Nuestros Servicios</h3>
+  <% $client  %>
+  <p>TEXTO POR DEFINIR</p>
+  <%= link_to "Iniciar Sesión", new_user_session_path, class: "hvr-skew-backward" %></a>
+</div>
+<div class="clearfix"></div>
+<div class="div-hidden">
+  <%= f.text_field :client_type, value: "#{$client}" %>
+</div>
+
+<% end %>
+</div>

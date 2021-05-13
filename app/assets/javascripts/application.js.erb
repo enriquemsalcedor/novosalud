@@ -1,0 +1,1036 @@
+// This is a manifest file that'll be compiled into application.js, which will include all the files
+// listed below.
+//
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
+// or any plugin's vendor/assets/javascripts directory can be referenced here using a relative path.
+//
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// compiled file. JavaScript code in this file should be added after the last require_* statement.
+//
+// Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
+// about supported directives.
+//= require jquery
+//= require jquery.turbolinks
+//= require jquery_ujs
+//= require jquery_nested_form
+//= require rails.validations
+//= require_self
+//= require people
+//= require customers
+//= require business/companies
+//= require provider/providers
+//= require bootstrap/bootstrap
+//= require bootstrap/bootstrap-select
+//= require jquery.remotipart
+//= require dataTables/jquery.dataTables
+//= require bootstrap/fileinput
+//= require alert/sweetalert2
+//= require chosen-jquery
+//= require twitter/typeahead
+//= require bootstrap-datepicker
+//= require bootstrap/jquery.highlight
+//= require bootstrap/line
+//= require nivo
+// require_tree .
+
+
+$(window).on('load', function() {
+  $('#slider').nivoSlider();
+  $('[data-toggle="tooltip"]').tooltip();  
+});
+
+function ValidarFecha(valor)
+{
+  var fecha=valor.value;
+  var dia= fecha.substr(0,2);
+  var mes= fecha.substr(3,2);
+  var an= fecha.substr(6,4);
+  fecha_valida=mes+"/"+dia+"/"+an;
+  var fechauno = new Date(fecha_valida);
+  var fechados = new Date();
+  var fechatres = new Date();
+  $("#msj").hide();
+  if (fecha=="") 
+  {
+    $("#btnAceptarServicioCreate").removeAttr("disabled","disabled");
+    $("#msj").hide();
+    $("#msj").html("");
+  }else
+  {
+    if(fechauno.getTime() > fechados.getTime() || (fechauno.getDay() === fechatres.getDay()&& fechauno.getDate() === fechatres.getDate()))
+    {
+      $("#msj").hide();
+      $("#msj").html("");
+      $("#btnAceptarServicioCreate").removeAttr("disabled","disabled");
+    }
+    else
+    {
+      $("#msj").show();
+      $("#msj").html("<div class='errors'><label  class='message'>Debe ser mayor o igual a la fecha de hoy.</label></div>");
+      $("#btnAceptarServicioCreate").attr("disabled","disabled");
+    }
+  }
+}
+
+function ValidarFecha2(valor)
+{
+  var fecha=valor.value;
+  var dia= fecha.substr(0,2);
+  var mes= fecha.substr(3,2);
+  var an= fecha.substr(6,4);
+  fecha_valida=mes+"/"+dia+"/"+an;
+  var fechauno = new Date(fecha_valida);
+  var fechados = new Date();
+  var fechatres = new Date();
+  $("#msj").hide();
+  if (fecha=="") 
+  {
+
+    $("#btnAceptarServicioAtender").attr("disabled","disabled");
+    $("#msj").hide();
+    $("#msj").html("");
+  }else
+  {
+    if(fechauno.getTime() < fechados.getTime() || (fechauno.getDay() === fechatres.getDay()&& fechauno.getDate() === fechatres.getDate()))
+    {
+      $("#msj").hide();
+      $("#msj").html("");
+      $("#btnAceptarServicioAtender").removeAttr("disabled","disabled");
+    }
+    else
+    {
+      $("#btnAceptarServicioAtender").attr("disabled","disabled");
+      $("#msj").show();
+      $("#msj").html("<div class='errors'><label  class='message'>Debe ser menor o igual a la fecha de hoy.</label></div>");
+      $("#btnAceptarServicioCreate").attr("disabled","disabled");
+    }
+  }
+}
+
+
+$(document).ready(function()
+{
+$("#main:has(container)").css("color","blue");
+
+  $("#btnAceptarServicioAtender").attr("disabled","disabled");
+  setTimeout(function() {
+    $(".msj-banner").fadeOut(1500);
+  },10000);
+  var url="<%= I18n.t ('.general.attribute.url.local') %>"; 
+
+  $('#slider').nivoSlider(
+  {
+    effect: 'random'
+  });
+
+ function Agregarmensaje(msg)
+ {
+  return "<div class='alert alert-success notice'>"+msg+"</div>";
+}
+var cantidad= $("#cantidad").html();
+if(cantidad==0 || cantidad==null)
+{
+  $(".cart-table").hide();
+  $("#mensaje").html(Agregarmensaje("Debe agregar un producto para generar la cotización")+"<div class='center'><a href='/' class='hvr-skew-backward'>Volver</a></div>");
+}
+(function()
+{
+  var d = document,
+  accordionToggles = d.querySelectorAll('.js-accordionTrigger'),
+  setAria,
+  setAccordionAria,
+  switchAccordion,
+  touchSupported = ('ontouchstart' in window),
+  pointerSupported = ('pointerdown' in window);
+
+  skipClickDelay = function(e){
+    e.preventDefault();
+    e.target.click();
+  }
+
+  setAriaAttr = function(el, ariaType, newProperty)
+  {
+    el.setAttribute(ariaType, newProperty);
+  };
+  setAccordionAria = function(el1, el2, expanded)
+  {
+    switch(expanded) {
+      case "true":
+      setAriaAttr(el1, 'aria-expanded', 'true');
+      setAriaAttr(el2, 'aria-hidden', 'false');
+      break;
+      case "false":
+      setAriaAttr(el1, 'aria-expanded', 'false');
+      setAriaAttr(el2, 'aria-hidden', 'true');
+      break;
+      default:
+      break;
+    }
+  };
+    //function
+    switchAccordion = function(e) 
+    {
+      console.log("triggered");
+      e.preventDefault();
+      var thisAnswer = e.target.parentNode.nextElementSibling;
+      var thisQuestion = e.target;
+      if(thisAnswer.classList.contains('is-collapsed')) {
+        setAccordionAria(thisQuestion, thisAnswer, 'true');
+      } else {
+        setAccordionAria(thisQuestion, thisAnswer, 'false');
+      }
+      thisQuestion.classList.toggle('is-collapsed');
+      thisQuestion.classList.toggle('is-expanded');
+      thisAnswer.classList.toggle('is-collapsed');
+      thisAnswer.classList.toggle('is-expanded');
+
+      thisAnswer.classList.toggle('animateIn');
+    };
+    for (var i=0,len=accordionToggles.length; i<len; i++) {
+      if(touchSupported) {
+        accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+      }
+      if(pointerSupported){
+        accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+      }
+      accordionToggles[i].addEventListener('click', switchAccordion, false);
+    }
+  })();
+
+  function substringMatcher(strs) 
+  {
+    return function findMatches(q, cb) 
+    {
+      var matches, substringRegex;
+      matches = [];
+      substrRegex = new RegExp(q, 'i');
+      $.each(strs, function(i, str)
+      {
+        if (substrRegex.test(str))
+        {
+          matches.push(str);
+        }
+      });   
+      cb(matches);
+    };
+  };
+
+  var products_fil=[];
+  $.getJSON(url, function(products)
+  {
+    for (var i = 0; i < products.length; i++) {
+      products_fil.push(products[i].name);
+    }
+  });
+  $('#menu-option>li>a').click(function()
+  {
+    $(".lnt-search-input").val('');
+    $(".tt-dataset-states").text('');
+    var data=[];
+    products_fil.length=0;
+    var valor=$(this).attr('id').toString();
+    $("#param_id_speciality").val(valor);
+    if (valor=='0')
+    {
+      $.getJSON(url, function(products)
+      {
+        for (var i = 0; i < products.length; i++) 
+        {
+          products_fil.push(products[i].name);
+        }
+      });
+    }
+    else
+    {
+      $.getJSON(url, function(products)
+      {
+        $.grep(products, function(element,index)
+        {
+          if (element.speciality_id==valor) {
+           products_fil.push(element.name);
+         } 
+       });
+
+        for (var i = 0; i < products.length; i++) {
+          data.push(products[i].name);
+        }
+      });
+    }
+  });
+
+  $('#the-basics .typeahead').typeahead(
+  {
+    hint: true,
+    highlight: true,
+    minLength: 1
+  },
+  {
+    name: 'states',
+    source: substringMatcher(products_fil)
+  });
+
+  //ocultar campos luego de lanzar error cuando falta un correo existe en empresa
+  $("#business_company_email").change(function()
+  {
+    $(".help-block1").hide();
+  });
+
+    //ocultar campos luego de lanzar error cuando un correo existe en cliente
+    $("#customer_people_attributes_identification_document").change(function()
+    {
+      $(".help-block1").hide();
+    });
+  //ocultar campos luego de lanzar error cuando un correo existe en cliente
+  $("#customer_people_attributes_email").change(function()
+  {
+    $(".help-block1").hide();
+  });
+  //ocultar campos luego de lanzar error cuando un correo existe en cliente
+  $("#file-0d").change(function()
+  {
+    $(".help-block1").hide();
+  });
+  //ocultar campos luego de lanzar error en cambio de contraseña
+  $("#user_password").change(function()
+  {
+    $(".help-block1").hide();
+  });
+
+  $("#user_password_confirmation").change(function()
+  {
+    $(".help-block1").hide();
+  });
+  //fin
+
+  $('.input-daterange').datepicker(
+  {
+    format: 'dd-mm-yyyy',
+    language: 'es'
+  });
+  //ocultar calendario en empleado al editar si su perfil es permanente
+  var tipoPerfilActual = $("#employee_type_profile").val();
+  if(tipoPerfilActual == "Permanente")
+  {
+    $('#fecha_valida').hide(); 
+  }else
+  {
+    $('#fecha_valida').show(); 
+  }
+  //fin
+  //oculta calendario en empleado si es perfil permanente
+  $('#employee_type_profile').change(function()
+  { 
+    var tipoPerfil = document.getElementById("employee_type_profile");
+    var textoPerfil = tipoPerfil.options[tipoPerfil.selectedIndex].text;
+    if(textoPerfil == "Permanente")
+    {
+      $('#fecha_valida').hide(); 
+      $('.errors').hide();
+    }else{
+      $('#fecha_valida').show(); 
+      $('.errors').show();
+    }
+  });
+  //fin
+    //Validacion de input file
+  /*$("#btn-tranference").click(function(){
+    var imgtranfer=$("#file-0d").val();
+    if(imgtranfer=='')
+    {
+      document.getElementById("e-img-tranfer").innerHTML="<div class='errors'><label class='message'>Debe adjuntar un comprobante de pago.</label></div>";
+      $("#file-0d").change(function(){
+        $(".errors").remove();
+      })
+    }
+  });*/
+  //
+
+  $.fn.datepicker.dates['es'] = 
+  {
+    days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"],
+    daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+    daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+    months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Dicimbre"],
+    monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    today: "Hoy",
+    clear: "Clear",
+    format: "mm/dd/yyyy",
+    titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+    weekStart: 0
+  };
+
+  //ocultar banco y referencia en sale/quotations/id/pay
+  $('#payment_plan_method_payment_id').change(function()
+  {
+    var metodoPago = document.getElementById("payment_plan_method_payment_id");
+    var valor = metodoPago.selectedIndex+1;
+    var texto = metodoPago.options[metodoPago.selectedIndex].text;
+    if(texto == 'Pago en efectivo')
+    {
+      $('#metodoPago').hide();
+    }
+    else
+    {
+      $('#metodoPago').show();
+      var banco = document.getElementById("payment_plan_bank_id");
+      var textoBanco = banco.options[banco.selectedIndex].text;
+      if(textoBanco == 'Banco')
+        //lanzara los errores luego de Validar
+      $(document).bind('ajaxError', 'form#new_provider_medico_provider', function(event, jqxhr, settings, exception)
+      {
+      //note: jqxhr.responseJSON undefined, parsing responseText instead
+      $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+    });
+    } 
+  })
+  //fin
+
+    // ocultar campo contraseña en edit de cliente
+    $("#divPassword").hide();
+    $("#btnAceptarActualizacion").click(function ()
+    {
+      $("#divPassword").show();
+      $(".btn-x").hide();
+
+    });
+    $("#btnCancelarActualizacion").click(function ()
+    {
+      $("#divPassword").hide();
+      $(".btn-x").show();
+    });
+    $("#btnAceptarActualizacionBusiness").click(function ()
+    {
+      $("#divPassword").show();
+      $(".btn-x").hide();
+    });
+    $("#btnCancelarActualizacionBusiness").click(function ()
+    {
+      $("#divPassword").hide();
+      $(".btn-x").show();
+    });
+//
+
+   //validar que solo ingresen por usuario
+   var username =$("#usernameText").html();
+
+   cuenta = 0;
+   var posicion = '';
+
+   $("#usernameText").change(function(){
+    var username =$("#usernameText").val();
+    cuenta = 0;
+    posicion = username.indexOf("@");
+    if(posicion==-1){
+      $("#user_password").removeAttr("disabled","disabled");
+      $("#btnIniciarSesion").removeAttr("disabled","disabled");
+      document.getElementById("msg").innerHTML="";
+    }else{
+      $("#user_password").attr("disabled","disabled");
+      $("#btnIniciarSesion").attr("disabled","disabled");
+      document.getElementById("msg").innerHTML="<div class='alert alert-danger notice'>Para ingresar al sistema debe usar su usuario<button type='button' class='close' data-dismiss='alert'>&times;</button> </div>"; 
+    }
+  });
+   $("#usernameText").keydown(function(){
+    var username =$("#usernameText").val();
+    cuenta = 0;
+    posicion = username.indexOf("@");
+    if(posicion==-1){
+      $("#user_password").removeAttr("disabled","disabled");
+      $("#btnIniciarSesion").removeAttr("disabled","disabled");
+      document.getElementById("msg").innerHTML="";
+    }else{
+      $("#user_password").attr("disabled","disabled");
+      $("#btnIniciarSesion").attr("disabled","disabled");
+      document.getElementById("msg").innerHTML="<div class='alert alert-danger notice'>Para ingresar al sistema debe usar su usuario<button type='button' class='close' data-dismiss='alert'>&times;</button> </div>"; 
+    }
+  });
+
+  //ocultar campos luego de lanzar error en payment/tranference
+  $("#payment_transference_bank_id").change(function()
+  {
+    $(".help-block1").hide();
+  });
+
+  $("#payment_transference_reference").change(function()
+  {
+    $(".help-block1").hide();
+  });
+  //ocultar campos luego de lanzar error en sale/quotations/id/pay
+  $("#payment_plan_bank_id").change(function()
+  {
+    $(".help-block1").hide();
+  });
+
+  $("#payment_plan_reference").change(function()
+  {
+    $(".help-block1").hide();
+  });
+  //fin
+  $("#view_menu").click(function()
+  {
+    $("#grand_menu").show();
+  });
+
+  $(".header_top").hover(function(){
+    $("#grand_menu").hide();
+    $("#menu-option").hide();
+  });
+  $(".lnt-category>li>a").click(function()
+  {
+    $("active").show();
+  });
+  $("#menu-option").hide();
+  $("#menu-option-btn").hover(function()
+  {
+    $("#menu-option").show();
+    $("#grand_menu").hide();
+  })
+  $(".lnt-subcategroy-carousel-wrap").hide();
+  $(".active").hover(function()
+  {
+    $(".lnt-subcategroy-carousel-wrap").show();
+  })
+  $("#the-basics >input ").click(function()
+  {
+   $("#grand_menu").hide();
+ });
+  $('.dropdown-menu').click(function()
+  {
+    $('.dropdown-menu').hide();
+  });
+  var $item = $('.carousel .item'); 
+  var $wHeight = $(window).height();
+  $item.eq(0).addClass('active');
+  $item.height($wHeight); 
+  $item.addClass('full-screen');
+
+  $('.carousel img').each(function() 
+  {
+    var $src = $(this).attr('src');
+    var $color = $(this).attr('data-color');
+    $(this).parent().css({
+      'background-image' : 'url(' + $src + ')',
+      'background-color' : $color
+    });
+    $(this).remove();
+  });
+
+  $(window).on('resize', function ()
+  {
+    $wHeight = $(window).height();
+    $item.height($wHeight);
+  });
+
+  $('.carousel').carousel(
+  {
+    interval: false,
+    pause: "false"
+  });
+
+
+  $(".add-to-cart").click(function()
+  {
+    var item;
+    console.log(item);
+  });
+
+  $(window).scroll(function()
+  {
+    $("#grand_menu").hide();
+  });
+
+  $(window).scroll(function()
+  {
+    $("#menu-option").hide();
+  });
+
+  $("#view_menu").mouseover(function()
+  {
+    $("#grand_menu").show();
+  });
+
+  $("#view_menu").hover(function()
+  {
+    $("#menu-option").hide();
+  });
+  $("#grand_menu").mouseover(function()
+  {
+    $("#grand_menu").show();
+  });
+
+  $("#grand_menu").mouseout(function()
+  {
+    $("#grand_menu").hide();
+  });
+
+  $('.lnt-search-input').click(function(){
+    $("#grand_menu").hide();
+    $("#menu-option").hide();
+  });
+
+  $('#datatable').dataTable(
+  {
+    "language": {
+      "zeroRecords": "<%= I18n.t('.general.attributes.zeroRecords') %>",
+      "search":"<%= I18n.t('.general.attributes.search') %>",
+      "lengthMenu":"<%= I18n.t('.general.attributes.lengthMenu') %>",
+      "info":"<%= I18n.t('.general.attributes.info') %>",
+      "infoEmpty":"<%= I18n.t('.general.attributes.infoEmpty') %>",
+      "first":"<%= I18n.t('.general.attributes.first') %>",
+      "last":"<%= I18n.t('.general.attributes.last') %>",
+      "infoFiltered": "Filtrando de  _MAX_ registros ",
+      "paginate": {
+        "previous": "<%= I18n.t('.general.attributes.previous') %>",
+        "next": "<%= I18n.t('.general.attributes.next') %>",
+        "first": "<%= I18n.t('.general.attributes.first') %>",
+        "last": "<%= I18n.t('.general.attributes.last') %>"
+      }
+    },
+    "order": false,
+    "columnDefs": [
+    {
+      "targets": [ -1 ],
+      "searchable": false
+    }
+    ]
+  });
+  $("#menu_toggle").click(function ()
+  {
+    $(this).toggleClass('open');
+    $('.mobile_header .top_nav_mobile').slideToggle(300);
+    return false;
+  });
+
+  $(".mobile_header .top_nav_mobile .main_menu_nav > li.menu-item-has-children > a").after('<span class="arrow"><i></i></span>');
+  $(".mobile_header .top_nav_mobile .main_menu_nav > li.menu-item-has-children > .sub-menu > .menu-item-has-children > a").after('<span class="arrow"><i class="fa fa-chevron-down"></i></span>');
+
+  $(".mobile_header .top_nav_mobile .main_menu_nav > li.menu-item-has-children .arrow").on('click', function ()
+  {
+    $(this).toggleClass('active');
+    $(this).closest('li').find('> ul').slideToggle(300);
+  });
+
+  $(".mobile_header .top_nav_mobile .main_menu_nav > li.menu-item-has-children > a").on('click', function ()
+  {
+    if( $(this).attr('href') == '#' )
+    {
+      $(this).closest('li').find('ul').slideToggle(300);
+      $(this).closest('li').find('.arrow').toggleClass('active');
+    }
+  });
+
+  //script del Alert Personalizado
+  $.rails.allowAction = function(link)
+  {
+    if (link.data("confirm") == undefined)
+    {
+      return true;
+    }
+    $.rails.showConfirmationDialog(link);
+    return false;
+  }
+
+  //User click confirm button
+  $.rails.confirmed = function(link)
+  {
+    link.data("confirm", null);
+    link.trigger("click.rails");
+  }
+
+  //Display the confirmation dialog
+  $.rails.showConfirmationDialog = function(link)
+  {
+    var message = link.data("confirm");
+    swal({
+      title: message,
+      type: 'warning',
+      confirmButtonText: '<%=  I18n.t('.general.action.accept') %>',
+      cancelButtonText: '<%=  I18n.t('.general.action.cancel') %>',
+      confirmButtonClass: 'hvr-skew-backward flex_center',
+      cancelButtonClass: 'hvr-skew-backward flex_center',
+      confirmButtonColor: '#2acbb3',
+      showCancelButton: true
+    }).then(function(e){
+      $.rails.confirmed(link);
+    });
+  };
+//Auto ajuste del buscador del inicio
+$("#menu-option").click(function()
+{
+  var ancho_btn;
+  var ancho_btncss;
+  var ancho_inputcss;
+  var ancho_input;
+  var ancho_btn = document.getElementById('menu-option-btn').offsetWidth;
+  var anchocontenedor = document.getElementById('the-basics').offsetWidth;
+  var ancho_btn_vw=(ancho_btn/screen.width)*100;
+  if (screen.width>=1024) 
+  {
+    ancho_inputcss=105-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+
+  }else
+  if(screen.width>=767 && screen.width<=1023){
+
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }else
+  if(screen.width>=520 && screen.width<=766)
+  {
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }else
+  if(screen.width>=420 && screen.width<=519){
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }
+  if(screen.width>=401 && screen.width<=419){
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }
+  else
+    if(screen.width>=360 && screen.width<=400){
+      ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+      ancho_btncss=100-ancho_inputcss;
+    }
+    else
+      if(screen.width>=320 && screen.width<360){
+        ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+        ancho_btncss=100-ancho_inputcss;
+      }else if( screen.width<=319)
+      {
+        ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+        ancho_btncss=100-ancho_inputcss;
+      }
+      $('.twitter-typeahead').css("width",ancho_inputcss+"%");
+      $('menu-option-btn').css("width",ancho_btncss+"%");
+
+    });
+$(window).resize(function()
+{
+  var ancho_btn;
+  var ancho_btncss;
+  var ancho_inputcss;
+  var ancho_input;
+  var ancho_btn = document.getElementById('menu-option-btn').offsetWidth;
+  var anchocontenedor = document.getElementById('the-basics').offsetWidth;
+  var ancho_btn_vw=(ancho_btn/screen.width)*100;
+  if (screen.width>=1024) 
+  {
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+
+  }else
+  if(screen.width>=767 && screen.width<=1023){
+
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }else
+  if(screen.width>=520 && screen.width<=766)
+  {
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }else
+  if(screen.width>=420 && screen.width<=519){
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }
+  if(screen.width>=401 && screen.width<=419){
+    ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+    ancho_btncss=100-ancho_inputcss;
+  }
+  else
+    if(screen.width>=360 && screen.width<=400){
+      ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+      ancho_btncss=100-ancho_inputcss;
+    }
+    else
+      if(screen.width>=320 && screen.width<360){
+        ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+        ancho_btncss=100-ancho_inputcss;
+      }else if( screen.width<=319)
+      {
+        ancho_inputcss=100-(ancho_btn/anchocontenedor)*100;
+        ancho_btncss=100-ancho_inputcss;
+      }
+      $('.twitter-typeahead').css("width",ancho_inputcss+"%");
+      $('menu-option-btn').css("width",ancho_btncss+"%");
+    });
+//fin del Auto ajuste del buscar inicio
+  $("#btnAceptarServicio").click(function()
+  {
+    var itemDoctor = document.getElementById('service_service_provider_medico_provider_id');
+    var item = document.getElementById('service_service_motive_id');
+
+    if(item !=null)
+    {
+      var opcion = item.selectedIndex+1;
+      if(opcion == 1)
+      {
+        $("#service_service_motive_id + .help-block").html("<div class='errors'><label  class='message'>Debe ingresar un motivo.</label></div>").addClass("has-error-2");
+        return false;
+      }
+
+      else
+      {
+        $("#service_service_motive_id + .help-block").css("display","none");
+        return true;
+      }
+    }
+    if(itemDoctor !=null)
+    {
+      var opcionDoctor = itemDoctor.selectedIndex+1;
+      if(opcionDoctor == 1)
+      {
+        $("#service_service_provider_medico_provider_id + .help-block").html("<div class='errors'><label  class='message'>Debe ingresar un médico.</label></div>").addClass("has-error-2");
+        return false;
+      }
+
+      else
+      {
+        $("#service_service_provider_medico_provider_id + .help-block").css("display","none");
+        return true;
+      }
+    }
+  })
+
+  $("#btnAceptarServicioCreate").click(function()
+  {
+    var itemDoctor = document.getElementById('service_service_provider_medico_provider_id');
+    if(itemDoctor !=null)
+    {
+      var opcionDoctor = itemDoctor.selectedIndex+1;
+      if(opcionDoctor == 1)
+      {
+        $("#service_service_provider_medico_provider_id + .help-block").html("<div class='errors'><label  class='message'>Debe ingresar un médico.</label></div>").addClass("has-error-2");
+        return false;
+      }
+
+      else
+      {
+        $("#service_service_provider_medico_provider_id + .help-block").html("").addClass("has-error-2");
+        return true;
+      }
+    }
+  })
+
+
+
+  $('#service_service_provider_medico_provider_id').change(function()
+  { 
+    var itemDoctor = document.getElementById('service_service_provider_medico_provider_id');
+    if(itemDoctor != "Permanente")
+    {
+      var opcionDoctor = itemDoctor.selectedIndex+1;
+      if(opcionDoctor != 1){
+        $("#service_service_provider_medico_provider_id + .help-block").html("").addClass("has-error-2");
+      }
+
+    }
+  });
+
+ $("#service_service_motive_id").change(function(){
+  var dato_selec =$(this).val();
+  if(dato_selec!="")
+  {
+
+    $("#service_service_motive_id + .help-block").html("").addClass("has-error-2");
+  }else
+  {
+    $("#service_service_motive_id").show();
+    $("#service_service_motive_id + .help-block").html("<div class='errors'><label  class='message'>Debe ingresar un motivo.</label></div>").addClass("has-error-2"); 
+  }
+ });
+
+  $('#service_service_appointment_date').change(function(){
+    var fecha = document.getElementById('service_service_appointment_date');
+    if (fecha.value!=""){
+      $("#btnAceptarServicioAtender").removeAttr("disabled","disabled");
+    }else
+    {
+      $("#btnAceptarServicioAtender").attr("disabled","disabled");
+    }
+  })
+
+  $("#btnAceptarServicioAtender").click(function()
+  {
+    var itemDoctor = document.getElementById('service_service_provider_medico_provider_id');
+    var fecha = document.getElementById('service_service_appointment_date');
+    if (fecha.value=="") 
+    {
+      $("#msj").show();
+      $("#msj").html("<div class='errors'><label  class='message'>Debe Agregar una fecha</label></div>");
+      $("#btnAceptarServicioAtender").attr("disabled","disabled");
+    }else
+    {
+      ValidarFecha(fecha);
+    }
+    if(itemDoctor !=null)
+    {
+      var opcionDoctor = itemDoctor.selectedIndex+1;
+      if(opcionDoctor == 1)
+      {
+        $("#service_service_provider_medico_provider_id + .help-block").html("<div class='errors'><label  class='message'>Debe ingresar un médico.</label></div>").addClass("has-error-2");
+        return false;
+      }else
+      {
+        $("#service_service_provider_medico_provider_id + .help-block").html("").addClass("has-error-2");
+        return true;
+      }
+    }
+ })
+
+  $(document).on("click", "#btnAceptarProfile", function(event)
+  {
+    $(document).bind('ajaxError', 'form#new_security_profile', function(event, jqxhr, settings, exception)
+    {
+      //note: jqxhr.responseJSON undefined, parsing responseText instead
+      $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+    });
+  });
+
+  $(document).on("click", "#btnAceptarRoleProfile", function(event)
+  {
+    $(document).bind('ajaxError', 'form#new_security_role_profile', function(event, jqxhr, settings, exception)
+    {
+      //note: jqxhr.responseJSON undefined, parsing responseText instead
+      $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+    });
+  });
+
+  $("#file-0d").fileinput(
+  {
+    language: 'es',
+    'allowedFileExtensions': ['jpg', 'png', 'gif', 'pdf']
+  });
+
+  $(document).on("click", ".check", function(event) 
+  {
+    $('#sale_product_quotation_product_product_provider_id').val($(this).val());
+  });
+
+  $(document).on("click", "#btnAceptarMedicoProvider", function(event)
+  {
+    $(document).bind('ajaxError', 'form#new_provider_medico_provider', function(event, jqxhr, settings, exception)
+    {
+      //note: jqxhr.responseJSON undefined, parsing responseText instead
+      $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+    });
+
+    $(document).on("click", "#btnAceptarMedicoProvider", function(event)
+    {
+      event.getPreventDefault();
+      $(document).bind('ajaxError', 'form#new_provider_medico_provider', function(event, jqxhr, settings, exception)
+      {
+          //note: jqxhr.responseJSON undefined, parsing responseText instead
+          $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+        });
+    });
+  });
+
+  $(document).on("click", "#btnAceptarServicio", function(event) 
+  {
+    $(document).bind('ajaxError', 'form.formService', function(event, jqxhr, settings, exception){
+    //note: jqxhr.responseJSON undefined, parsing responseText instead
+    $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+  });
+  });
+
+  $(document).on("click", "a#redirect", function(event) 
+  {
+    window.location="/";
+  });
+
+  $(".progress_and_message").change(function()
+  {
+    var opcion = $(this).val();
+    $.get('sale/package_quotations/actualizar_cantidad');
+    $.get('sale/product_quotations/actualizar_cantidad_producto');
+  });
+  $(document).on("click", "#btnAceptarPaquete", function(event)
+  {
+    $(document).bind('ajaxError', 'form#new_colection_package', function(event, jqxhr, settings, exception)
+    {
+      //note: jqxhr.responseJSON undefined, parsing responseText instead
+      $(event.data).render_form_errors( $.parseJSON(jqxhr.responseText) );
+    });
+  });
+  $(document).on("change", ".progress_and_message", function(event)
+  {
+    //alert("EJECUTO");
+    var opcion = $(this).val();
+    //alert(opcion);
+    $.get('sale/package_quotations/actualizar_cantidad');
+    $(function()
+    { 
+      $.getJSON('specialities_controller/mostrar.json', function(data1)
+      { 
+        alert("inside getJson"); alert(data1); console.log(data1);
+      }); 
+    })(); 
+  });
+
+  (function($)
+  {
+    $.fn.success = function()
+    {
+      this.clear_previous_errors();
+    };
+
+    $.fn.render_form_errors = function(errors)
+    {
+      $form = this;
+      this.clear_previous_errors();
+      model = this.data('model');
+      atributte = this.data('atributte');
+      console.log(model);
+      console.log(atributte);
+      // show error messages in input form-group help-block
+      $.each(errors, function(field, messages)
+      {
+        console.log(field)
+        $input = $('input[name = "' + model + '[' + field + ']"]');
+        $input2 = $('input[name = "' + model + '[' + atributte + ']' + '[]"]');
+        console.log('input[name = "' + model + '[' + atributte + ']' + '[]"]');
+        $select = $('select[name = "' + model + '[' + field + ']"]');
+        $date_select = $('select[name = "' + model + '[' + field + '(1i)]"]');
+        $select2 = $('select[name = "' + model + '[' + atributte + ']' + '[firt_name]"]');
+        console.log('select[name = "' + model + '[' + atributte + ']' + '[firt_name]"]');
+        $input.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
+        $select.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
+        $date_select.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
+      //Para estructuras de Nested Form
+      $input.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
+      $select.closest('.form-group').addClass('has-error').find('.help-block').html( messages.join(' & ') );
+    });
+};
+
+$.fn.clear_previous_errors = function()
+{
+  $('.form-group.has-error').find('.help-block').html('');
+  $('.form-group.has-error').removeClass('has-error');
+}
+
+function mostrarInputFileModificado(numeroInput) 
+{
+  $("#archivo_oculto"+numeroInput).change(function(){
+    $("#archivo"+numeroInput).val($("#archivo_oculto"+numeroInput).val());
+  });
+  console.log(numeroInput);
+}
+$(document).on("click", "#cotizar", function(event)
+{
+  $(".deleteProductQuotation").hide();
+  //$(".progress_and_message").attr("disabled","disabled");
+  $('#generarCotizacion').toggle();
+  $('.deleteProductQuotation').hide();
+  $('#transferencia').toggle();
+ /* $('#quantity').prop('disabled', true);*/
+  $('.progress_and_message').prop('disabled', true);
+});
+/*$(document).on("click", "#comprobante", function(event)
+{
+   window.location.replace("/");
+});*/
+}(jQuery));
+});

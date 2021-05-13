@@ -1,0 +1,76 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      p:
+        one: "Banco"
+        other: "Bancos"
+
+    attributes:
+      banks:
+        name: "Nombre"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+        action: "Acciones"
+        direction_web: "Página web"
+        image: "Logo del banco"
+
+    errors:
+      models:
+        bank:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+              too_short: "El campo 'Nombre' debe contener al menos %{count} caracteres"
+              too_long: "El campo 'Nombre' no debe contener más de %{count} caracteres"
+
+  banks:
+    title: "Banco"
+    attributes:
+      name: "Nombre"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+      action: "Acciones"
+      direction_web: "Página web"
+      image: "Logo del banco"
+    actions:
+      new_bank: "Registrar Banco"
+      edit_bank: "Editar Banco"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      back: "Regresar"
+      accept: "Aceptar"
+      question:
+        disable: "¿Desea inhabilitar este banco?"
+        enable: "¿Desea habilitar este banco?"
+      new_bank: "Registrar banco"
+      edit_bank: "Editar banco"
+      show_bank: "Datos del banco"
+    controller:
+      create: "Se creó con éxito el banco."
+      update: "Se actualizó con éxito el banco."
+      disable: "Se inhabilitó con éxito el banco."
+      enable: "Se habilitó con éxito el banco"

@@ -1,0 +1,30 @@
+<h1>Colection Package Products</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Quantity</th>
+      <th>User created</th>
+      <th>User updated</th>
+      <th>Product product</th>
+      <th>Colection package</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @colection_package_products.each do |colection_package_product| %>
+      <tr>
+        <td><%= colection_package_product.quantity %></td>
+        <td><%= colection_package_product.user_created_id %></td>
+        <td><%= colection_package_product.user_updated_id %></td>
+        <td><%= colection_package_product.product_product %></td>
+        <td><%= colection_package_product.colection_package %></td>
+        <td><%= link_to 'Show', colection_package_product %></td>
+        <td><%= link_to 'Edit', edit_colection_package_product_path(colection_package_product) %></td>
+        <td><%= link_to 'Destroy', colection_package_product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Colection Package Product', new_colection_package_product_path %>

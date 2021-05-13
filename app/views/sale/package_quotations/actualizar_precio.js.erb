@@ -1,0 +1,3 @@
+$('#<%= @package.id %>').html('<%= number_with_precision(@total.to_f, precision: 2,delimiter:'.',separator: ',') %>');
+$('#total_cotizacion').html('<%= number_with_precision(@package.sale_quotation.total_cotizacion.to_f, precision: 2,delimiter:'.',separator: ',') %>');
+$(".cantidad").html('<%= @package.sale_quotation.cant_total %>');

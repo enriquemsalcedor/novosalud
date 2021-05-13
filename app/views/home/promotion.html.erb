@@ -1,0 +1,67 @@
+<div class="container">
+  <div class="row">
+    <div class="breadcrumbs">
+      <%= render_breadcrumbs :separator => ' / '%>
+    </div>
+  </div>
+</div> 
+<div class="container">
+  <div class="row">
+    <div class="col-lg-3 col-sm-3 col-md-3  col-xs-12">
+      <div class="details-title"><%= @package.description %></div>
+      <div class="flex-viewport" style="overflow: hidden; position: relative;">
+       <% if @package.image_file_name.nil? %>
+       <i class="fa fa-medkit"></i>
+       <%else%>
+       <%= image_tag @package.image.url(:medium) %>
+       <%end%>
+     </div>
+   </div>
+   <div class="col-lg-6 col-sm-6 col-md-6   col-xs-12">
+    <nav class="nav-sidebar">
+      <ul class="nav tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">Detalle de compra</a>
+        </li>
+        <li class=""><a href="#tab2" data-toggle="tab">Descripción</a>
+        </li>
+        <li class=""><a href="#tab3" data-toggle="tab">Términos y condiciones legales</a>
+        </li>
+      </ul>
+    </nav>
+    <div class="tab-content one">
+      <div class="tab-pane active text-style" id="tab1">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Cantidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @package_products.each do |colection_package_product| %>
+            <tr>
+              <td><%= colection_package_product.product_products.armar_nombre %></td>
+              <td><%= colection_package_product.quantity %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane text-style" id="tab2">
+       <%= @package.description %>
+     </div>
+     <div class="tab-pane text-style" id="tab3">
+       <p class="in-para"><%= @package.terms %></p>
+     </div>
+   </div>
+ </div>
+ <div class="col-lg-3 col-sm-3 col-md-3 col-xs-12 form_cart">
+  <div class="col-lg-12">
+    <p class="in-para">Precio: <span class="price coin"><%= "#{number_with_precision(@package.total_amount, precision: 2, delimiter:'.',separator: ',')}" %></span></p>
+  </div>
+  <div>
+   <%= render "sale/package_quotations/form" %>
+ </div>
+</div>
+</div>
+</div>

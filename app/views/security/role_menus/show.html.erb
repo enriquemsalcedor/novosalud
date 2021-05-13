@@ -1,0 +1,20 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+
+<p>
+  <strong>Rol:</strong>
+  <%= @security_role_menu.security_role %>
+</p>
+
+<p>
+  <strong>Menú:</strong>
+  <%= @security_role_menu.security_menu %>
+</p>
+<% if @permiso_modificar == true %>
+  <%= link_to 'Modificar', edit_security_role_menu_path(@security_role_menu) %>
+<% end -%> |
+<%= link_to 'Regresar', security_role_menus_path %>

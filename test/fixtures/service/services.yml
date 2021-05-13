@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  date_service: 2017-03-07
+  code: MyString
+  appointment_date: 2017-03-07
+  user_created_id: 1
+  user_updated_id: 1
+  beneficiary: one
+  provider_medico_provider: one
+  motive: one
+  payment_contracted_product: one
+  status: MyString
+
+two:
+  date_service: 2017-03-07
+  code: MyString
+  appointment_date: 2017-03-07
+  user_created_id: 1
+  user_updated_id: 1
+  beneficiary: two
+  provider_medico_provider: two
+  motive: two
+  payment_contracted_product: two
+  status: MyString

@@ -1,0 +1,57 @@
+      <h3>Detalle de la cotización</h3>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Descripcion</th>
+              <th>Cantidad</th>
+              <th>Precio unitario</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <% unless @quotation.empty? %>
+              <% @quotation.each do |q|  %>
+                <% q.sale_package_quotation.each do |package_quotation| %>
+                  <tr>
+                    <td>
+                      <%= package_quotation.colection_package.description %>
+                    </td>
+                    <td>
+                      <% package_quotation.colection_package.product_products.each do |pp| %>
+                      - <%= pp.armar_nombre %></br>
+                      <% end %>
+                    </td>
+                    <td>
+                      <%= package_quotation.quantity%>
+                    </td>
+                    <td id=<%= package_quotation.id %>>
+                      <%= package_quotation.monto_pagar %>
+                    </td>
+                  </tr>
+                <% end %>
+                <% q.sale_product_quotations.each do |product_quotation| %>
+                  <tr>
+                    <td><%= product_quotation.product_product.armar_nombre %></td>
+                    <td><%= product_quotation.product_product.name%></td>
+                    <td>
+                      <%= product_quotation.quantity %>
+                      </td>
+                    <td id=<%= product_quotation.id %>><%= product_quotation.product_product.price %></td>
+                  </tr>
+                <% end %>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Total a Pagar:</td>
+              <td id="total_cotizacion"><%= q.total_cotizacion %></td>
+            </tr>
+            <% end %>
+            <% end %>
+            <p id="notice">
+              <%= @noticia %>
+            </p>
+          </tbody>
+
+        </table>
+<%= will_paginate @quotation %>

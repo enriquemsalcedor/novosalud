@@ -1,0 +1,10 @@
+<section class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-12">
+  	<%if $empleado == "externo"%>
+  		<h1 class="space-title flex-center"><%= raw I18n.t('.employees.actions.edit_employee_clinic') %></h1>
+  	<%else%>
+  		<h1 class="space-title flex-center"><%= raw I18n.t('.employees.actions.edit_employee') %></h1>
+  	<%end%>
+    <%= render 'form', employee: @employee %>
+  </div>
+</section>

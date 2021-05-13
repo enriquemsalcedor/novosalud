@@ -1,0 +1,37 @@
+<div id="myModal" class="modal fade" role="dialog">
+<div id="capa">
+
+	</div>
+	<div class="modal-dialog" >
+		<!-- Modal content-->
+
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" id="button-equis">&times;</button>
+				<h1 class="title-center">Registrar Beneficiario</h1>
+			</div>
+			<div class="modal-body">
+				<%= form_for @beneficiary, :html => { :onsubmit => "return validacion()" },remote:true  do |f| %>
+				<div class="field">  
+					<%= f.fields_for :people do |b| %>
+					<%= render 'people/formbeneficiary', :f => b %>
+					<% end %>
+					<div class="col-lg-12 form-group">
+						<div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+							<button type="button" class="hvr-skew-backward" id="close" data-dismiss="modal">Cancelar</button>
+						</div>
+						<div class="col-lg-3 pull-right">
+							<%= f.submit I18n.t('.beneficiaries.actions.accept'),class: "hvr-skew-backward",data: {disable_with: "Guardando ..."}, id:"btn-beneficiary" %>
+						</div>
+					</div>
+				</div>  
+				<% end %> 
+			</div>
+			<div class="modal-footer">
+				
+			</div>
+		</div>
+
+	</div>
+</div>
+

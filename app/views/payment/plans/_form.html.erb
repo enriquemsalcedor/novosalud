@@ -1,0 +1,64 @@
+<%= form_for @payment_plan , validate: true do |f| %>
+
+<div class="field hidden">
+  <%= f.number_field :user_updated_id , hidden: "false" %>
+  <%= f.number_field :user_created_id , hidden: "false" %>
+  <%= f.number_field :customer_id , hidden: "false" , value: @costumer %>
+  <%= f.number_field :company_id , hidden: "false" , value: @company  %>
+  <%= f.number_field :sale_quotation_id, hidden: "false" , value: params[:id]  %>
+  <%= f.number_field :total_amount, hidden: "false" , value: @monto  %>
+</div>
+
+<% if @payment_transference.nil?%>
+<div class="col-lg-12 form-group mr-0 pr-0 ml-0 pl-0">
+  <div class="col-lg-4 input_100">
+    <%= f.label I18n.t('.general.model.method_payment') %>
+    <%= f.collection_select :method_payment_id, MethodPayment.activo.order(:name), :id, :name, validate: true,include_blank:"Modalidad de Pago" %>
+  </div>
+  <div id="metodoPago">
+    <div class="col-lg-5 input_100">
+      <%= f.label I18n.t('.general.attribute.bank_novo') %>
+      <%= f.collection_select :bank_id, Account.where(status: 'Activo' ), :bank_id, :nombre_banco, prompt: true, validate: true %>      
+      <% unless flash[:errors_banks].nil? %>
+      <span class="help-block1"><%= flash[:errors_banks] %></span>  
+      <%end%>
+    </div>
+    <div class="col-lg-3 input_100 mr-0 pr-0">
+      <%= f.label  I18n.t('.general.attribute.reference') %> 
+      <%= f.text_field :reference , maxlength: 20, size: 30%>
+      <% unless flash[:errors_reference].nil? %>
+      <span class="help-block1"><%= flash[:errors_reference] %></span>  
+      <%end%>
+    </div>
+  </div>
+</div>
+<% else %>
+
+<div class="col-lg-12 form-group mr-0 pr-0 ml-0 pl-0">
+  <div class="col-lg-4 input_100">
+    <%= f.label I18n.t('.general.model.method_payment') %>
+    <%= f.text_field @method_payment, value: @method_payment.name , :readonly => true %>
+    <%= f.hidden_field :method_payment_id, value: @method_payment.id    %>
+  </div>
+  <div class="col-lg-5 input_100">
+    <%= f.label I18n.t('.general.attribute.bank_novo') %>
+    <%= f.text_field :bank_id, value: @payment_transference.bank.name , :readonly => true %>
+    <%= f.hidden_field :bank_id, value: @payment_transference.bank_id  %>
+  </div>
+  <div class="col-lg-3 input_100 mr-0 pr-0">
+     <%= f.label I18n.t('.general.attribute.reference') %>
+    <%= f.text_field :reference , value: @payment_transference.reference , :readonly => true  %>
+  </div>
+</div>   
+<% end %>
+
+<div class="form-group">
+  <div class="col-lg-2 col-lg-offset-7">
+    <%= link_to I18n.t('.general.action.cancel'), sale_quotations_path,class: "hvr-skew-backward" %>
+  </div>
+  <div class="col-lg-3 pull-right">
+    <%= f.submit "Procesar pago", data: {disable_with: "Procesando ..."},class: "hvr-skew-backward"  %>
+  </div>
+</div>
+</div>
+<% end %>

@@ -1,0 +1,40 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.profiles.attributes.name_show') %></strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @security_profile.name %>
+      </div>
+
+    </div>
+  </div>
+<%= form_tag(controller: "profiles", action: "inhabilitar", method: "post") do %>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong><%= label_tag I18n.t('.employees.attributes.motive')  %></strong>
+    </div>
+    <div class="col-lg-10 input_100 form-group">
+      <%= text_field_tag :motive,nil, maxlength: 75 %> 
+        <% unless flash[:errors].nil? %>
+          <span class="help-block1"><%= flash[:errors] %></span>  
+        <% end -%> 
+    </div>
+  </div>
+  <div class="form-group col-lg-12">
+      <div class="col-lg-2 col-lg-offset-7 col-xs-4 col-xs-offset-4">
+      <%= link_to I18n.t('.general.action.cancel'), security_profiles_path, class: "hvr-skew-backward"  %>
+      </div>
+      <div class="col-lg-3 col-xs-4">
+      <%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.profile.disable'), disable_with: "Guardando ..."} %>
+      </div>
+</div>
+<%end%> 
+</div> 

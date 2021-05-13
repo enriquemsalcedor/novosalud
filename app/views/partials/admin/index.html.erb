@@ -1,0 +1,21 @@
+<%= form_for(:user, :url => session_path(:user)) do |f| %>
+  <div class="col-md-6 login-do">
+    <div class="login-mail">
+      <%= f.email_field :email, autofocus: true, placeholder: true %>
+      <i class="glyphicon glyphicon-envelope"></i>
+    </div>
+    <div class="login-mail">
+      <%= f.password_field :password, autocomplete: "off", placeholder: true %>
+      <i class="glyphicon glyphicon-lock"></i>
+    </div>
+    <% if devise_mapping.rememberable? -%>
+    <div class="field">
+      <%= f.check_box :remember_me %>
+      <%= f.label I18n.t ('.devise.new.remember_me') %>
+    </div>
+    <% end -%>
+    <div class="actions hvr-skew-backward">
+      <%= f.submit I18n.t ('.devise.new.login') %>
+    </div>
+  </div>
+<% end %>

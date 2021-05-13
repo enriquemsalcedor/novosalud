@@ -1,0 +1,1 @@
+json.array! @sale_quotations, partial: 'sale_quotations/sale_quotation', as: :sale_quotation

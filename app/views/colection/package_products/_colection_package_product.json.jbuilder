@@ -1,0 +1,2 @@
+json.extract! colection_package_product, :id, :quantity, :user_created_id, :user_updated_id, :product_product_id, :colection_package_id, :created_at, :updated_at
+json.url colection_package_product_url(colection_package_product, format: :json)

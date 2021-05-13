@@ -1,0 +1,183 @@
+<%unless notice.nil?%>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<%end%>
+<section class="col-lg-10 col-lg-offset-1">
+<div class="title-center">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.quotation_data') %></h1>
+</div>
+
+<div class="col-lg-10 col-lg-offset-1">
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+      <strong>Código de cotización:</strong>
+    </div>
+    <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @sale_quotation.quoting_number %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+      <strong>Cotización válida: </strong>
+    </div>
+    <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+       <strong>desde &nbsp; </strong> <%= @sale_quotation.valid_since.strftime("%d-%m-%Y") %>   <strong>&nbsp;&nbsp;hasta &nbsp; </strong>
+        <%= @sale_quotation.valid_until.strftime("%d-%m-%Y") %>
+      </div>
+
+    </div>
+  </div>
+  <% unless @sale_quotation.user.customer.nil? %>
+  <div class="col-lg-12">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+      <strong>Cédula del cliente:</strong>
+    </div>
+    <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+      <div class="col-lg-10">
+        <%= @sale_quotation.identificacion_usuario %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+      <strong>Nombre del cliente:</strong>    </div>
+      <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+        <div class="col-lg-10">
+          <%= @sale_quotation.nombre_usuario %>
+
+        </div>
+      </div>
+    </div>
+    <%else%>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+        <strong>RIF del cliente:</strong>
+      </div>
+      <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+        <div class="col-lg-10">
+          <%= @sale_quotation.user.company.rif %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+        <strong>Nombre de la empresa:</strong>
+      </div>
+      <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+        <div class="col-lg-10">
+          <%= @sale_quotation.user.company.name %>
+        </div>
+      </div>
+    </div>
+    <% end -%>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+        <strong>Estatus:</strong>
+      </div>
+      <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+        <div class="col-lg-10">
+          <%= @sale_quotation.status %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+        <strong>Monto total de la cotización:</strong>
+      </div>
+      <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+        <div class="col-lg-10">
+          <%= number_with_precision(@sale_quotation.sumar_montos , :precision => 2 , delimiter:'.',separator: ',') %>
+        </div>
+      </div>
+    </div>
+
+    <% @payment_transference = Payment::Transference.find_by(sale_quotation_id: @sale_quotation.id) %>
+    <%unless @payment_transference.nil?%>
+      <% unless @payment_transference.file_file_name.nil?%>
+        <div id="btn-tranference" class="col-lg-4 col-xs-7 pull-right">
+          <%= link_to "Ver comprobante" , @payment_transference.file.url(:original, false), :target => "_blank" , class: "hvr-skew-backward" %>
+        </div>
+      <% else %>
+          <div class="col-lg-12 mb-1 text-right">
+            <strong>Esta cotizacion no tiene archivo adjunto</strong>
+         </div>
+      <% end %>
+      <div class="col-lg-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+          <strong>Método de pago:</strong>
+        </div>
+        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+          <div class="col-lg-10">
+          <% @method_payment = MethodPayment.find_by(name: "Transferencia electrónica") %>
+            <%= @method_payment.name %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+          <strong>Banco:</strong>
+        </div>
+        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+          <div class="col-lg-10">
+            <%=  @payment_transference.bank.name %>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-12">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-5 text-right">
+          <strong>Referencia:</strong>
+        </div>
+        <div class="col-lg-8 col-sm-8 col-md-8 col-xs-7 rdown">
+          <div class="col-lg-10">
+            <%=  @payment_transference.reference %>
+          </div>
+        </div>
+      </div>
+    <%end%>
+
+    <div class="col-lg-12 col-xs-12  center-flex">
+      <h3 class="sub-title"><%=raw I18n.t ('.general.titles.quotation_ditail') %></h3>
+    </div>
+   <section class="container table_flex_five col-lg-12 col-sm-12 col-md-12 col-xs-12">
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Estatus</th>
+          <th align="center">Cantidad</th>
+          <th align="right">Precio unitario</th>
+          <th align="right">Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @product_quotations.each do |product_quotation| %>
+        <tr>
+          <td><%= product_quotation.product_product.armar_nombre %></td>
+          <td align="center"><%= product_quotation.product_product.status %></td>
+          <td align="right"><%= product_quotation.quantity %></td>
+          <td align="right"><%= number_with_precision(product_quotation.product_product.price , :precision => 2, delimiter:'.',separator: ',') %></td>
+          <td align="right"><%= number_with_precision(product_quotation.product_product.price * product_quotation.quantity , :precision => 2, delimiter:'.',separator: ',') %></td>
+        </tr>
+        <%end%>
+        <% @package_quotations.each do |package_quotation| %>
+        <tr>
+          <td><%= package_quotation.colection_package.description %></td>
+          <td align="center"><%= package_quotation.colection_package.status  %></td>
+          <td align="right"><%= package_quotation.quantity %></td>
+          <td align="right"><%= number_with_precision(package_quotation.colection_package.total_amount , :precision => 2, delimiter:'.',separator: ',') %></td>
+          <td align="right"><%= number_with_precision(package_quotation.colection_package.total_amount * package_quotation.quantity , :precision => 2, delimiter:'.',separator: ',')%></td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+    </section>
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 pull-right">      
+      <%= link_to 'Cancelar', '/sale/quotations',class: "hvr-skew-backward" %>
+    </div>
+</div>
+</section>

@@ -1,0 +1,1 @@
+json.partial! "provider_provider_types/provider_provider_type", provider_provider_type: @provider_provider_type

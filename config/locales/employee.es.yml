@@ -1,0 +1,147 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      employees:
+        one: "Empleado"
+        other: "Empleados"
+    attributes:
+      employees:
+        first_name: "Nombre"
+        second_name: "Segundo nombre"
+        surname: "Apellido"
+        second_surname: "Segundo apellido"
+        usuario: "Usuario"
+        names: "Nombres"
+        user: "Usuario"
+        motive: "Motivo"
+        type_identification: "Tipo de identificación"
+        identification_document: "Cédula de identidad"
+        email: "Correo electrónico"
+        date_birth: "Fecha de nacimiento"
+        sex: "Sexo"
+        phone: "Teléfono"
+        cellphone: "Celular"
+        phones: "Teléfonos"
+        territory_country_id: "País"
+        territory_state_id: "Estado"
+        territory_city_id: "Ciudad"
+        address: "Dirección"
+        code_employee: "Código de empleado"
+        security_profiles_id: "Perfil de seguridad"
+        tipo_perfil: "Tipo de perfil de seguridad"
+        date_valid: "Fecha válida para el perfil"
+        position: "Cargo"
+        business_company_id: "Clinica"
+        names: "Nombres"
+        confirmed: "Confirmado"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+    errors:
+      models:
+        people:
+          attributes:
+            first_name:
+              blank: "Debe ingresar un nombre."
+            second_name:
+              blank: "Debe ingresar segundo nombre"
+            surname:
+              blank: "Debe ingresar un apellido."
+            second_surname:
+              blank: "Debe ingresar segundo apellido"
+            identification_document:
+              blank: "Debe ingresar una cédula de identidad."
+              taken: "Existe un registro con esta cédula de identidad."
+            phone:
+              blank: "Debe ingresar un teléfono"
+            usuario:
+              blank: "Usuario"
+            email:
+              blank: "Debe ingresar un correo electrónico."
+              uniqueness: "Existe un registro con este correo electrónico."
+            date_valid:
+              blank: "Por favor, introduzca fecha valida perfil."
+              invalid_date: "Por favor, introduzca fecha valida perfil."
+  employees:
+    title: "Empleados"
+    attributes:
+      first_name: "Nombre"
+      second_name: "Segundo nombre"
+      surname: "Apellido"
+      second_surname: "Segundo apellido"
+      names: "Nombres"
+      usuario: "Usuario"
+      user: "Usuario"
+      type_identification: "Tipo de identificación"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      date_birth: "Fecha de nacimiento"
+      sex: "Sexo"
+      motive: "Motivo"
+      phone: "Teléfono"
+      cellphone: "Celular"
+      phones: "Teléfonos"
+      territory_country_id: "País"
+      territory_state_id: "Estado"
+      territory_city_id: "Ciudad"
+      address: "Dirección"
+      code_employee: "Código de empleado"
+      security_profiles_id: "Perfil de seguridad"
+      tipo_perfil: "Tipo de perfil de seguridad"
+      date_valid: "Fecha válida para el perfil"
+      position: "Cargo"
+      business_company_id: "Clinica"
+      names: "Nombres"
+      confirmed: "Confirmado"
+      created_at: "Fecha de creación"
+      updated_at: "Fecha de actualización"
+      user_created: "Creado por"
+      status: "Estatus"
+    actions:
+      new_employee: "Registrar Empleado"
+      new_employee_clinic: "Registrar Usuario Prestador de Servicio"
+      edit_employee: "Editar Empleado"
+      edit_employee_clinic: "Editar Usuario Prestador de Servicio"
+      show_employee: "Datos del Empleado"
+      show_user: "Datos del Usuario"
+      show_employee_clinic: "Datos del usuario Prestador de Servicio"
+      motive_description: "Motivos inhabilitar/habilitar"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este empleado?"
+        enable: "¿Desea habilitar este empleado?"
+      back: "Regresar"
+      accept: "Aceptar"
+      accept_user: "Asignar Usuario"
+    controller:
+      create: "Se creó con éxito el empleado."
+      update: "Se actualizó con éxito el empleado."
+      update_clinic: "Se actualizó con éxito el usuario prestador de servicio."
+      update_user: "Se asignó el usuario con éxito"
+      update_email: "Se actualizó con éxito el empleado y se le enviara un correo al mismo para confirmar el nuevo correo"
+      destroy: "Se eliminó con éxito el empleado."
+      disable: "Se inhabilitó con éxito el empleado."
+      enable: "Se habilitó con éxito el empleado."

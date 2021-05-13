@@ -1,0 +1,44 @@
+<article>
+   <div class="col-lg-12 col-xs-12 cart-mobile" id="cart<%= product_quotation.id %>">
+      <div class="col-lg-12 cont-cart display-flex">
+
+         <div class="col-xs-4 hidden-sm hidden-md hidden-lg"><strong>Producto</strong></div>
+         <div class="col-xs-8 col-sm-1  cont-img">
+            <div class="img-product img-responsive">
+               <%= image_tag product_quotation.product_product.image.url(:medium) %>
+               
+            </div>
+         </div>
+
+         <div class="col-xs-4 hidden-sm hidden-md hidden-lg"><strong>Descripción</strong></div>
+         <div class="col-xs-8 col-sm-5">
+            <%= product_quotation.product_product.name%>
+            <br>
+            <%= link_to 'Eliminar', product_quotation, remote: true, :class => 'deleteProductQuotation', method: :delete, data: { confirm: '¿Desea eliminar este producto para esta cotización?' } %>
+         </div>
+
+         <div class="col-xs-4 hidden-sm hidden-md hidden-lg"><strong>Precio unitario</strong></div>
+         <div class="col-xs-8 col-sm-2 coin"><%=number_with_precision(product_quotation.product_product.price,precision: 2, delimiter:'.',separator: ',') %></div>
+
+         <div class="col-xs-4 hidden-sm hidden-md hidden-lg"><strong>Cantidad</strong></div>
+         <div class="col-xs-8 col-sm-2">
+
+            <%= select_tag( :quantity,options_for_select(Sale::Quotation::QUANTITY_OPTIONS, product_quotation.quantity ), class: "progress_and_message",
+             data: {
+               remote: true,
+               url: url_for(controller: "sale/product_quotations", action: "actualizar_cantidad_producto", id: product_quotation.id)
+             }
+             )%>
+
+         </div>
+
+         <div class="col-xs-4 hidden-sm hidden-md hidden-lg"><strong>Sub total</strong></div>
+         <div class="col-xs-8 col-sm-2 coin" id="<%= product_quotation.id %>">
+            <%=number_with_precision(product_quotation.monto_pagar.to_f, precision: 2, delimiter:'.',separator: ',') %>
+         </div>
+      </div>
+   </div>
+   
+</article>
+   
+

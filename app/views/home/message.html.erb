@@ -1,0 +1,29 @@
+<div class="container">
+	<div class="cont-sesion" >
+		<div class="login">
+			<p align="center"><h3>Usted ha seleccionado producto(s) que no pertenecen a su segmento. Estos serán eliminados de su compra. ¿Deséa continuar?</h3></p>
+      <div class='cont-btn-super'>
+        <%if params[:cliente]== "persona"%>
+        <div class='cont-'>
+          <div class="cont-btn">
+            <%= link_to "Aceptar", new_user_session_path(:cliente => "persona"), class: "hvr-skew-backward"%>
+          </div>                 
+        </div>
+        <%else%>
+        <div class='cont-'>
+          <div class="cont-btn">
+            <%= link_to "Aceptar", new_user_session_path(:cliente => "empresa"), class: "hvr-skew-backward"%>
+          </div>                 
+        </div> 
+        <%end%>
+      <div class='cont- right'>
+        <div class="cont-btn">
+          <%= link_to "Cancelar", decision_path, class: "hvr-skew-backward" %>       
+        </div>
+      </div>
+
+    </div>
+    <br>
+  </div>
+</div>
+</div> 

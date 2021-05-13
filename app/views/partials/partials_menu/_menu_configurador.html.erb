@@ -1,0 +1,216 @@
+<header id="header">
+  <div class="header_top clearfix affix-top">
+    <div class="container">
+      <div class="col-lg-4 col-md-4 col-sm-12 logo media-left media-middle padding_left_none">
+        <a href="/">
+          <img src="<%= asset_path 'logo-novosalud.svg' %>" alt="Novosalud" />
+        </a>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-10 top_nav media-body media-middle affix-top">
+        <div class="header_socials margin_left_none">
+          <a target="_blank" href="http://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+          <a target="_blank" href="http://www.twitter.com/"><i class="fa fa-twitter"></i></a>
+        </div>
+        <% if user_signed_in? %>
+        <div class="top_nav_wrapper clearfix">
+          <ul id="menu-main-menu" class="main_menu_nav">
+            <li id="menu-item-1022" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1022">
+              <a href="">Configurador</a>
+              <ul class="sub-menu">
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1129">
+                  <a href="">Proveedor</a>
+                  <ul class="sub-menu">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1460">
+                      <a href="/specialities">Especialidad</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1323">
+                      <a href="/provider/provider_types">Tipo de proveedor</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1323">
+                      <a href="/provider/providers">Proveedor</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1323">
+                      <a href="/provider/medicos">Médico</a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1129">
+                  <a href="">Producto</a>
+                  <ul class="sub-menu">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1460">
+                      <a href="/product/product_types">Tipo de producto</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1323">
+                      <a href="/product/products">Producto</a>
+                    </li>
+                  </ul>
+                </li>
+                <li id="menu-item-1321" class="menu-item-1321tem menu-item-type-post_type menu-item-object-page menu-item-1321">
+                  <a href="/colection/packages">Paquete</a>
+                </li>
+                <li id="menu-item-1321" class="menu-item-1321tem menu-item-type-post_type menu-item-object-page menu-item-1321">
+                  <a href="/banks">Bancos</a>
+                </li>
+                <li id="menu-item-1321" class="menu-item-1321tem menu-item-type-post_type menu-item-object-page menu-item-1321">
+                  <a href="/method_payments">Modalidad de pago</a>
+                </li>
+                <li id="menu-item-1321" class="menu-item-1321tem menu-item-type-post_type menu-item-object-page menu-item-1321">
+                  <a href="/organizations/1">Organización</a>
+                </li>
+                <li id="menu-item-1321" class="menu-item-1321tem menu-item-type-post_type menu-item-object-page menu-item-1321">
+                  <a href="/motives">Motivo</a>
+                </li>
+                <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1129">
+                  <a href="">Registro</a>
+                  <ul class="sub-menu">
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1460">
+                      <a href="/security/profiles">Perfil empleado</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1460">
+                      <a href="/security/profiles">Perfil empleado</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1460">
+                      <a href="/employees">Registrar Empleados</a>
+                    </li>
+                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1323">
+                      <a href="/product/products">Cuentas de usuarios bloqueados</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </li>
+          <li id="menu-item-1321" class="menu-item-1321tem menu-item-type-post_type menu-item-object-page menu-item-1321">
+            <a href="">Mi cuenta</a>
+            <ul class="sub-menu">
+              <li id="menu-item-1403" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1400">
+                <%= link_to "Mi perfil", employee_path( session[:employee_id]) %>
+              </li>
+              <li id="menu-item-1403" class="menu-item menu-item-1400">
+                <%= link_to "Cambio de Clave", edit_user_registration_path %>
+              </li>
+            </ul>
+          </li>
+          <li id="menu-item-1321" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1321">
+            <%= link_to "Cerrar Sesión", destroy_user_session_path(:layout => 'admin'), method: :delete %>
+          </li>
+        </ul>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="mobile_header">
+  <div class="logo_wrapper clearfix">
+    <div class="logo">
+      <a href="http://novosalud.com.ve/sitio/">
+        <img src="<%= asset_path 'logo-novosalud.svg' %>" alt="Novosalud"/>
+      </a>
+    </div>
+    <div id="menu_toggle">
+      <button></button>
+    </div>
+  </div>
+  <div class="header_info">
+    <div class="top_nav_mobile">
+      <ul id="menu-main-menu-1" class="main_menu_nav">
+        <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+          <a href="http://novosalud.com.ve/sitio/nosotros/">Nosotros</a><span class="arrow"><i></i></span>
+          <ul class="sub-menu">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item menu-item-1264">
+              <a href="http://novosalud.com.ve/sitio/nosotros/">¿Quiénes Somos?</a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1212">
+              <a href="http://novosalud.com.ve/sitio/nosotros/unete-al-equipo/">Únete al Equipo</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1126">
+          <a href="#">Planes</a><span class="arrow"><i></i></span>
+          <ul class="sub-menu">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1457">
+              <a href="http://novosalud.com.ve/sitio/plan-global/">Plan Global</a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1460">
+              <a href="http://novosalud.com.ve/sitio/plan-optimo/">Plan Óptimo</a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1322">
+              <a href="http://novosalud.com.ve/sitio/comparativo-de-plan/">Comparativo de Planes</a>
+            </li>
+            <li class="fa file-pdf-o menu-item menu-item-type-post_type menu-item-object-page menu-item-1282">
+              <a href="http://novosalud.com.ve/sitio/planes-descargables/">Descargables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1022">
+          <a href="#">Afiliados</a><span class="arrow"><i></i></span>
+          <ul class="sub-menu">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1263">
+              <a href="http://novosalud.com.ve/sitio/afiliados/servicios/">Servicios</a>
+            </li>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1358">
+              <a href="http://novosalud.com.ve/sitio/afiliados/preguntas-frecuentes/">Preguntas Frecuentes</a>
+            </li>
+            <li class="fa file-pdf-o menu-item menu-item-type-post_type menu-item-object-page menu-item-1303">
+              <a href="http://novosalud.com.ve/sitio/afiliados/descargables-afiliados/">Descargables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1135">
+          <a href="#">Intermediarios</a><span class="arrow"><i></i></span>
+          <ul class="sub-menu">
+            <li class="fa file-pdf-o menu-item menu-item-type-post_type menu-item-object-page menu-item-1311">
+              <a href="http://novosalud.com.ve/sitio/quiero-ser-novosalud/">Quiero ser Novosalud</a>
+            </li>
+            <li class="fa file-pdf-o menu-item menu-item-type-post_type menu-item-object-page menu-item-1386">
+              <a href="http://novosalud.com.ve/sitio/intermediarios/descargables-intermediarios/">Descargables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1138">
+          <a href="#">Proveedores</a><span class="arrow"><i></i></span>
+          <ul class="sub-menu">
+            <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1314">
+              <a href="http://novosalud.com.ve/sitio/registro-de-proveedores/">Registro de Proveedores</a>
+            </li>
+            <li class="fa file-pdf-o menu-item menu-item-type-post_type menu-item-object-page menu-item-1397">
+              <a href="http://novosalud.com.ve/sitio/proveedores/descargables-proveedores/">Descargables</a>
+            </li>
+          </ul>
+        </li>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1221">
+          <a href="http://novosalud.com.ve/sitio/contacto/">Contacto</a>
+        </li>
+        <% if user_signed_in? %>
+        <li id="menu-item-1321" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1321">
+          <%= link_to "Cerrar Sesión", destroy_user_session_path, method: :delete %>
+        </li>
+        <%else%>
+        <li id="menu-item-1321" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-1321">
+          <%= link_to " Iniciar Sesión", new_user_session_path %>
+        </li>
+        <%end%>
+      </ul>
+    </div>
+    <div class="icon_texts">
+      <div class="icon_text clearfix">
+        <div class="icon"><i class="fa fa fa-phone"></i>
+        </div>
+        <div class="text"><strong>+58 (251) 250.44.00</strong>
+          <br><span>Atención 24/7</span>
+        </div>
+      </div>
+      <div class="icon_text clearfix">
+        <div class="icon"><i class="fa fa fa-clock-o"></i>
+        </div>
+        <div class="text">Lun. - Dom. de 8:00 a.m. a 5:00 p.m.</div>
+      </div>
+      <div class="icon_text clearfix">
+        <div class="icon"><i class="fa fa fa-map-marker"></i>
+        </div>
+        <div class="text">Calle 26 entre 16 y 17, Edificio Centro Plaza, Piso PB, Local 03. Barquisimeto - Venezuela</div>
+      </div>
+    </div>
+  </div>
+</div>
+</header>

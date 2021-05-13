@@ -1,0 +1,81 @@
+var first_name="<%= params[:beneficiary][:people_attributes][:first_name] %>";
+var surname="<%= params[:beneficiary][:people_attributes][:surname] %>";
+var identification_document="<%= params[:beneficiary][:people_attributes][:identification_document] %>";
+var date_birth="<%= params[:beneficiary][:people_attributes][:date_birth] %>";
+var sex="<%= params[:beneficiary][:people_attributes][:sex] %>";
+var phone="<%= params[:beneficiary][:people_attributes][:phone] %>";
+var cellphone="<%= params[:beneficiary][:people_attributes][:cellphone] %>";
+var err="<%= @beneficiary.errors.full_messages[0] %>"
+
+
+if(first_name=="" || first_name==null){
+	$("input[name='beneficiary[people_attributes][first_name]'] + .help-block").show();
+	$("input[name='beneficiary[people_attributes][first_name]'] + .help-block").html("Por favor, introduzca primer nombre.");
+
+}
+
+if(surname=="" || surname==null){
+	$("input[name='beneficiary[people_attributes][surname]'] + .help-block").show();
+	$("input[name='beneficiary[people_attributes][surname]'] + .help-block").html("Por favor, introduzca apellido.");
+}
+if(identification_document=="" || identification_document==null){
+	$("input[name='beneficiary[people_attributes][identification_document]'] + .help-block").show();
+	$("input[name='beneficiary[people_attributes][identification_document]'] + .help-block").html("Por favor, introduzca cédula.");
+}
+if(date_birth=="" || date_birth==null){
+	$(".help-block-fecha").show();
+	$(".help-block-fecha").html("Debe agregar una Fecha");
+}
+if(sex=="" || sex==null){
+	$("#beneficiary_people_attributes_sex + .help-block").show();
+	$("#beneficiary_people_attributes_sex + .help-block").html("Debe selecionar una opción");
+}
+if(phone=="" || phone==null){
+	$("input[name='beneficiary[people_attributes][phone]'] + .help-block").show();
+	$("input[name='beneficiary[people_attributes][phone]'] + .help-block").html("Debe ingresar un teléfono");
+}
+if(cellphone=="" || cellphone==null){
+	$("input[name='beneficiary[people_attributes][cellphone]'] + .help-block").show();
+	$("input[name='beneficiary[people_attributes][cellphone]'] + .help-block").html("Debe ingresar un celular");
+}
+
+if (surname!="" && identification_document!="" && date_birth!="" &&  sex!="" && phone!="" &&  cellphone!="") 
+{
+
+	$("input[name='beneficiary[people_attributes][identification_document]'] + .help-block").show();
+	$("input[name='beneficiary[people_attributes][identification_document]'] + .help-block").html(err.substr(20,60));
+
+}
+
+
+
+/*$("input[name='beneficiary[people_attributes][identification_document]").change(function(){
+	$("input[name='beneficiary[people_attributes][identification_document]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][identification_document]'] + .help-block").hide();
+});
+$("input[name='beneficiary[people_attributes][first_name]").change(function(){
+	$("input[name='beneficiary[people_attributes][first_name]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][first_name]'] + .help-block").hide();
+});
+$("input[name='beneficiary[people_attributes][surname]").change(function(){
+	$("input[name='beneficiary[people_attributes][surname]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][surname]'] + .help-block").hide();
+});
+$("input[name='beneficiary[people_attributes][date_birth]").change(function(){
+	$("input[name='beneficiary[people_attributes][date_birth]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][date_birth]'] + .help-block").hide();
+});
+$("input[name='beneficiary[people_attributes][sex]").change(function(){
+	$("input[name='beneficiary[people_attributes][sex]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][sex]'] + .help-block").hide();
+});
+$("input[name='beneficiary[people_attributes][phone]").change(function(){
+	$("input[name='beneficiary[people_attributes][phone]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][phone]'] + .help-block").hide();
+});
+$("input[name='beneficiary[people_attributes][cellphone]").change(function(){
+	$("input[name='beneficiary[people_attributes][cellphone]'] + .help-block").html("");
+	$("input[name='beneficiary[people_attributes][cellphone]'] + .help-block").hide();
+});
+
+*/

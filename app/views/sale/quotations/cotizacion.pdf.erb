@@ -1,0 +1,164 @@
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+<title> Cotizacion <%= @cotizacion.quoting_number%> <%= Date.today.strftime("%d-%m-%Y")%></title>
+<style type="text/css">
+  p,tr,td{
+    font-size: 0.8rem;
+  }
+  img{
+    width: 300px;
+    height: auto;
+  }
+</style>
+</head>
+
+<body onload='number_pages'>
+  <table width="1000" class="cab-header">
+    <tr>
+      <td width="600">
+        <%= image_tag wicked_pdf_asset_base64('logo-web.png') %>
+        <p>
+          <strong><%= @novosalud.name.upcase %></strong>
+          <br>
+          <%= @novosalud.phone %>
+          <br>
+          <%= @novosalud.rif %>
+          <br>
+          <%= @novosalud.address %>
+        </p>
+      </td>
+      <td width="400">
+        <table width="400">
+          <tr>
+            <td>
+              <div>
+                <p align="right">
+                  <strong>Número de cotización</strong>
+                  <br>
+                  <%= @cotizacion.quoting_number%>
+                </p>                             
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <div align="right">
+              <p>
+                <strong>Fecha:</strong>
+                <%= Date.today.strftime("%d-%m-%Y")%>
+              </p>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <br>
+  <div>
+    <table width="814">
+      <% if @cotizacion.user.customer.nil?%>
+        <tr>
+          <td width="75"><strong>Cliente:</strong><%= @cotizacion.user.company.name %></td>
+        </tr>
+        <tr>
+          <td width="75"><strong>Identificación:</strong><%= @cotizacion.user.company.rif %></td>
+        </tr>
+        <tr>
+          <td width="75"><strong>Dirección:</strong><%= @cotizacion.user.company.address %></td>
+        </tr>
+        <tr>
+          <td width="75"><strong>Teléfono:</strong><%= @cotizacion.user.company.phone %></td>
+        </tr>
+      <%else%>
+        <tr>
+          <td width="75"><strong>Cliente:</strong> <%= @cotizacion.nombre_usuario %></td>
+
+        </tr>
+        <tr>
+          <td width="75"><strong>Identificación:</strong> <%= @cotizacion.identificacion_usuario %></td>
+        </tr>
+        <tr>
+          <td width="75"><strong>Dirección:</strong> <%= @cotizacion.user.customer.people.address %></td>
+        </tr>
+        <tr>
+          <td width="75"><strong>Teléfono:</strong> <%= @cotizacion.user.customer.people.phone%></td>
+        </tr>
+        <%end%>
+    </table>
+    <br>
+    <table width="1000">
+      <td align="center"><h2>Detalle de la cotización</h2>
+      </td>
+    </table>
+    <table width="1000">
+      <tr class="cab-thead">
+        <td width="150" align="center"><strong>Código</strong></td>
+        <td width="450" align="center"><strong>Producto</strong></td>
+        <td width="100" align="center"><strong>Cantidad</strong></td>
+        <td width="150" align="center"><strong>Precio unitario </strong></td>
+        <td width="120" align="center"><strong>Subtotal</strong></td>
+      </tr>
+      <% unless @package_quotations.nil? or @product_quotations.nil? %>
+        <% @package_quotations.each do |package_quotation| %>
+          <tr>
+            <td><%= package_quotation.colection_package.code %></td>
+            <td><%= package_quotation.colection_package.description %></td>
+            <td>
+              <div align="right">
+                <%= package_quotation.quantity%>
+              </div>
+            </td>
+            <td>
+              <div align="right">
+                <%= number_with_precision(package_quotation.colection_package.total_amount, precision: 2, delimiter:'.',separator: ',') %>
+              </div>
+            </td>
+            <td>
+              <div align="right"><%= number_with_precision(package_quotation.colection_package.total_amount.to_f * package_quotation.quantity.to_f , precision: 2, delimiter:'.',separator: ',') %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+        <% @product_quotations.each do |product_quotation| %>
+          <tr>
+            <td><%= product_quotation.product_product.code %></td>
+            <td><%= product_quotation.product_product.armar_nombre %></td>
+            <td>
+              <div align="right">
+                <%= product_quotation.quantity %>
+              </div>
+            </td>
+            <td> 
+              <div align="right">
+                <%= number_with_precision(product_quotation.product_product.price.to_f, precision: 2, delimiter:'.',separator: ',') %>
+              </div>
+            </td>
+            <td>
+              <div align="right">
+                <%= number_with_precision(product_quotation.product_product.price.to_f * product_quotation.quantity.to_f, precision: 2, delimiter:'.',separator: ',') %>
+              </div>
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <br>
+    <footer>
+      <table width="1000">
+        <tr>
+          <td width="750"></td>
+          <td width="125" align="right"><strong>Total a pagar: </strong></td>
+          <td width="125" align="right">
+            <strong><%= number_with_precision(@cotizacion.sumar_montos.to_f, precision: 2, delimiter:'.',separator: ',') %>
+            </strong>
+          </td>
+        </tr>
+      </table>
+    </footer>
+  </div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+
+<p>
+  <strong>Quantity:</strong>
+  <%= @colection_package_product.quantity %>
+</p>
+
+<p>
+  <strong>User created:</strong>
+  <%= @colection_package_product.user_created_id %>
+</p>
+
+<p>
+  <strong>User updated:</strong>
+  <%= @colection_package_product.user_updated_id %>
+</p>
+
+<p>
+  <strong>Product product:</strong>
+  <%= @colection_package_product.product_product %>
+</p>
+
+<p>
+  <strong>Colection package:</strong>
+  <%= @colection_package_product.colection_package %>
+</p>
+
+<%= link_to 'Edit', edit_colection_package_product_path(@colection_package_product) %> |
+<%= link_to 'Back', colection_package_products_path %>

@@ -1,0 +1,2 @@
+module Security::ProfilesHelper
+end

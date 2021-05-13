@@ -1,0 +1,2 @@
+module Security::RoleTypeMenusHelper
+end

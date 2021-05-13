@@ -1,0 +1,69 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	<p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<div class="col-lg-12">
+	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 padding_left_none">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+			<img src="https://trip101.com/assets/default_profile_pic-9c5d869a996318867438aa3ccf9a9607daee021047c1088645fbdfbbed0e2aec.jpg" alt="..." class="img-circle ">
+			<h1 class="title-show"><strong><%= @provider_medico.people.first_name %> <%= @provider_medico.people.surname %></strong></h1>
+			<div>
+				<%= @provider_medico.people.type_identification %> - <%= @provider_medico.people.identification_document %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+		<section class="table_flex_five flex_doctor">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th><%= raw I18n.t('.medicos.attributes.code_medico') %></th>
+						<th><%= raw I18n.t ('.medicos.attributes.c_m_l') %></th>
+						<th><%= raw I18n.t ('.medicos.attributes.speciality_id') %></th>
+						<th><%= raw I18n.t ('.medicos.attributes.phone') %>:</th>
+						<th><%= raw I18n.t ('.general.attributes.created_at') %></th>
+						<th><%= raw I18n.t ('.general.attributes.updated_at') %></th>
+						<th><%= raw I18n.t ('.general.attributes.status') %></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><%= @provider_medico.code_medico %></td>
+						<td><%= @provider_medico.c_m_l %></td>
+						<td><%= @provider_medico.speciality.name %></td>
+						<td><%= @provider_medico.phone_medico %></td>
+						<td><%= @provider_medico.created_at.strftime("%d-%m-%Y") %></td>
+						<td><%= @provider_medico.updated_at.strftime("%d-%m-%Y") %></td>
+						<td><%= @provider_medico.status %></td>
+					</tr>
+				</tbody>
+			</table>
+		</section>
+	</div>
+	<%if @provider_medico.verificar_empleado_externo?(current_user.id) %>
+	<div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+		<table class="table table-bordered">
+			<thead>
+				<tr >
+					<th class="text-center"> <strong>Proveedores</strong></th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @provider_medico_provider.each do |provider_medico_provider| %>
+				<tr>
+					<td><%= provider_medico_provider.provider_provider.name %></td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+	<%end%>
+	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center"> 
+  <% if @permiso_modificar == true %> 		
+		<%= link_to I18n.t('.general.action.edit'), edit_provider_medico_path(@provider_medico),class: "hvr-skew-backward"  %> 
+  <% end -%>
+		<%= link_to I18n.t('.general.action.cancel'), provider_medicos_path, class: "hvr-skew-backward"  %>
+	</div>
+</div>

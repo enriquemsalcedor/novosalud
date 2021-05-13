@@ -1,0 +1,5 @@
+$('#formRoleProfile').success();
+$('#roles_perfil').append('<%= j render @role_profile %>')
+$('select option').prop('selected', function() {
+        return this.defaultSelected; });
+

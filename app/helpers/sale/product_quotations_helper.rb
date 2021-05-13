@@ -1,0 +1,2 @@
+module Sale::ProductQuotationsHelper
+end

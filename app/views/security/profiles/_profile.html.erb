@@ -1,0 +1,10 @@
+
+    <div class="control-group <%= @security_profile.errors[:name].any? ? "has-error has-feedback" : "" %> ">
+      <%= f.label I18n.t('profiles.attributes.name') %>
+        <div class="controls">
+          <%= f.text_field :name %>
+          <span   class="help-inline">
+            <%= @security_profile.errors[:name].any? ? @security_profile.errors[:name].to_s[/\w([^"]*)/] : "" %></span>
+       </div> 
+    </div>      
+

@@ -1,0 +1,28 @@
+<div id="permition-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= title %></h4>
+      </div>
+<%= form_for(@security_role_type) do |f| %>
+  <% if @security_role_type.errors.any? %>
+  <% end %>
+
+  <div class="field">
+    <div class="control-group <%= @security_role_type.errors[:name].any? ? "has-error has-feedback" : "" %> ">
+      <%= f.label I18n.t('role_types.attributes.name') %>
+      <div class="controls">
+        <%= f.text_field :name %>
+        <span   class="help-inline">
+          <%= @security_role_type.errors[:name].any? ? @security_role_type.errors[:name].to_s[/\w([^"]*)/] : "" %></span>
+     </div>
+   </div>
+ </div>
+  <div class="actions">
+    <%= f.submit I18n.t('role_types.actions.accept'), data: {disable_with: "Guardando ..."}%>
+  </div>
+<% end %>
+    </div>
+  </div>
+</div>

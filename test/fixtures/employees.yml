@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code_employee: MyString
+  people: one
+
+two:
+  code_employee: MyString
+  people: two

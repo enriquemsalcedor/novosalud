@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html class="no-js js_active vc_desktop vc_transform vc_transform vc_transform " lang="es-ES">
+<%= render "partials/admin/cab" %>
+<body class="page-template-default page page-id-9 page-parent site_layout_1 header_style_2 sticky_menu title_box_image_added wpb-js-composer js-comp-ver-4.11.2 vc_responsive" style="width: auto;">
+	<% if current_user %>
+	<%= auto_session_timeout_js %> <!-- me ejecutara la gema auto-session-timeout-->
+	<%end%>  
+	<div id="wrapper">
+		<div class="content_wrapper">
+			<%= render "partials/admin/menu_choice" %>
+			<div id="main">
+				<%= render "partials/admin/yield" %>
+			</div>
+			<%= render "partials/admin/footer" %>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<h1>People</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Surname</th>
+      <th>Typeidentification</th>
+      <th>Identificationdocument</th>
+      <th>Email</th>
+      <th>Datebirth</th>
+      <th>Gender</th>
+      <th>Civilstatus</th>
+      <th>Phone</th>
+      <th>Cellphone</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= person.name %></td>
+        <td><%= person.surname %></td>
+        <td><%= person.typeidentification %></td>
+        <td><%= person.identificationdocument %></td>
+        <td><%= person.email %></td>
+        <td><%= person.datebirth %></td>
+        <td><%= person.gender %></td>
+        <td><%= person.civilstatus %></td>
+        <td><%= person.phone %></td>
+        <td><%= person.cellphone %></td>
+        <td><%= link_to 'Show', person %></td>
+        <td><%= link_to 'Edit', edit_person_path(person) %></td>
+        <td><%= link_to 'Destroy', person, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Person', new_person_path %>

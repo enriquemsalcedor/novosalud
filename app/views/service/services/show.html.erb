@@ -1,0 +1,205 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<div class="title-center">
+  <h1 class="space-title">Datos del Servicio</h1>
+</div>
+<% unless @service_service.payment_contracted_product.payment_plan.customer.nil? %>
+<div class="col-lg-8 col-lg-offset-2">
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Titular</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.payment_contracted_product.payment_plan.nombre_titular %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+       <strong>Cédula de identidad</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+         <%= @service_service.payment_contracted_product.payment_plan.cedula_titular %>
+      </div>
+    </div>
+  </div>
+<%else%>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+       <strong>Titular</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+         <%= @service_service.payment_contracted_product.payment_plan.business_company.name%>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Titular</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.payment_contracted_product.payment_plan.business_company.name%>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong>RIF</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+         <%= @service_service.payment_contracted_product.payment_plan.business_company.rif%>
+      </div>
+    </div>
+  </div>
+<% end %>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Plan</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.payment_contracted_product.payment_plan.number_plan %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+       <strong>Producto</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.payment_contracted_product.product_product.name %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+        <strong>Certificado</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.payment_contracted_product.code %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+        <strong>Estatus del producto</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.payment_contracted_product.status %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+         <strong>Centro médico</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+       <%= @service_service.payment_contracted_product.product_product.proveedor %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+         <strong>Fecha de servicio</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.date_service.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+         <strong>Número de servicio</strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @service_service.code %>
+    </div>
+  </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-2 col-xs-5 text-right">
+      <strong>Fecha de cita </strong>
+    </div>
+    <div class="col-lg-10 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+       <% unless @service_service.appointment_date.nil? %>
+       <%= @service_service.appointment_date.strftime("%d-%m-%Y") %>
+       <%end%>
+     </div>
+   </div>
+ </div>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+    <strong>Beneficiario</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+      <%= @service_service.beneficiary.buscar_nombre_beneficiario %>
+    </div>
+  </div>
+</div>
+<%unless @service_service.provider_medico_provider.nil? %>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+    <strong>Medico</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+      <%= @service_service.provider_medico_provider.buscar_nombre_medico%>
+    </div>
+  </div>
+</div>
+<%end%>
+<%unless @service_service.motive.nil? %>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+    <strong>Motivo</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+       <%= @service_service.motive.name %>
+    </div>
+  </div>
+</div>
+<%end%>
+<% if @service_service.payment_contracted_product.status == "Usado" %>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+    <strong>Observación</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+       <%= @service_service.observation %>
+    </div>
+  </div>
+</div>
+<%end%>
+ <div class="col-lg-12">
+  <div class="col-lg-2 col-xs-5 text-right">
+     <strong>Estatus:</strong>
+  </div>
+  <div class="col-lg-10 col-xs-7 rdown">
+    <div class="col-lg-10 ">
+      <%= @service_service.status %>
+    </div>
+  </div>
+</div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center"> 
+  <%= link_to I18n.t('.general.action.cancel'), service_services_path, class: "hvr-skew-backward"  %>
+</div>

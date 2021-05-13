@@ -1,0 +1,1 @@
+json.partial! "security_profiles/security_profile", security_profile: @security_profile

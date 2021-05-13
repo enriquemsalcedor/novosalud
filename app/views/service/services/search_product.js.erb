@@ -1,0 +1,63 @@
+  $(".notice").hide();
+  $("#capa").click(function(){
+    $('#myModal').remove();
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+  });
+  $("#close").click(function(){
+    $(".modal").remove();
+    $(".modal-backdrop").remove();
+    $('#myModal').remove();
+    $("body").removeClass("modal-open");
+  });
+$("#mensaje-beneficiario-creado").hide();
+$("#mensajeBeneficiario").hide();
+<% unless @payment_contracted_product[0].nil? %>
+
+  $("#mensaje-beneficiario-creado").hide();
+<% if @service.nil? %>
+  <% if @payment_contracted_product[0].status=="Pagado" %>
+    $('#contractedProduct').show();
+
+  <% unless @payment_contracted_product[0].payment_plan.customer.nil? %>
+    $('#Titular').html('<%= @payment_contracted_product[0].payment_plan.nombre_titular %>');
+    $('#CedulaTilular').html('<%= @payment_contracted_product[0].payment_plan.cedula_titular %>');
+  <% else %>
+    // var nameTitular = '<%= @payment_contracted_product[0].payment_plan.business_company.name %>';
+    // var name = nameTitular.replace("&amp;","&");
+    // document.getElementById('Titular').setAttribute("value",name);
+    $('#Titular').html('<%= @payment_contracted_product[0].payment_plan.business_company.name %>');
+    $('#CedulaTilular').html('<%= @payment_contracted_product[0].payment_plan.business_company.rif %>');
+  <%end%>
+  $('#Plan').html('<%= @payment_contracted_product[0].payment_plan.number_plan %>');
+  $('#producto').html('<%= @payment_contracted_product[0].product_product.name %>');  
+  $('#Certificado').html('<%= @payment_contracted_product[0].code %>');
+  $('#Centro_medico').html('<%= @payment_contracted_product[0].product_product.proveedor %>');
+  $('#Estatus').html('<%= @payment_contracted_product[0].status %>');
+  $('#searchProduct').val('');
+  $('#mensajeProducto span').html('').removeClass('error-busqueda');
+  $('#service_service_payment_contracted_product_id').val('<%=@payment_contracted_product[0].id%>');
+  $('#beneficiary').hide();
+  $('#formService').hide();
+<% else %>
+$('#mensajeProducto').show();
+$('#mensajeProducto span').html("<div class='alert alert-danger notice'>"+'Producto expirado, ha superado la fecha límite de uso (<%= @payment_contracted_product[0].valid_until.strftime('%d-%m-%Y') %>)'+"<button type='button' class='close' data-dismiss='alert'>&times;</button></div>");
+$('#contractedProduct').hide();
+$('#beneficiary').hide();
+$('#formService').hide();
+<% end %> 
+<%else%>
+$('#mensajeProducto').show();
+$('#mensajeProducto span').html("<div class='alert alert-danger notice'>"+'<%= "El producto ya esta asociado al  servicio  #{@service.code}" %>'+"<button type='button' class='close' data-dismiss='alert'>&times;</button></div>");
+$('#contractedProduct').hide();
+$('#beneficiary').hide();
+$('#formService').hide();
+<%end%>
+<%else%>
+$("#mensaje-beneficiario-creado").hide();
+$('#mensajeProducto').show();
+$('#mensajeProducto span').html("<div class='alert alert-danger notice'>"+'<%= "No existe un producto con esta clave."%>'+"<button type='button' class='close' data-dismiss='alert'>&times;</button></div>");
+$('#contractedProduct').hide();
+$('#beneficiary').hide();
+$('#formService').hide();
+<%end%>

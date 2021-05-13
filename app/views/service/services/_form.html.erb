@@ -1,0 +1,182 @@
+<%= form_for(service_service, html: {role: :form, 'data-model' => 'service_service', :class => "formService"}) do |f| %>
+<%if params[:action] == "new" || params[:action] == "create" %>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-xs-6 text-right">
+      <label>Fecha de registro</label>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 flex-end">
+        <p><%=  Date.today.strftime("%d-%m-%Y") %></p> 
+      </div>
+    </div>
+  </div>
+</div>
+<%else%>
+<div class="col-lg-6">
+  <div class="col-lg-12 pr-0 pl-0">
+    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-6 text-right">
+      <label>Fecha de registro</label>
+    </div>
+    <div class="col-lg-7 col-sm-7 col-md-7  rdown pr-0">
+      <div class="col-lg-10">
+        <p><%=  Date.today.strftime("%d-%m-%Y") %></p>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
+<% if service_service.id.nil? %>
+<div class="field hidden">
+  <%= f.number_field :code, hidden: "true" %>
+</div>
+<% end%>
+<% if @service_service.id.nil?  %>
+  <%if session[:layout] == 'admin' %>
+    <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 form-group dd">
+      <div class="col-lg-6 col-sm-6 col-md-6"><label class="text-right">Fecha de la cita</label></div>
+      <div class="col-lg-6 col-sm-6 col-md-6 pl-0">
+        <div class="  input-daterange calendar pl-0"> 
+          <%= f.text_field :appointment_date,validate: true, onchange:"ValidarFecha(this)" %>
+        </div>
+        <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon"></span></div>
+      </div>
+      <div class="col-lg-6 col-lg-offset-6 pl-0" id="msj"></div>
+    </div>
+  <%end%>  
+<% elsif $motivo == "reagendar"  %>
+<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 form-group">
+  <div class="col-lg-12 pad_left">
+    <div class="col-lg-5 col-sm-5 col-md-5"><label class="text-right">Fecha de la cita</label></div>
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-7 pl-0 pr-0">
+      <div class="input-daterange calendar pl-0"> 
+        <%if @service_service.appointment_date.present?%>
+        <%= f.text_field :appointment_date,validate: true,value: @service_service.appointment_date.strftime("%d-%m-%Y"), onchange:"ValidarFecha(this)" %>
+        <%else%>
+        <%= f.text_field :appointment_date,validate: true, onchange:"ValidarFecha(this)" %>
+        <%end%>
+      </div>
+      <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon"></span></div>
+      <div  id="msj"></div>
+    </div>
+  </div>
+</div>
+</div>
+<% elsif @service_service.id.nil? || $motivo=="atender" %>
+<div class="col-lg-6 form-group pr-0">
+  <div class="col-lg-12 pr-0">
+    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-5 text-right">
+      <%= label_tag :fecha_de_la_cita %>
+    </div>
+    <%if @service_service.appointment_date.present?%>
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-6 pl-0 pr-0">
+      <div class="col-lg-12 rdown">
+        <div class="col-lg-10  ">
+          <%unless @service_service.appointment_date.nil?%>
+          <p><%=  @service_service.appointment_date.strftime("%d-%m-%Y") %></p>
+          <%end %>
+        </div>
+      </div>
+    </div>
+    <%else%>
+    <!-- atender-->
+    <div class="col-lg-7 col-sm-7 col-md-7  pl-0 pr-0">
+      <div class="input-daterange daterange-atender pl-0"> 
+        <%= f.text_field :appointment_date,validate: true, onchange:"ValidarFecha2(this)" %>
+        <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon "></span></div>
+      </div>
+      <div class="pl-0" id="msj"></div>
+    </div>
+    <%end%>
+  </div> 
+</div>
+<%else %>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group pr-0">
+  <div class="col-lg-12 pr-0">
+    <div class="col-lg-5 col-sm-5 col-md-5 col-xs-6 text-right">
+      <label>Fecha de la cita</label>
+    </div>
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <% unless @service_service.appointment_date.nil?%>
+        <p><%= @service_service.appointment_date.strftime("%d-%m-%Y") %></p>
+        <%end%>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
+<div class="field hidden">
+  <%= f.number_field :user_created_id , hidden: "true" %>
+  <%= f.number_field :user_updated_id, hidden: "true" %>
+</div>
+<div class="field hidden">
+  <%= f.number_field  :beneficiary_id, hidden: "true" %>
+</div>
+<% if  $motivo=="cancelar" ||  $motivo == "anular" %>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <label class="col-lg-5 col-sm-5 col-md-5 text-right">Asignar Motivo</label>
+  <div class="col-lg-7 col-sm-7 col-md-7 input_100 pl-0 pr-0">
+    <%= collection_select(:service_service, :motive_id , @motive, :id, :name, :prompt=>"Seleccione", onchange:"ValidarSelect(this)")%> 
+    <span class="help-block"></span>
+  </div>
+</div>
+</div>
+<%end%>
+<% if $motivo=="atender" %>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+  <div class="col-lg-12 pr-0 pl-0">
+    <label class="col-lg-5 col-sm-5 col-md-5 col-xs-12 text-right">Asignar Médico</label>
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12 input_100 pl-0 pr-0">
+      <%= collection_select(:service_service, :provider_medico_provider_id, service_service.buscar_proveedor_medico, :id, :nombre_medico_completo, prompt: true  ) %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+</div>
+<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 form-group pr-0">
+  <div class="col-lg-12 pr-0">
+    <label class="col-lg-5 col-sm-5 col-md-5 col-xs-12 text-right "> Observación</label>
+    <div class="col-lg-7 col-sm-7 col-md-7 col-xs-12 input_100 pl-0 pr-0">
+      <%= f.text_area :observation, minlength: '0', maxlength: '140' %>
+      <span   class="help-inline"></span>
+    </div>
+  </div>
+</div>
+<%end%>
+<div class="field hidden">
+  <%= f.number_field :payment_contracted_product_id, hidden: "true" %>
+</div>
+<div class="col-lg-12 form-group pr-0">
+  <div class="col-lg-12 pr-0">
+    <% if  $motivo=="atender" %>
+      <%if @service_service.appointment_date.present?%>
+        <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+          <%= link_to I18n.t('.general.action.cancel'), clinic_clinic_service_path,class: "hvr-skew-backward" %>
+        </div>
+        <div class="col-lg-3 pull-right pr-0">
+          <%= f.submit "Aceptar", :id=>'btnAceptarServicioCreate', data: {disable_with: "Guardando ..."},class: "hvr-skew-backward" %>
+        </div>
+      <%else%>  
+        <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+          <%= link_to I18n.t('.general.action.cancel'), clinic_pending_date_path,class: "hvr-skew-backward" %>
+        </div>
+        <div class="col-lg-3 pull-right pr-0">
+          <%= f.submit "Aceptar", :id=>'btnAceptarServicioAtender', data: {disable_with: "Guardando ..."},class: "hvr-skew-backward" %>
+        </div>
+      <%end%>  
+    <%elsif $motivo=="cancelar" ||  $motivo == "anular" || $motivo == "reagendar"%>
+      <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+        <%= link_to I18n.t('.general.action.cancel'), service_services_path,class: "hvr-skew-backward" %>
+      </div>
+      <div class="col-lg-3 pull-right">
+        <%= f.submit "Aceptar", :id=>'btnAceptarServicio', data: {disable_with: "Guardando ..."},class: "hvr-skew-backward" %>
+      </div>
+    <%end%>
+  </div>
+</div>
+<%if params[:action] == "new" || params[:action] == "create" %>
+<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 form-group dd">
+  <%= f.submit "Aceptar", :id=>'btnAceptarServicioCreate', data: {disable_with: "Guardando ..."},class: "hvr-skew-backward" %>
+</div>
+<%end%>
+<% end %>

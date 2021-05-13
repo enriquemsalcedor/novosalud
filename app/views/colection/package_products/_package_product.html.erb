@@ -1,0 +1,5 @@
+<tr>
+  <td><%= package_product.product_products.armar_nombre %></td>
+  <td id= <%= package_product.product_product_id %>><%= package_product.quantity %></td>
+  <td><% if @permiso_eliminar == true %><%= link_to 'Eliminar', package_product, remote: true, :class => 'delectPackageProduct', method: :delete, data: { confirm: '¿Desea eliminar este producto para este paquete?' } %><% end -%></td>
+</tr>

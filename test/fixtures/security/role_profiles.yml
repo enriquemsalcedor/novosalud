@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  security_profile: one
+  security_role: one
+  start_date: 2017-02-08
+  end_date: 2017-02-08
+
+two:
+  security_profile: two
+  security_role: two
+  start_date: 2017-02-08
+  end_date: 2017-02-08

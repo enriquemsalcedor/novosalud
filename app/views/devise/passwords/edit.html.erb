@@ -1,0 +1,45 @@
+<div class="container login-container">
+  <div class="col-lg-5 col-sm-6 col-md-6 col-xs-12 cont-sesion " >
+  <h3>Registrar contraseña</h3>
+<%= form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, valide: true) do |f| %>
+    <%= f.hidden_field :reset_password_token %>
+
+    <div class="login-mail, margin= 0">
+      <%= f.label I18n.t ('.devise.edit.password') %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> caracteres minimo,debe incluir al menos una letra minúscula, una letra mayúscula y un símbolo)</em>
+      <% end %>
+    </div>
+    <div class="login-mail">  
+      <%= f.password_field :password, autofocus: true, autocomplete: "off" %>
+      <i class="glyphicon glyphicon-lock"></i>
+      <% unless flash[:errors].nil? %>
+        <span class="help-block1"><%= flash[:errors] %></span>  
+      <%end%> 
+    </div>
+    <div class = "login-mail">
+      <%= f.label I18n.t ('.devise.edit.password_confirmation'), "Confirm new password" %>
+    </div>
+    <div class="login-mail">  
+      <%= f.password_field :password_confirmation, autocomplete: "off" %>
+      <i class="glyphicon glyphicon-lock"></i>
+      <% unless flash[:errors].nil? %>
+        <span class="help-block1"><%= flash[:errors] %></span>  
+      <%end%> 
+    </div>
+    
+    <div class='cont-btn-super'>
+      <div class='cont-'>
+        <div class="cont-btn actions">
+          <%= link_to "Cancelar", root_path ,class: "hvr-skew-backward"%>
+        </div>                 
+      </div> 
+      <div class='cont- right'>
+        <div class="cont-btn actions ">
+          <%= f.submit "Aceptar", data: {disable_with: "Guardando ..."}, class:"hvr-skew-backward" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+</div>

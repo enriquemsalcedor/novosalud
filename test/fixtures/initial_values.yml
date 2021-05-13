@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  days_validity: 1
+  max_refech_service: 1
+  number_employee: 1
+  max_quantity_product: 1
+
+two:
+  days_validity: 1
+  max_refech_service: 1
+  number_employee: 1
+  max_quantity_product: 1

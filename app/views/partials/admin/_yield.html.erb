@@ -1,0 +1,8 @@
+<div class="container">
+	<% unless notice.nil? %>
+	<div>
+		<p id="notice"><%notice %></p>
+	</div>
+	<% end -%>
+	<%= yield %>
+</div>

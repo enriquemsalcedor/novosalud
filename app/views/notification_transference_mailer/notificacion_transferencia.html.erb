@@ -1,0 +1,58 @@
+<p>
+  Saludos, se ha realizado el pago vía transferencia electrónica de la cotización número
+  <%= @payment_transference.sale_quotations.quoting_number%>, perteneciente a :
+  <% if @payment_transference.sale_quotations.user.customer.nil?%>
+    <p>
+      <strong>Cliente:</strong>
+      <%= @payment_transference.sale_quotations.user.company.name %>
+    </p>
+    <p>
+      <strong>RIF:</strong>
+      <%= @payment_transference.sale_quotations.user.company.rif %>
+    </p>
+    <p>
+      <strong>Teléfono:</strong>
+      <%= @payment_transference.sale_quotations.user.company.phone %>
+    </p>
+    <p>
+      <strong>Correo electrónico:</strong>
+      <%= @payment_transference.sale_quotations.user.company.email %>
+    </p>
+  <%else%>
+    <p>
+      <strong>Cliente:</strong>
+      <%= @payment_transference.sale_quotations.nombre_usuario %>
+    </p>
+    <p>
+      <strong>C.I.:</strong>
+      <%= @payment_transference.sale_quotations.identificacion_usuario %>
+    </p>
+    <p>
+      <strong>Teléfono:</strong>
+      <%= @payment_transference.sale_quotations.user.customer.people.phone %>
+    </p>
+    <p>
+      <strong>Correo electrónico:</strong>
+      <%= @payment_transference.sale_quotations.user.customer.people.email %>
+    </p>
+    
+  <%end%>
+</p>
+<p style="color:rgb(101, 101, 101)"><strong>Datos de la Transferencia del Beneficiario </strong></p>
+<p>
+  <strong>Banco:</strong>
+  <%= @payment_transference.bank.name %>
+</p>
+<p>
+  <strong>Número de referencia:</strong>
+  <%= @payment_transference.reference %>
+</p>
+<p>
+  <strong>Monto:</strong>
+ Bs <%= number_with_precision(@payment_transference.sale_quotations.total_cotizacion.to_f , precision: 2,delimiter:'.',separator: ',') %>
+</p>
+<p>
+  <strong>Fecha:</strong>
+  <%= @payment_transference.created_at.strftime("%d-%m-%Y")  %>
+</p>
+    

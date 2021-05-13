@@ -1,0 +1,383 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  general:
+    connectors:
+      of: "de"
+      for: "para"
+    attribute:
+      number: "Número"
+      rif: "RIF"
+      image: "Imagen"
+      code: "Código"
+      web_novo: "http://novosalud.com.ve"
+      url: 
+        local: "http://localhost:3000/list.json"
+        quality: "http://172.20.0.113:3000/list.json"
+        production: "http://novoenlinea.novosalud.com.ve/list.json"
+      name: "Nombre"
+      username: "Usuario"
+      confirmed: "Confirmado"
+      surname: "Apellido"
+      first_name: "Primer nombre"
+      last_name: "Segundo Nombre"
+      action: "Acción"
+      phone: "Teléfono de contacto"
+      created_by: "Creado por"
+      updated_by: "Modificado por"
+      total_amount: "Cantidad total"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      description: "Descripción"
+      created_at: "Fecha de creación"
+      updated_at: "Fecha de modificación"
+      valid_since: "Válido desde"
+      valid_until: "Válido hasta"
+      status: "Estatus"
+      health: "Salud"
+      provider: "Proveedor"
+      speciality: "Especialidad"
+      product_type: "Tipo de producto"
+      category: "Categoría"
+      terms: "Términos y condiciones legales"
+      publication_date: "Fecha de publicación"
+      expiration_date: "Fecha de expiración"
+      valid_days: "Días de validez para la activación"
+      price: "Precio unitario"
+      plan: "Orden de compra"
+      cotizacion: "Código cotización"
+      headline: "Titular"
+      product: "Producto"
+      service_number: "Número de servicio"
+      status: "Estatus"
+      reference: "Número de referencia"
+      file_transference: "Comprobante de transferencia"
+      bank: "Banco"
+      account_number: "Número de cuenta"
+      account_type: "Tipo de cuenta"
+      direction_web: "Pagina web del banco"
+      bank_id: "Banco"
+      bank_novo: "Banco Beneficiario de Novo Salud"
+      account_number: "Número de cuenta"
+      account_type: "Tipo de cuenta"
+      list_empty: "No se han encontrado resultados."
+      see_more: "Ver más"
+      new_label: "NUEVO"
+    attributes:
+      numbers: "Números"
+      names: "Nombres"
+      name: "Nombre"
+      description: "Descripción"
+      username: "Usuario"
+      confirmed: "Confirmado"
+      surnames: "Apellidos"
+      see: "Ver"
+      date: "Fecha"
+      editing: "Editar"
+      enable: "Activar"
+      disable: "Desactivar"
+      actions: "Acciones"
+      quotes: "Cotizaciones"
+      overdue: "Vencidas"
+      valid: "Vigentes"
+      created_at: "Fecha de creación"
+      updated_at: "Fecha de modificación"
+      status: "Estatus"
+      search: "Buscar:"
+      zeroRecords: "No existen resultados para esta búsqueda."
+      lengthMenu: "Número de registros _MENU_ "
+      info: "Resultados de página _PAGE_ - _PAGES_ de _TOTAL_ registros"
+      infoEmpty: ""
+      first: "Primero"
+      last: "Último"
+      first: "Primero"
+      next: "Siguiente"
+      previous: "Anterior"
+      infoFiltered: "- Filtrando de _MAX_ registros"
+    model:
+      plan: "Plan"
+      position: "Cargo"
+      login: "Inicio de Sesión"
+      role: "Rol"
+      role_type: "Tipo de Rol"
+      profile: "Perfil"
+      bank: "Banco"
+      companie: "Empresa"
+      quotation: "Cotización"
+      beneficiary: "Beneficiario"
+      employee: "Empleado"
+      employee_clinic: "Empleado clínica"
+      doctor: "Médico"
+      person: "Persona"
+      package: "Paquete"
+      specialty: "Especialidad"
+      initial_value: "Valor Inicial"
+      organization: "Organización"
+      provider: "Proveedor"
+      motive: "Motivo"
+      customer: "Cliente"
+      method_payment: "Modalidad de pago"
+      product: "Producto"
+      product_type: "Tipo de Producto"
+      provider_type: "Tipo de Proveedor"
+      account: "Cuenta Bancaria"
+    models:
+      plans: "Órdenes de compra"
+      positions: "Cargos"
+      roles: "Roles"
+      roles_types: "Tipos de Roles"
+      profiles: "Perfiles"
+      companies: "Empresas"
+      banks: "Bancos"
+      quotations: "Cotizaciones"
+      beneficiaries: "Beneficiarios"
+      employees: "Empleados"
+      employees_clinic: "Empleados clínicas"
+      doctors: "Médicos"
+      persons: "Personas"
+      packages: "Paquetes"
+      specialities: "Especialidades"
+      providers: "Proveedores"
+      motives: "Motivos"
+      customers: "Clientes"
+      methods_payment: "Modalidades de Pago"
+      products: "Productos"
+      products_types: "Tipos de Productos"
+      providers_types: "Tipos de Proveedores"
+      accounts: "Cuentas Bancarias"
+    action:
+      export_to_excel: "Exportar a Excel"
+      transference_payment: "Pagado por transferencia"
+      see: "Ver"
+      new: "Nuevo"
+      pay: "Pagado"
+      reactivate: "Reactivar"
+      remove:  "Quitar"
+      back: "Atrás"
+      register: "Registrar"
+      register_clinic: "Registrar usuario"
+      return: "Regresar"
+      edit: "Modificar"
+      enable: "Activar"
+      delete: "Eliminar"
+      unblocked: "Desbloquear"
+      forget: "Reenviar usuario"
+      resend_password: "Reenviar contraseña"
+      disable: "Desactivar"
+      reschedule: "Reagendar"
+      cancel: "Cancelar"
+      annul: "Anular"
+      accept: "Aceptar"
+      finaled: "Finalizar"
+      atention: "Atender"
+      question:
+        profile:
+          enable: "¿Desea activar este perfíl?"
+          disable: "¿Desea desactivar este perfíl?"
+        role:
+          enable: "¿Desea activar este rol?"
+          disable: "¿Desea desactivar este rol?"
+          finaled: "¿Está seguro de guardar los permisos asignados?"
+        role_type:
+          enable: "¿Desea activar este tipo de rol?"
+          disable: "¿Desea desactivar este tipo de rol?"
+        specialty:
+          enable: "¿Desea activar esta especialidad?"
+          disable: "¿Desea desactivar esta especialidad?"
+        package:
+          enable: "¿Desea activar este paquete?"
+          disable: "¿Desea desactivar este paquete?"
+        product:
+          enable: "¿Desea activar este producto?"
+          disable: "¿Desea desactivar este producto?"
+        product_type:
+          enable: "¿Desea activar este tipo de producto?"
+          disable: "¿Desea desactivar este tipo de producto?"
+        doctor:
+          enable: "¿Desea activar este médico?"
+          disable: "¿Desea desactivar este médico?"
+        role_type:
+          enable: "¿Desea activar este típo de rol?"
+          disable: "¿Desea desactivar este típo de rol?"
+        method_payment:
+          enable: "¿Desea activar esta modalidad de pago?"
+          disable: "¿Desea desactivar esta modalidad de pago?"
+        bank:
+          enable: "¿Desea activar este banco?"
+          disable: "¿Desea desactivar este banco?"
+        employee:
+          enable_clinic: "¿Desea activar este usuario prestador de servicio?"
+          enable: "¿Desea activar este empleado?"
+          disable: "¿Desea desactivar este empleado?"
+          disable_clinic: "¿Desea desactivar este usuario prestador de servicio?"
+          delete: "¿Desea eliminar este empleado?"
+          unblocked: "¿Desea desbloquear este usuario?"
+          forget: "¿Desea reenviar usuario?"
+          update: "¿Desea actualizar este empleado?"
+          resend_password: "¿Desea enviar una nueva clave?"
+          password_update: "¿Desea cambiar la contraseña?"
+          delete_clinic: "¿Desea eliminar este usuario prestador de servicio?"
+        customer:
+          enable: "¿Desea activar este cliente?"
+          disable: "¿Desea desactivar este cliente?"
+        beneficiary:
+          enable: "¿Desea activar este beneficiario?"
+          disable: "¿Desea desactivar este beneficiario?"
+        provider:
+          enable: "¿Desea activar este proveedor?"
+          disable: "¿Desea desactivar este proveedor?"
+        provider_type:
+          enable: "¿Desea activar este tipo de proveedor?"
+          disable: "¿Desea desactivar este tipo de proveedor?"
+        position:
+          enable: "¿Desea activar este cargo?"
+          disable: "¿Desea desactivar este cargo?"
+        motive:
+          enable: "¿Desea activar este motivo?"
+          disable: "¿Desea desactivar este motivo?"
+        quotation:
+          enable: "¿Desea activar esta cotización?"
+          disable: "¿Desea desactivar esta cotización?"
+          delete: "¿Desea eliminar esta cotización?"
+        service:
+          reschedule: "¿Desea reagendar el servicio?"
+          cancel: "¿Desea cancelar el servicio?"
+          annul: "¿Desea anular el servicio?"
+        clinic:
+          atention: "¿Esta seguro de haber atentido este beneficiario?"
+        account:
+          enable: "¿Desea activar esta cuenta bancaria?"
+          disable: "¿Desea desactivar esta cuenta bancaria?"
+      response:
+        profile:
+          enable: "Se activó el perfíl con éxito"
+          disable: "Se desactivó el perfíl con éxito"
+          asigned_employee: "El perfil está asignado a uno o más empleados"
+          disable_profile: "Debe colocar un motivo para desactivar el perfil"
+        role:
+          enable: "Se activó el rol con éxito"
+          disable: "Se desactivó el rol con éxito"
+          asigned_profile: "El rol está asignado a uno o más perfiles"
+        role_type:
+          enable: "Se activó el tipo de rol con éxito"
+          disable: "Se desactivó el tipo de rol con éxito"
+        specialty:
+          enable: "Se activó la especialidad con éxito"
+          disable: "Se desactivó la especialidad con éxito"
+        package:
+          enable: "Se activó el paquete con éxito"
+          disable: "Se desactivó el paquete con éxito"
+        product:
+          enable: "Se activó el producto con éxito"
+          disable: "Se desactivó el producto con éxito"
+        product_type:
+          enable: "Se activó el tipo de producto con éxito"
+          disable: "Se desactivó el tipo de producto con éxito"
+        doctor:
+          enable: "Se activó el médico con éxito"
+          disable: "Se desactivó el médico con éxito"
+        role_type:
+          enable: "Se activó el típo de rol con éxito"
+          disable: "Se desactivó el típo de rol con éxito"
+        method_payment:
+          enable: "Se activó la modalidad de pago con éxito"
+          disable: "Se desactivó la modalidad de pago con éxito"
+        bank:
+          enable: "Se activó el banco con éxito"
+          disable: "Se desactivó el banco con éxito"
+        employee:
+          enable: "Se activó el empleado con éxito."
+          enable_clinic: "Se activó el usuario prestador de servicio con éxito."
+          disable: "Se desactivó el empleado con éxito."
+          disable_clinic: "Se desactivó el usuario prestador de servicio con éxito."
+          unblocked: "Se desbloqueó el usuario con éxito."
+          forget: "Se envió el usuario con éxito."
+          delete: "Se eliminó el empleado con éxito."
+          delete_clinic: "Se eliminó el usuario prestador de servicio con éxito."
+          resend_password: "Se envió la nueva clave con éxito."
+          delete_employee: "Debe ingresar un motivo para eliminar un empleado."
+          disable_employee: "Debe ingresar un motivo para desactivar un empleado."
+          session_status: "Por su seguridad el sistema lo desconecta automáticamente, luego de cinco(5) minutos de inactividad."
+        customer:
+          enable: "Se activó el cliente con éxito"
+          disable: "Se desactivó el cliente con éxito"
+        beneficiary:
+          enable: "Se activó el beneficiario con éxito"
+          disable: "Se desactivó el beneficiario con éxito"
+        provider:
+          enable: "Se activó el proveedor con éxito"
+          disable: "Se desactivó el proveedor con éxito"
+        provider_type:
+          enable: "Se activó el tipo de proveedor con éxito"
+          disable: "Se desactivó el tipo de proveedor con éxito"
+        motive:
+          enable: "Se activó el motivo con éxito"
+          disable: "Se desactivó el motivo con éxito"
+        quotation:
+          enable: "Se activó la cotización con éxito"
+          disable: "Se desactivó la cotización con éxito"
+          delete: "Se elimino la cotización con éxito"
+        service:
+          reschedule: "Se reagendó el servicio con éxito"
+          cancel: "Se canceló el servicio con éxito"
+          annul: "Se anuló el servicio con éxito"
+    controller:
+      enable: "Se activó el cargo con éxito"
+      disable: "Se desactivó el cargo con éxito"
+      create: "Se creó el cargo con éxito"
+      updated: "Se actualizó el cargo con éxito"
+    titles:
+      banks: "Bancos"
+      packages: "Paquetes ó promociones"
+      method_payments: "Modalidad de pago"
+      initial_values: "Valores iniciales"
+      vigent_quotations: "Vigencia por cotización"
+      specialities: "Especialidades"
+      provider_types: "Tipos de proveedor"
+      providers: "Proveedores"
+      medicos: "Médicos"
+      profiles: "Perfiles"
+      positions: "Cargos"
+      employees_clinic: "Empleados externos"
+      employees: "Empleados"
+      role_menus: "Roles/Menús"
+      blocked_users: "Usuarios Bloqueados"
+      quotations: "Cotizaciones"
+      plans: "Órdenes de compra"
+      producto_pay: "Productos Pagados"
+      appointment: "Citas agendadas"
+      pending_date: "Citas por agendar"
+      beneficiaries_atend: "Beneficiarios atendidos"
+      contracted_products: "Productos contratados"
+      services: "Servicios"
+      service_activates: "Servicios activados"
+      motives: "Motivos"
+      forget_username_list: "Recuperación de usuarios"
+      forget_password: "Recuperación de contraseñas"
+      quotation_data: "Datos de la cotización"
+      plan_data: "Datos de la orden de compra"
+      quotation_ditail: "Detalle de la cotización"
+      plan_ditail: "Detalle de la orden de compra"
+      beneficiaries: "Beneficiarios"
+      accounts: "Cuentas Bancarias"
+      employees_clinic: "Usuarios Prestadores de Servicios"
+    shows:
+      show_quotation: "Datos de la cotización"

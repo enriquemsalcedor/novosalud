@@ -1,0 +1,120 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      providers:
+        one: "Proveedor"
+        other: "Proveedores"
+    attributes:
+      providers:
+        clinic_code: "Código de centro médico"
+        name: "Nombre(s) y apellido(s)/"
+        business_name: "Razón social"
+        rif: "RIF"
+        phone: "Teléfono de contacto"
+        email: "Correo electrónico"
+        type_identification_responsable: "Tipo de identificación"
+        identification_document: "Cédula de identidad"
+        firt_name_responsable: "Nombre(s)"
+        last_name_responsable: "Apellido(s)"
+        phone_responsable: "Teléfono del responsable"
+        position: "Cargo"
+        email_responsable: "Correo electrónico"
+        provider_provider_type_id: "Tipo de Proveedor"
+        territory_country_id: "País"
+        territory_state_id: "Estado"
+        territory_city_id: "Ciudad"
+        address: "Dirección"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+    errors:
+      models:
+        provider/provider:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+            rif:
+              blank: "Debe ingresar un RIF."
+              taken: "Existe un registro con este RIF."
+            phone:
+              blank: "Debe ingresar un teléfono del responsable."
+            email:
+              blank: "Debe ingresar un correo electrónico."
+            firt_name_responsable:
+              blank: "Debe ingresar un nombre(s)"
+            last_name_responsable:
+              blank: "Debe ingresar un apellido(s)"
+            phone_responsable:
+              blank: "Debe ingresar un teléfono"
+            position:
+              blank: "Debe ingresar un cargo"
+            email_responsable:
+              blank: "Debe ingresar un correo electrónico"
+            provider_provider_type_id:
+              blank: "Debe ingresar un tipo de proveedor"
+              not_a_number: "Debe seleccionar un tipo de proveedor"
+  providers:
+    title: "Proveedores"
+    attributes:
+      clinic_code: "Código de centro médico"
+      name: "Nombre(s) y apellido(s) /"
+      business_name: "Razón social"
+      rif: "RIF"
+      phone: "Teléfono"
+      email: "Correo electrónico"
+      provider_provider_type_id: "Tipo de proveedor"
+      type_identification_responsable: "Tipo de identificación"
+      identification_document: "Cédula de identidad"
+      firt_name_responsable: "Nombre(s)"
+      last_name_responsable: "Apellido(s)"
+      phone_responsable: "Teléfono de contacto de responsable"
+      position: "Cargo"
+      email_responsable: "Correo electrónico"
+      territory_country_id: "País"
+      territory_state_id: "Estado"
+      territory_city_id: "Ciudad"
+      address: "Dirección"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+    actions:
+      new_provider: "Registrar Proveedor"
+      edit_provider: "Editar Proveedor"
+      show_provider: "Datos del Centro Médico"
+      datos_responsable: "Datos del responsable"
+      equipo_medico: "Equipo médico"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este proveedor?"
+        enable: "¿Desea habilitar este proveedor?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el proveedor."
+      update: "Se actualizó con éxito el proveedor."
+      destroy: "Se eliminó con éxito el proveedor."
+      disable: "Se inhabilitó con éxito el proveedor."
+      enable: "Se habilitó con éxito el proveedor."

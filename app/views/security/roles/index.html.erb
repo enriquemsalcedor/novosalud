@@ -1,0 +1,77 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<% unless alert.nil? %>
+<div class="alert alert-danger notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="alert"><%= alert %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.role_menus') %></h1>
+  <table id="datatable" class="table table-hover roles">
+    <thead>
+    <% @security_roles.each do |security_role| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.created_by') %></th>
+        <th><%= raw I18n.t('.general.attribute.created_at') %></th>
+        <th><%= raw I18n.t('.general.attribute.updated_by') %></th>
+        <th><%= raw I18n.t('.general.attribute.updated_at') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+    <% @security_roles.each do |security_role| %>
+      <tr>
+        <td><%= security_role.name %></td>
+        <td><%= security_role.usuario(security_role.user_created_id) %></td>
+        <td><%= security_role.created_at.strftime("%d-%m-%Y")  %></td>
+        <td><%= security_role.usuario(security_role.user_updated_id) %></td>
+        <td><%= security_role.updated_at.strftime("%d-%m-%Y")  %></td>
+        <td>
+          <%= link_to security_role, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, "Configurar") %>
+          <% end %>
+          <% if @permiso_modificar == true %> 
+            <%= link_to edit_security_role_path(security_role), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+              <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+              <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+            <% end %>
+          <% end -%>
+          <% if @permiso_activar == true %> 
+            <% if security_role.may_inhabilitar? %>
+              <%= link_to "/security/roles/#{security_role.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.role.disable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+                <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+                <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+              <% end %>
+            <%else%>
+              <%= link_to "/security/roles/#{security_role.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.role.enable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Activar" do %>
+                <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+                <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+              <% end %>
+            <% end -%>
+        <%end%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @permiso_crear == true%> 
+    <%= link_to new_security_role_path,  class: "hvr-skew-backward"  do %>
+    <%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.role')) %>
+    <% end %>
+  <% end -%>
+  <% if !@security_roles.present? %>
+  <div class="alert alert-danger notice col-lg-12 ml-0">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+  </div>
+  <% end %>
+</section>
+

@@ -1,0 +1,169 @@
+<%= form_for(employee,validate: true) do |f| %>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+  <label class="label-form"><%= I18n.t ('.people.attributes.first_name') %></label>
+    <%= f.text_field :first_name,  :input_html => {:maxlength => 50, :size => 60},  class: "input-text", validate: true  %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+<label class="label-form"><%= I18n.t ('.people.attributes.second_name') %></label>
+    <%= f.text_field :second_name,  :input_html => {:maxlength => 50, :size => 60},  class: "input-text", validate: true  %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+  <label class="label-form"><%= I18n.t ('.people.attributes.surname') %></label>
+    <%= f.text_field :surname , minlength: '3', maxlength: '50', validate: true %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+  <label class="label-form"><%= I18n.t ('.people.attributes.second_surname') %></label>
+    <%= f.text_field :second_surname,  :input_html => {:maxlength => 50, :size => 60},  class: "input-text", validate: true  %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <label class="label-form col-lg-12"><%= I18n.t ('.people.attributes.identification_document') %></label>
+  <div class="col-lg-2 col-xs-4 input_100">
+    <%= f.select :type_identification,People::TYPE_IDENTIFICATION_OPTIONS %>
+    <span class="help-block"></span>
+  </div>
+  <div class="col-lg-10 col-xs-8 input_100">
+    <%= f.text_field :identification_document , minlength: '3', maxlength: '9', validate: true %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 col-xs-12 input_100">
+    <label class="label-form"><%= I18n.t ('.people.attributes.email') %></label>
+    <%= f.text_field :email,  minlength: '10', maxlength: '60',placeholder:"correo.electronico@prueba.com",  validate: { presence: true }%>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+  <label class="label-form"><%= I18n.t ('.employees.attributes.code_employee') %></label>
+    <%= f.text_field :code_employee %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-6 input_100">
+  <label class="label-form"><%= I18n.t ('.employees.attributes.position') %></label>
+    <%= f.collection_select :position_id, Position.order(:name), :id, :name%>
+    <span class="help-block"></span>
+  </div>
+  <% if $empleado == "interno"%>
+    <%if params[:action] == "new" || params[:action] == "create" %>
+      <div class="col-lg-6 input_100">
+      <label class="label-form"><%= I18n.t ('.employees.attributes.tipo_perfil') %></label>
+      <%= f.text_field :type_profile, value: "Permanente", disabled: true%>
+  
+      <%= f.hidden_field :type_profile, value: "Permanente"%>
+      <span class="help-block"></span>
+      </div>
+      <div class="col-lg-12 input_100">
+      <label class="label-form"><%= I18n.t ('.employees.attributes.security_profiles_id') %></label>
+        <%= f.collection_select :security_profiles_id, Security::Profile.order(:name), :id, :name %>
+        <span class="help-block"></span>
+      </div>
+    <%end%>
+    <%if params[:action] == "edit" || params[:action] == "update"%>
+      <div class="col-lg-6 input_100">
+      <label class="label-form"><%= I18n.t ('.employees.attributes.tipo_perfil') %></label>
+        <%= f.select :type_profile, Employee::TIPO_PERFIL_OPTIONS %>
+        <span class="help-block"></span>
+      </div>
+
+      <div class="col-lg-6 input_100">
+      <label class="label-form"><%= I18n.t ('.employees.attributes.security_profiles_id') %></label>
+        <%= f.collection_select :security_profiles_id, Security::Profile.order(:name), :id, :name %>
+        <span class="help-block"></span>
+      </div>
+      <div class="col-lg-6 input_100" id="fecha_valida">
+        <label class="label-form"><%= I18n.t ('.employees.attributes.date_valid') %></label>
+        <div class="input-daterange calendar div-calendar">
+          <%= f.text_field :date_valid, validate: true%>
+        </div>
+        <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon"></span></div>
+          
+      </div>
+    <%end%>
+  <% end%>
+  <% if $empleado == "externo"%>
+
+  <div class="col-lg-6 input_100">
+  <label class="label-form"><%= I18n.t ('.people.attributes.business_company') %></label>
+    <%= f.collection_select :provider_provider_id, Provider::Provider.order(:name), :id, :name%>
+    <span class="help-block"></span>
+  </div>
+  <%end%>
+</div>
+<%if params[:action] == "edit" || params[:action] == "update"%>
+  <div class="form-group col-lg-12">
+    <div class="col-lg-12 input_100">
+      <label class="label-form"><%= label_tag I18n.t('.employees.attributes.user')%></label>
+      <%if employee.user.username.present?%>
+        <%= f.text_field :usuario, placeholder:"#{I18n.t('.employees.attributes.user') }", value: employee.user.username %>
+      <%else%>
+        <%= f.text_field :usuario, placeholder:"#{I18n.t('.employees.attributes.user')}" %>
+      <%end%>  
+      <span class="help-block"><%= flash[:errors] %></span>
+    </div>
+  </div>
+<%end%>
+<%if params[:action] == "new" || params[:action] == "create" %>
+  <%if employee.errors[:usuario].any?%>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+      <label class="label-form"><%= label_tag I18n.t('.employees.attributes.user')%></label>
+      <%= f.text_field :usuario, maxlength: '20'%>
+      <% unless flash[:errors].nil? %>
+      <span class="help-block"><%= flash[:errors] %></span>
+      <%end%>  
+      <span class="help-block"></span>
+    </div>
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+        <%= link_to I18n.t('.general.action.cancel'), employees_path,class: "hvr-skew-backward" %>
+      </div>
+      <% if @permiso_crear == true %>
+      <div class="col-lg-3 pull-right">
+        <%= f.submit I18n.t('.employees.actions.accept_user'),class: "hvr-skew-backward",data: {disable_with: "Guardando ..."} %>
+      </div>
+      <% end -%>
+    </div>
+  </div>  
+    <%else%>
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+        <%= link_to I18n.t('.general.action.cancel'), employees_path,class: "hvr-skew-backward" %>
+      </div>
+      <% if @permiso_crear == true %>
+      <div class="col-lg-3 pull-right">
+        <%= f.submit I18n.t('.employees.actions.accept'),class: "hvr-skew-backward",data: {disable_with: "Guardando ..."} %>
+      </div>
+      <% end -%>
+    </div>
+  <%end%>
+<%else%>
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+        <%= link_to I18n.t('.general.action.cancel'), employees_path,class: "hvr-skew-backward" %>
+      </div>
+      <% if @permiso_modificar == true || @permiso_crear == true%> 
+      <div class="col-lg-3 pull-right">
+        <%= f.submit I18n.t('.employees.actions.accept'),class: "hvr-skew-backward",data: {disable_with: "Guardando ..."} %>
+      </div>
+      <% end -%>
+    </div>
+<%end%>
+<% end %>
+</section>
+
+

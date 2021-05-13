@@ -1,0 +1,74 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end %>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.plans') %></h1>
+  <% if @payment_plans.present? %>
+  <div class="pull-right col-lg-12 icon-download">
+  <%= link_to " Exportar a Excel", payment_plans_path(format: "xlsx",fechaDesde: params[:fechaDesde], fechaHasta: params[:fechaHasta]), class:"fa fa-download" %>
+  </div>
+  <% end %>
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @payment_plans.each do |payment_plan| %>
+      <tr>
+        <th>Número orden de compra</th>
+        <th>Código cotización</th>
+        <th><%= raw I18n.t('.general.attribute.identification_document') %></th>
+        <th>Nombre del cliente</th>
+        <th>Modalidad de pago</th>
+        <th>Banco</th>
+        <th>Fecha de pago</th>
+        <th>Estatus</th>
+        <th>Monto total</th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @payment_plans.each do |payment_plan| %>
+      <tr>
+        <td><%= payment_plan.number_plan %></td>
+        <td><%= payment_plan.sale_quotation.quoting_number %></td>
+        <% unless payment_plan.customer.nil? %>
+        <td class="correo"><%= payment_plan.customer.identificacion_usuario %></td>
+        <td><%= payment_plan.customer.nombre_usuario %></td>
+        <%else%>
+        <td><%= payment_plan.business_company.rif %></td>
+        <td><%= payment_plan.business_company.name %></td>
+        <% end %>
+        <td><%= payment_plan.method_payment.name %></td>
+        <%unless payment_plan.bank.nil?%>
+        <td><%= payment_plan.bank.name %></td>
+        <%else%>
+        <td> - </td>
+        <%end%>
+        <td><%= payment_plan.created_at.strftime("%d-%m-%Y") %></td>
+        <td><%= payment_plan.status %></td>
+        <td class="correo"><%= number_with_precision(payment_plan.total_amount.to_f , precision: 2,delimiter:'.',separator: ',') %></td>
+        <td>
+          <% if @permiso_consultar == true %>
+          <%= link_to payment_plan, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+          <% end -%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+<!--   <%= link_to "/sale/quotations",  class: "hvr-skew-backward pull_left"  do %>
+  <%= content_tag(:span, I18n.t(".general.action.return")) %>
+  <% end %> -->
+
+  <% if !@payment_plans.present? %>
+  <div class="alert alert-danger notice col-lg-12 ml-0">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+  </div>
+  <% end %>
+</section>

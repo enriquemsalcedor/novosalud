@@ -1,0 +1,8 @@
+$('.delectRolProfile').bind('ajax:success', function() {
+   $(this).closest('tr').fadeOut();
+   $('#notice').hide();
+});
+
+$("#miselect").change(function() {
+	$('#notice').hide(); 
+});

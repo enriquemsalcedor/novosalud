@@ -1,0 +1,59 @@
+<% unless notice.nil? %>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.vigent_quotations') %></h1>
+  <table class="table table-hover" id="datatable">
+    <thead>
+    <% @quotations.each do |sale_quotation| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.code') %></th>
+        <th><%= raw I18n.t('.general.attribute.identification_document') %></th>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.valid_since') %></th>
+        <th><%= raw I18n.t('.general.attribute.valid_until') %></th>
+        <th><%= raw I18n.t('.general.attribute.status') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+    <% end -%>
+    </thead>
+    <tbody>
+      <% @quotations.each do |sale_quotation| %>
+      <tr>
+        <td><%= sale_quotation.quoting_number %></td>
+          <% unless sale_quotation.user.customer.nil? %>
+            <td><%= sale_quotation.identificacion_usuario %></td>
+            <td><%= sale_quotation.nombre_usuario %></td>
+          <%else%>
+            <td><%= sale_quotation.user.company.rif %></td>
+            <td><%= sale_quotation.user.company.name %></td>
+          <% end %>
+        <td><%= sale_quotation.valid_since.strftime("%d-%m-%Y") %></td>
+        <td><%= sale_quotation.valid_until.strftime("%d-%m-%Y") %></td>
+        <td><%= sale_quotation.status %></td>
+        <td>
+        <% if @permiso_consultar == true%>
+          <%= link_to sale_quotation, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+        <% end -%>
+        <% if @permiso_modificar == true %>
+          <%= link_to edit_sale_quotation_path(sale_quotation), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+          <% end %>
+        <% end -%>
+        </td>
+      </tr>
+        <% end %>
+    </tbody>
+  </table>
+  <% if !@quotations.present? %>
+  <p>No se han encontrado resultados.</p>
+  <% end %>
+
+</section>

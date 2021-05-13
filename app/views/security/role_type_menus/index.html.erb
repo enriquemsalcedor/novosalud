@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Security Role Type Menus</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Security role type</th>
+      <th>Security role menu</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @security_role_type_menus.each do |security_role_type_menu| %>
+      <tr>
+        <td><%= security_role_type_menu.security_role_type %></td>
+        <td><%= security_role_type_menu.security_role_menu %></td>
+        <td><%= link_to 'Show', security_role_type_menu %></td>
+        <td><%= link_to 'Edit', edit_security_role_type_menu_path(security_role_type_menu) %></td>
+        <td><%= link_to 'Destroy', security_role_type_menu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Security Role Type Menu', new_security_role_type_menu_path %>

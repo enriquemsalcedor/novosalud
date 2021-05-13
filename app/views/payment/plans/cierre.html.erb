@@ -1,0 +1,157 @@
+<% unless @noticia.nil? %>
+<div class="alert alert-danger notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p  id="notice margin_left_none"><%= @noticia %></p>
+</div>
+<% end -%>
+<div class="col-lg-12 text-center">
+
+  <h1 class="space-title">Cierre de Caja <%= unless @payment_plans.nil? 
+    "del #{$fecha.strftime("%d-%m-%Y")}"  end %></h1>
+  </div>
+  <form>
+    <section>
+      <div class="col-lg-12 col-sm-12 col-md-12 form-group flex-search pl-0">
+        <div class="col-lg-5  col-sm-5 pl-0">
+
+          <label class="label-form col-lg-2 col-sm-2 col-md-2 center-v mt-0 pl-0 pr-0 text-right">Fecha:</label>
+          <div class="col-lg-10 col-md-10 col-sm-10 pl-0 pr-0 ">
+            <div class="input-daterange calendar col-lg-8- col-md-8 col-sm-8 pl-0 ml-0">
+              <input type="text"  name="fecha"   <%= @fecha %> />
+            </div>
+            <div class="icon-fecha"><span class="glyphicon glyphicon-calendar icon"></span></div>
+          </div>
+        </div>
+
+        <div class="col-lg-2  col-sm-2">
+          <div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 pull-right">
+            <button class="hvr-skew-backward" type="submit" data-disable-with="Buscando ..."} >Buscar</button>
+          </div>  
+        </div>
+      </div>
+    </section>
+  </form>
+  <%unless @payment_plans.nil? %>
+  <div class="row">
+    <div class="col-lg-12 pl-0">
+      <h4>Detalle de Ventas</h4>
+    </div>
+    <div class="row">
+      <div class="col-lg-12 pl-0">
+        <div class="col-lg-6">
+          <p><strong>Fecha: </strong><%= $fecha.strftime("%d-%m-%Y")%>
+          </p>
+        </div>
+        <div class="text-right col-lg-6 pr-0">Generar Cierre:
+          <%= link_to "PDF",  payment_plans_cierre_path(format: "pdf",fecha: params[:fecha]) , :target => "_blank" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12 pl-0">
+      <table class="table table-hover reporte table1">
+        <thead>
+          <tr>
+            <th class="col-lg-8"><strong>Modalidad</strong></th>
+            <th><strong>Cantidad</strong></th>
+            <th><strong>Monto Bs.</strong></th>
+          </tr>
+        </thead>
+        <tbody>
+         <% @method_payment.each do |method_payment| %>
+         <tr>
+           <td class="col-lg-8"><%= method_payment.name %></td>
+           <td class="text-right"><%= method_payment.count_planes($fecha) %> </td>
+           <td class="text-right"><%= (number_with_precision(method_payment.total_montos($fecha),  precision: 2,delimiter:'.',separator: ',') || 0) %> </td>
+         </tr>
+
+         <%end%>
+
+       </tbody>
+      </table>
+    </div>
+  </div>
+ <hr class="hr">  
+ <div class="col-lg-12 text-right pr-0">
+  <strong>Total Ventas: <span class="coin"><%= (number_with_precision(@total_general,  precision: 2,delimiter:'.',separator: ',') || 0)%></span> </strong>
+</div>
+<div class="table-report">
+  <h4>Transacciones del día</h4>
+  <table  class="table table-hover reporte table2">
+    <thead>
+      <tr>
+        <th><strong>N° orden de compra</strong></th>
+        <th><strong>Cédula/Rif</strong></th>
+        <th><strong>Titular de la orden de compra</strong></th>
+        <th><strong> Modalidad de Pago</strong></th>
+        <th><strong>Monto Total</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payment_plans.each do |payment_plan| %>
+      <tr>
+        <td>
+          <%= payment_plan.number_plan %>
+        </td>
+        <% unless payment_plan.customer.nil? %>
+        <td>
+          <%= payment_plan.customer.identificacion_usuario %>
+        </td>
+        <td>
+          <%= payment_plan.customer.nombre_usuario %>
+        </td>
+        <%else%>
+        <td>
+          <%= payment_plan.business_company.rif %>
+        </td>
+        <td>
+          <%= payment_plan.business_company.name %>
+        </td>
+        <%end%>
+        <td>
+          <%= payment_plan.method_payment.name %>
+        </td>
+        <td>
+          <%=(number_with_precision(payment_plan.total_amount,  precision: 2,delimiter:'.',separator: ',') || 0)  %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr class="hr">  
+  <div class="col-lg-12 text-right pr-0">
+    <strong>Total Transacciones del dia: <span class="coin"><%= (number_with_precision(@total_general,  precision: 2,delimiter:'.',separator: ',') || 0)%></span> </strong>
+  </div>
+  <h4>Productos Vendidos</h4>
+  <table class="table table-hover reporte table3">
+    <thead>
+      <tr>
+        <th><strong>N° de orden de compra</strong></th>
+        <th><strong>Producto</strong></th>
+        <th><strong>Cantidad</strong></th>
+        <th><strong>Precio Unitario</strong></th>
+        <th><strong>Sub Total</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% @buscar_precio.each do |payment_plan| %>
+      <% payment_plan.payment_plan.sale_quotation.sale_product_quotations.each do |product| %>
+      <% if payment_plan.product_product_id == product.product_product_id %>
+        <tr>
+          <td><%= payment_plan.payment_plan.number_plan %></td>
+          <td><%= payment_plan.product_product.armar_nombre%></td>
+          <td><%= product.quantity %></td>
+          <td><%= (number_with_precision(payment_plan.price_contracted, precision: 2,delimiter:'.',separator: ',') || 0) %> </td>
+          <td><%= (number_with_precision(payment_plan.price_contracted * product.quantity, precision: 2,delimiter:'.',separator: ',') || 0) %> </td>       
+        </tr>
+      <%end%>  
+      <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+<hr class="hr"> 
+<div class="col-lg-12 text-right pr-0">
+  <strong>Total Productos Vendidos: <span class="coin"><%= (number_with_precision(@total_general,  precision: 2,delimiter:'.',separator: ',') || 0)%></span> </strong>
+</div>
+<%end%>

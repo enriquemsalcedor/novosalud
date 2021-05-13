@@ -1,0 +1,172 @@
+<p id="notice"><%= notice %></p>
+<div class="col-lg-11 col-lg-offset-1 col-sm-10 col-sm-offset-3 col-md-8 col-md-offset-4">
+	<%if $empleado == "externo"%>
+	<h1 class="space-title"><%= raw I18n.t('.employees.actions.show_employee_clinic') %></h1>
+	<%else%>
+	<h1 class="space-title"><%= raw I18n.t('.employees.actions.show_employee') %></h1>
+	<%end%>
+</div>
+<div class="col-lg-10">
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.first_name') %>  </strong>
+		</div>	
+		<div class="col-lg-10 rdown">
+
+			<div class="col-lg-10 ">
+				<%= @employee.first_name %> <%= @employee.second_name %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12"> 
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.surname') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @employee.surname %> <%= @employee.second_surname %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.identification_document') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @employee.type_identification %> - <%= @employee.identification_document %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.email') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @employee.email %>
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.position') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @employee.position.name %>
+			</div>
+		</div>
+	</div>
+	<%unless @employee.asignar_username_con_opciones.nil?%>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.user') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @employee.user.username %>
+			</div>
+		</div>
+	</div>
+	<%end%>
+	<% unless $empleado == "externo"%>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= raw I18n.t ('.employees.attributes.security_profiles_id') %>  </strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 rdown">
+			<div class="col-lg-10 ">
+				<%= @employee.security_profile.name %>
+			</div>
+		</div>
+	</div>
+	<%end%>
+	<%if @employee.status == "Inactivo" && $motivo.nil? %>
+	<%= form_tag(controller: "employees", action: "habilitar", method: "post") do %>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= label_tag I18n.t('.employees.attributes.motive')  %></strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 ">
+			<div class="col-lg-10 input_100 form-group">
+				<%= text_field_tag :motive%> 
+				<% unless flash[:errors].nil? %>
+				<span class="help-block1"><%= flash[:errors] %></span>
+				<%end%>	  
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 form-group">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+			<% if $empleado == "interno" %>
+			<%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.employee.enable'),disable_with: "Guardando ..."}%>
+			<%= link_to I18n.t('.general.action.cancel'), employees_path, class: "hvr-skew-backward"  %>
+			<% else %>
+			<%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.employee.enable_clinic'),disable_with: "Guardando ..."}%>
+			<%= link_to I18n.t('.general.action.cancel'), employees_path, class: "hvr-skew-backward"  %>
+			<% end %>
+
+		</div>
+	</div>
+	<%end%>
+	<%elsif @employee.status == "Activo" && $motivo.nil? %>
+	<%= form_tag(controller: "employees", action: "inhabilitar", method: "post") do %>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= label_tag I18n.t('.employees.attributes.motive')  %></strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 ">
+			<div class="col-lg-10 input_100 form-group">
+				<%= text_field_tag :motive %> 
+				<% unless flash[:errors].nil? %>
+				<span class="help-block1"><%= flash[:errors] %></span>
+				<%end%>   
+			</div>
+		</div>
+	</div>
+	<div class="col-lg-12 form-group">
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+			<% if $empleado == "interno" %>
+				<%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.employee.disable'), disable_with: "Guardando ..."} %>
+				<%= link_to I18n.t('.general.action.cancel'), employees_path, class: "hvr-skew-backward"  %>
+			<%else%>
+				<%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.employee.disable_clinic'), disable_with: "Guardando ..."} %>
+				<%= link_to I18n.t('.general.action.cancel'), employees_path, class: "hvr-skew-backward"  %>
+			<%end%>
+		</div>
+	</div>
+	<%end%>
+	<%elsif $motivo == "eliminar" %>
+	<%= form_tag(controller: "employees", action: "eliminar_logico", method: "post") do %>
+	<div class="col-lg-12">
+		<div class="col-lg-2 col-xs-5 text-right">
+			<strong><%= label_tag I18n.t('.employees.attributes.motive')  %></strong>
+		</div>
+		<div class="col-lg-10 col-xs-7 ">
+			<div class="col-lg-10 input_100 form-group">
+				<%= text_field_tag :motive %> 
+				<% unless flash[:errors].nil? %>
+				<span class="help-block1"><%= flash[:errors] %></span>
+				<%end%>	
+			</div> 
+		</div>
+	</div>
+	<div class="col-lg-12 form-group">
+		<%if $empleado == "interno"%>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+			<%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.employee.delete'), disable_with: "Guardando ..."} %>
+			<%= link_to I18n.t('.general.action.cancel'), employees_path, class: "hvr-skew-backward"  %>
+		</div>
+		<%else%>
+		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">
+			<%= submit_tag I18n.t('.employees.actions.accept'),class: "hvr-skew-backward", data: {confirm: I18n.t('.general.action.question.employee.delete_clinic'), disable_with: "Guardando ..."} %>
+			<%= link_to I18n.t('.general.action.cancel'), employees_path, class: "hvr-skew-backward"  %>
+		</div>
+		<%end%>
+	</div>
+	<%end%> 
+	<%end%>	
+</div>
+
+

@@ -1,0 +1,7 @@
+$('.deleteRoleTypeMenu').bind('ajax:success', function() {
+   $(this).closest('li').fadeOut();
+   
+});
+$('#checklist').append('<%= j render @role_type %>');
+
+

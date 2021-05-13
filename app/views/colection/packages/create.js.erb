@@ -1,0 +1,42 @@
+<% if @colection_package.verificar_paquete_nuevo== false %>
+  $('#divAceptarProduct').toggle();
+  $('#colectionPackageProduct').toggle();
+  $('#divPackageProduct').html('<%= j render "colection/package_products/form" %>');
+  $('#divEditPackageProduct').html('<%= j render "colection/package_products/form"  %>');
+  $('#colection_package_description').prop('disabled', true);
+  $('#colection_package_total_amount').prop('disabled', true);
+  $('#colection_package_valid_since').prop('disabled', true);
+  $('#colection_package_category').prop('disabled', true);
+  document.getElementById("colection_package_valid_until_3i").disabled = true;
+  document.getElementById("colection_package_valid_until_2i").disabled = true;
+  document.getElementById("colection_package_valid_until_1i").disabled = true;
+  document.getElementById("colection_package_valid_since_3i").disabled = true;
+  document.getElementById("colection_package_valid_since_2i").disabled = true;
+  document.getElementById("colection_package_valid_since_1i").disabled = true;
+  $('#btncpackage').removeClass('disabled');
+<%else%>
+  <% if @colection_package.cambio_categoria =="1"%>
+    $.get('destroy_package_product');
+    $('#colection_package_category').prop('disabled', true);
+    $('#divPackageProduct').html('<%= j render "colection/package_products/form" %>');
+    $('#divEditPackageProduct').html('<%= j render "colection/package_products/form"  %>');
+    $('#btncpackage').removeClass('disabled');
+  <%else%>
+    $('#divAceptarProduct').toggle();
+    $('#colectionPackageProduct').toggle();
+    $('#divEditPackageProduct').html('<%= j render "colection/package_products/form"  %>');
+    $('#packages_product').append('<%= j render @package_products %>');
+    $('#colection_package_description').prop('disabled', true);
+    $('#colection_package_total_amount').prop('disabled', true);
+    $('#colection_package_valid_since').prop('disabled', true);
+    document.getElementById("colection_package_valid_until_3i").disabled = true;
+    document.getElementById("colection_package_valid_until_2i").disabled = true;
+    document.getElementById("colection_package_valid_until_1i").disabled = true;
+    document.getElementById("colection_package_valid_since_3i").disabled = true;
+    document.getElementById("colection_package_valid_since_2i").disabled = true;
+    document.getElementById("colection_package_valid_since_1i").disabled = true;
+    $('#btncpackage').removeClass('disabled');
+    $('#colection_package_category').prop('disabled', true);
+    $('#divPackageProduct').html('<%= j render "colection/package_products/form" %>');
+  <%end%>
+<%end%>

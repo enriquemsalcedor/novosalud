@@ -1,0 +1,66 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.banks') %></h1>
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <%- @banks.each do |bank| -%>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.created_at') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <%- end -%>
+    </thead>
+    <tbody>
+      <% @banks.each do |bank| %>
+      <tr>
+        <td><%= bank.name %></td>
+        <td><%= bank.created_at.strftime("%d-%m-%Y") %></td>
+        <td>
+          <% if @permiso_consultar == true %>
+          <%= link_to bank, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+          <% end -%>
+          <% if @permiso_modificar == true %>
+          <%= link_to edit_bank_path(bank), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+          <% end %>
+          <% end -%>
+          <% if @permiso_activar == true %>
+          <% if bank.may_inhabilitar? %>
+          <%= link_to "/banks/#{bank.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.bank.disable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+          <% end %>
+          <%else%>
+          <%= link_to "/banks/#{bank.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.bank.enable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Activar"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+          <% end %>
+          <% end %>
+          <%end%>
+          <% end -%>
+        </td> 
+      </tr>
+    </tbody>
+  </table>
+  <% if @permiso_crear == true %>
+  <%= link_to new_bank_path,  class: "hvr-skew-backward"  do %>
+  <%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.bank')) %>
+  <% end %>
+  <% end -%>
+  <% if !@banks.present? %>
+  <div class="alert alert-danger notice col-lg-12 ml-0">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+  </div>
+  <% end %>
+</section>

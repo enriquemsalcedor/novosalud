@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="col-lg-12">
+    <h1 class="space-title">Mis ordenes de compra</h1>
+  </div>
+</div>
+<% unless @plan.empty? %>
+<% @plan.each do |plans|  %>
+<section class="table_custom">
+  <article>
+    <h2>Número de la orden de compra <%= plans.number_plan %></h2>
+    <h2>Estatus de la orden de compra <%= plans.status %></h2>
+  </article>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Producto</th>
+        <th>Certificado</th>
+        <th>Estatus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% plans.payment_contracted_products.each do |product_contracted| %>
+      <tr>
+        <td><%= product_contracted.product_product.armar_nombre %></td>
+        <td><% unless product_contracted.status == 'Usado' %><%= product_contracted.code %><% end %></td>
+        <td><%= product_contracted.status%></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+<% end %>
+<% end %>
+
+<% unless @plan.present? %>
+<div class="alert alert-danger notice">
+  <p id="notice margin_left_none">No se han encontrado resultados.</p>
+</div>
+</div>
+<% end %>
+
+<%= will_paginate @plan %>

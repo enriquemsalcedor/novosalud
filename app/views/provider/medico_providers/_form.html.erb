@@ -1,0 +1,18 @@
+<%= form_for @provider_medico_provider, remote: true, html:{role: :form, 'data-model' =>
+  'provider_medico_provider'} do |f| %>
+ <div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+  <label class="label-form">Proveedor</label>
+     <%= collection_select(:provider_medico_provider, :provider_provider_id, Provider::Provider.where(status: 'Activo').order(:name), :id, :name,
+     prompt: true,:class => "miselect") %>
+     <span class="help-block"></span>
+   </div>
+ </div>
+ <div class="col-lg-12 form-group">
+ <% if @permiso_modificar == true || @permiso_crear == true%> 
+    <div class=" col-lg-12 pull-right">
+      <%= f.submit :Agregar , :id=> 'btnAceptarMedicoProvider', data: {disable_with: "Guardando ..."}, class: "hvr-skew-backward" %>
+    </div>
+  <% end -%>
+</div>
+<% end %>

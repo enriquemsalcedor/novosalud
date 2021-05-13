@@ -1,0 +1,4 @@
+<tr>
+  <td><%= medico_provider.provider_provider.name %></td>
+  <td><% if @permiso_eliminar == true %><%= link_to 'Eliminar', medico_provider, remote: true, :class => 'delectMedicoProvider', method: :delete, data: { confirm: '¿Desea Eliminar este Proveedor para este médico?' } %> <% end -%></td>
+</tr> 

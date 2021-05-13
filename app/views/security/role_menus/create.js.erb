@@ -1,0 +1,19 @@
+$('#btnAceptarRoleMenu').success();
+var  security_menu_id= "<%= @role_menu.security_menu_id %>";
+var existe;
+
+$('#roles_menu tr').each(function(index, element){
+	var Referencia = $(element).find("td").eq(0).html();
+	var id_tr = $(element).attr("id");
+	if (id_tr==security_menu_id) {
+		existe=true;
+	}
+});
+if (!existe) 
+{
+	$('#roles_menu').append('<%= j render @role_menu %>')
+}
+$('select option').prop('selected', function() {
+	return this.defaultSelected; });
+$('#permition-modal').modal('hide');
+existe=false;

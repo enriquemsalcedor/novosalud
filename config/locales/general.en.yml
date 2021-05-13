@@ -1,0 +1,244 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+en:
+  general:
+    connectors:
+      of: "de"
+      for: "para"
+    attribute:
+      number: "Número"
+      rif: "Rif"
+      image: "Imagen"
+      code: "Código"
+      name: "Nombre"
+      surname: "Apellido"
+      first_name: "Primer nombre"
+      last_name: "Segundo Nombre"
+      action: "Acción"
+      phone: "Teléfono"
+      created_by: "Creado por"
+      total_amount: "Cantidad total"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      phone: "Teléfono"
+      description: "Descripción"
+      created_at: "Fecha de creación"
+      valid_since: "Válido desde"
+      valid_until: "Válido hasta"
+      status: "Estatus"
+      health: "Salud"
+      see_more: "See more"
+      new_label: "NEW"
+    attributes:
+      numbers: "Números"
+      names: "Nombres"
+      surnames: "Apellidos"
+      see: "Ver"
+      editing: "Editar"
+      enable: "Activar"
+      disable: "Desactivar"
+      actions: "Acciones"
+      quotes: "Cotizaciones"
+      overdue: "Vencidas"
+      valid: "Vigentes"
+    model:
+      plan: "Orden de compra"
+      login: "Inicio de Sesión"
+      role: "Rol"
+      role_type: "Tipo de Rol"
+      profile: "Perfil"
+      bank: "Banco"
+      companie: "Compañia"
+      quotation: "Cotización"
+      beneficiary: "Beneficiario"
+      employee: "Empleado"
+      employee_clinic: "Empleado clínica"
+      doctor: "Médico"
+      person: "Persona"
+      package: "Paquete"
+      specialty: "Especialidad"
+      organization: "Organización"
+      provider: "Proveedor"
+      motive: "Motivo"
+      customer: "Cliente"
+      method_payment: "Forma de Pago"
+      product: "Producto"
+      product_type: "Tipo de Producto"
+      provider_type: "Tipo de Proveedor"
+    models:
+      plans: "Órdenes de compra"
+      roles: "Roles"
+      roles_types: "Tipos de Roles"
+      profiles: "Perfiles"
+      companies: "Compañias"
+      banks: "Bancos"
+      quotations: "Cotizaciones"
+      beneficiaries: "Beneficiarios"
+      employees: "Empleados"
+      employees_clinic: "Empleados clínicas"
+      doctors: "Médicos"
+      persons: "Personas"
+      packages: "Paquetes"
+      specialities: "Especialidades"
+      providers: "Proveedores"
+      motives: "Motivos"
+      customers: "Clientes"
+      methods_payment: "Formas de Pago"
+      products: "Productos"
+      products_types: "Tipos de Productos"
+      providers_types: "Tipos de Proveedores"
+    action:
+      see: "Ver"
+      new: "Nuevo"
+      pay: "Pagar"
+      examine: "Examine"
+      test: "test"
+      back: "Atrás"
+      register: "Registrar"
+      return: "Regresar"
+      edit: "Modificar"
+      enable: "Activar"
+      disable: "Desactivar"
+      reschedule: "Reagendar"
+      cancel: "Cancel"
+      annul: "Anular"
+      accept: "Aceptar"
+      question:
+        profile:
+          enable: "¿Desea activar este perfíl?"
+          disable: "¿Desea desactivar este perfíl?"
+        role:
+          enable: "¿Desea activar este rol?"
+          disable: "¿Desea desactivar este rol?"
+        role_type:
+          enable: "¿Desea activar este tipo de rol?"
+          disable: "¿Desea desactivar este tipo de rol?"
+        specialty:
+          enable: "¿Desea activar esta especialidad?"
+          disable: "¿Desea desactivar esta especialidad?"
+        package:
+          enable: "¿Desea activar este paquete?"
+          disable: "¿Desea desactivar este paquete?"
+        product:
+          enable: "¿Desea activar este producto?"
+          disable: "¿Desea desactivar este producto?"
+        product_type:
+          enable: "¿Desea activar este tipo de producto?"
+          disable: "¿Desea desactivar este tipo de producto?"
+        doctor:
+          enable: "¿Desea activar este médico?"
+          disable: "¿Desea desactivar este médico?"
+        role_type:
+          enable: "¿Desea activar este típo de rol?"
+          disable: "¿Desea desactivar este típo de rol?"
+        method_payment:
+          enable: "¿Desea activar esta forma de pago?"
+          disable: "¿Desea desactivar esta forma de pago?"
+        bank:
+          enable: "¿Desea activar este banco?"
+          disable: "¿Desea desactivar este banco?"
+        employee:
+          enable: "¿Desea activar este empleado?"
+          disable: "¿Desea desactivar este empleado?"
+        customer:
+          enable: "¿Desea activar este cliente?"
+          disable: "¿Desea desactivar este cliente?"
+        beneficiary:
+          enable: "¿Desea activar este beneficiario?"
+          disable: "¿Desea desactivar este beneficiario?"
+        provider:
+          enable: "¿Desea activar este proveedor?"
+          disable: "¿Desea desactivar este proveedor?"
+        provider_type:
+          enable: "¿Desea activar este tipo de proveedor?"
+          disable: "¿Desea desactivar este tipo de proveedor?"
+        motive:
+          enable: "¿Desea activar este motivo?"
+          disable: "¿Desea desactivar este motivo?"
+        quotation:
+          enable: "¿Desea activar esta cotización?"
+          disable: "¿Desea desactivar esta cotización?"
+          delete: "¿Desea eliminar esta cotización?"
+        service:
+          reschedule: "¿Desea reagendar el servicio?"
+          cancel: "¿Desea cancelar el servicio?"
+          annul: "¿Desea anular el servicio?"
+      response:
+        profile:
+          enable: "Se activó el perfíl con éxito"
+          disable: "Se desactivó el perfíl con éxito"
+        role:
+          enable: "Se activó el rol con éxito"
+          disable: "Se desactivó el rol con éxito"
+        role_type:
+          enable: "Se activó el tipo de rol con éxito"
+          disable: "Se desactivó el tipo de rol con éxito"
+        specialty:
+          enable: "Se activó la especialidad con éxito"
+          disable: "Se desactivó la especialidad con éxito"
+        package:
+          enable: "Se activó el paquete con éxito"
+          disable: "Se desactivó el paquete con éxito"
+        product:
+          enable: "Se activó el producto con éxito"
+          disable: "Se desactivó el producto con éxito"
+        product_type:
+          enable: "Se activó el tipo de producto con éxito"
+          disable: "Se desactivó el tipo de producto con éxito"
+        doctor:
+          enable: "Se activó el médico con éxito"
+          disable: "Se desactivó el médico con éxito"
+        role_type:
+          enable: "Se activó el típo de rol con éxito"
+          disable: "Se desactivó el típo de rol con éxito"
+        method_payment:
+          enable: "Se activó la forma de pago con éxito"
+          disable: "Se desactivó la forma de pago con éxito"
+        bank:
+          enable: "Se activó el banco con éxito"
+          disable: "Se desactivó el banco con éxito"
+        employee:
+          enable: "Se activó el empleado con éxito"
+          disable: "Se desactivó el empleado con éxito"
+        customer:
+          enable: "Se activó el cliente con éxito"
+          disable: "Se desactivó el cliente con éxito"
+        beneficiary:
+          enable: "Se activó el beneficiario con éxito"
+          disable: "Se desactivó el beneficiario con éxito"
+        provider:
+          enable: "Se activó el proveedor con éxito"
+          disable: "Se desactivó el proveedor con éxito"
+        provider_type:
+          enable: "Se activó el tipo de proveedor con éxito"
+          disable: "Se desactivó el tipo de proveedor con éxito"
+        motive:
+          enable: "Se activó el motivo con éxito"
+          disable: "Se desactivó el motivo con éxito"
+        quotation:
+          enable: "Se activó la cotización con éxito"
+          disable: "Se desactivó la cotización con éxito"
+          delete: "Se elimino la cotización con éxito"
+        service:
+          reschedule: "Se reagendó el servicio con éxito"
+          cancel: "Se canceló el servicio con éxito"
+          annul: "Se anuló el servicio con éxito"
+          

@@ -1,0 +1,39 @@
+<div id="permition-modal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content col-lg-12 modal_padding">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"><%= title %></h4>
+      </div>
+      <div class="col-lg-6">
+        <h2>Permisos actuales</h2>
+        <% unless @security_role_type_menu_usuario[0].nil? %>
+        <ul>
+          <% @security_role_type_menu_usuario[0].security_role_type_menus.each do |role_types| %>
+          <li>
+            <%= h role_types.security_role_type.name -%>
+            <%= link_to 'Eliminar', role_types, remote: true, :class => 'deleteRoleTypeMenu', method: :delete, data: { confirm: '¿Desea eliminar este permiso para este menú?' } %>
+          </li>
+          <%end %>
+        </ul>
+        <% end %>
+      </div>
+      <div class="col-lg-6">
+      <h2>Permisos a elegir</h2>
+        <%= form_for @security_role_type_menu,remote: true do |f| %>
+        <ul id="checklist">
+          <%= render @security_role_type %>
+        </ul>
+        <br>
+          <%= f.hidden_field :id_menu, value: params[:id_menu], hidden: false %>
+
+          <%= f.hidden_field :id_role, value: params[:id_role], hidden: false %>
+
+        <div class="actions">
+          <%= f.submit "Registrar permisos", id: 'btnAceptarRoleMenu',class: "hvr-skew-backward" %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

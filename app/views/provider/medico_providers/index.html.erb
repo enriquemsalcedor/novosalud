@@ -1,0 +1,32 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<section class="container table_flex_five">
+  <h1>Provider Medico Providers</h1>
+  <table id="datatable">
+    <thead>
+      <% @provider_medico_providers.each do |provider_medico_provider| %>
+      <tr>
+        <th>Provider provider</th>
+        <th>Provider medico</th>
+        <th colspan="3"></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @provider_medico_providers.each do |provider_medico_provider| %>
+      <tr>
+        <td><%= provider_medico_provider.provider_provider %></td>
+        <td><%= provider_medico_provider.provider_medico %></td>
+        <td><%= link_to 'Show', provider_medico_provider %></td>
+        <td><%= link_to 'Edit', edit_provider_medico_provider_path(provider_medico_provider) %></td>
+        <td><%= link_to 'Destroy', provider_medico_provider, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Provider Medico Provider', new_provider_medico_provider_path %>
+</section>

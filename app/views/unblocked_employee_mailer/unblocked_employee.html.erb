@@ -1,0 +1,11 @@
+<h1>Solicitud de usuario </h1>
+<p>
+	Saludos, Sr(a). <%= @employee.nombre_apellido %><br/>
+	El presente es para notificar que su cuenta ha sido desbloqueada correctamente y su nueva contraseña es la siguiente:</p><br/>
+<p>
+	Contraseña:<%=@employee.user.password%><br/>
+</p>
+<p>  Para verificar la solicitud puede ingresar al sistema a través del siguiente enlace:
+   <%= link_to "Ingresar", admin_url, class: "hvr-skew-backward" %>
+
+</p>

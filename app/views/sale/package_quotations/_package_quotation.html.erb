@@ -1,0 +1,21 @@
+<tr>
+  <td>
+
+ <%= image_tag package_quotation.colection_package.image.url(:medium) %>
+
+  </td>
+  <td>
+     <%= package_quotation.colection_package.description %>
+ <%= link_to 'Eliminar', package_quotation, remote: true, :class => 'deletePackageQuotation', method: :delete, data: { confirm: '¿Desea eliminar este paquete para esta cotizacion?' } %>
+  </td>
+  <td class="coin"><%= number_with_precision(package_quotation.colection_package.total_amount.to_f,precision: 2, delimiter:'.',separator: ',') %></td>
+  <td>
+   <%= select_tag( :quantity,options_for_select(Sale::Quotation::QUANTITY_OPTIONS, package_quotation.quantity ), class: "progress_and_message",
+      data: {
+        remote: true,
+        url: url_for(controller: "sale/package_quotations", action: "actualizar_cantidad", id: package_quotation.id)
+      }
+      )%>
+  </td>
+  <td id="<%= package_quotation.id %>" class="coin"> <%= number_with_precision(package_quotation.monto_pagar.to_f, precision: 2, delimiter:'.',separator: ',') %></td>
+</tr>

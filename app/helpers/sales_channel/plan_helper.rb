@@ -1,0 +1,2 @@
+module SalesChannel::PlanHelper
+end

@@ -1,0 +1,19 @@
+<%= form_for @sale_product_quotation do |f| %>
+<% $productid= params[:id]%>
+<div id="divProductProductProviderId", class="field" >
+	<%= f.text_field :product_product_id, value: @product_providers[0].id %>
+</div>
+
+<div class="cant">
+	<p class="quanti">Cantidad: </p>
+	<%= f.number_field :quantity, min: 1, value: 1, max: 100, class:"item_Quantity", :required => true %>
+</div>
+
+<div class="col-lg-9 col-lg-offset-3 col-md-10 col-md-offset-2 col-sm-12  btn-cart">
+
+	<%= button_tag(type: "submit",  class: "add-to item_add hvr-skew-backward",  data: {disable_with: "Añadiendo ..."} ) do %>
+	<span>Añadir al carrito</span><span  class="glyphicon glyphicon-shopping-cart"></span> 
+	<% end %> 
+
+</div>
+<% end %>

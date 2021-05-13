@@ -1,0 +1,67 @@
+<div>
+  <div id="mensaje"></div>
+  <div class="col-xs-12 col-lg-12 cont-cart-mobile cart-table">
+    <div class="hidden-xs title-header">
+      <div class="col-sm-1 text-left"><strong>Producto</strong></div>
+      <div class="col-sm-5 text-left"><strong>Descripción</strong></div>
+      <div class="col-sm-2 text-left"><strong>Precio unitario</strong></div>
+      <div class="col-sm-2 text-left"><strong>Cantidad</strong></div>
+      <div class="col-sm-2 text-left"><strong>Sub total</strong></div>
+    </div>
+    <% unless @package_quotations.nil? or @product_quotations.nil? %>
+        <%= render @package_quotations %>
+        <%= render @product_quotations %>
+
+        <div class="col-xs-4 col-sm-1 hidden-xs"></div>
+        <div class="col-xs-4 col-sm-7 hidden-xs"></div>
+        <div class="col-xs-4 col-sm-2 mt-1 total"><strong>Total a Pagar:</strong></div>
+        <div class="col-xs-8 col-sm-2 mt-1">
+          <div class="col-xs-12 pl-0 coin monto-total" id="total_cotizacion">
+            <%= number_with_precision(session[:cart].total_cotizacion.to_f, precision: 2,delimiter:'.',separator: ',')  %>
+          </div
+          <div class="col-xs-12 pl-0">
+            <div class="btn-cart">
+              <% if user_signed_in? %>
+                <div id="generarCotizacion">
+                  <!--<%= link_to "Gestionar Compra", "#", id:"cotizar", class: "hvr-skew-backward"%>-->
+                  <%= link_to "Gestionar Compra", "sale/quotations/#{session[:cart].id}/cotizar.js", method: :put, id:"cotizar", class: "hvr-skew-backward"%>
+                </div>
+              <%else%>
+                  <%= link_to "Gestionar Compra", decision_path ,id:"cotizar",class: "hvr-skew-backward"%>
+              <% end %>              
+            </div>
+          </div>
+        </div>        
+    <% end %>
+  </div>
+</div>
+<% if user_signed_in? %>
+  <div  id="transferencia" class="container" style= "display:none;width:100%;">
+    <div class="cont-sesion" >
+      <div class="text-tranference">
+        <h4 align="justify">Usted puede realizar el pago de su cotización dirigiéndose a nuestras oficinas ubicadas en <%= @organization.address%>, junto con el comprobante de su cotización impreso.</h4>
+
+        <h4 align="justify">También puede realizar el pago de su cotización vía transferencia electrónica. ¿Desea realizar el pago vía transferencia?</h4>
+
+        <div class='cont-btn-super' align='center'>
+           <div class='cont-' >
+              <div class="cont-btn">
+                <% unless session[:cart].nil? %>
+                  <%= link_to 'Aceptar',"/#{session[:cart].id}/transference",  method: :get , class: "hvr-skew-backward" %>
+                <%end%>
+                  <%= link_to "Cancelar" ,'/',  class: "hvr-skew-backward",method: :get %>
+                 <% unless session[:cart].nil? %>
+                  <%= link_to "Generar comprobante", "sale/quotations/#{session[:cart].id}/comprobante.pdf", method: :put,  :target => "_blank", id:"comprobante", class: "hvr-skew-backward"%>
+                  <%end%>
+              </div>                 
+           </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+<%end%>  
+
+<script> 
+
+ 
+</script>

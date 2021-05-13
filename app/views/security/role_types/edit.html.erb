@@ -1,0 +1,6 @@
+<h1><%= raw I18n.t('role_types.actions.edit_role_type') %></h1>
+<%= render 'form', security_role_type: @security_role_type %>
+<% if @permiso_consultar == true %>
+  <%= link_to I18n.t('general.action.see'), @security_role_type %>
+<% end -%> |
+<%= link_to I18n.t('general.action.cancel'), security_role_types_path %>

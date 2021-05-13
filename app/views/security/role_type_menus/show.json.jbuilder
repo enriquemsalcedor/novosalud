@@ -1,0 +1,1 @@
+json.partial! "security_role_type_menus/security_role_type_menu", security_role_type_menu: @security_role_type_menu

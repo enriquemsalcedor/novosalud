@@ -1,0 +1,2 @@
+module Provider::ProviderTypesHelper
+end

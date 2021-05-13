@@ -1,0 +1,67 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<div class="container">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.pending_date') %></h1>
+</div>
+<% if !@clinic_clinic_service.present?%>
+<div class="row space-title">
+  <div class="col-lg-12">
+    <div class="alert alert-danger notice">
+      <p id="notice margin_left_none">No se han encontrado resultados.</p>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="pull-right col-lg-12 icon-download">
+  <%= link_to " Exportar a Excel", clinic_pending_date_path(format: "xlsx",fechaDesde: params[:fechaDesde], fechaHasta: params[:fechaHasta]), class:"fa fa-download" %>
+</div>
+<section class="container table_flex_five">
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @clinic_clinic_service.each do |service_service| %>
+      <tr>
+        <th>Beneficiario</th>
+        <th>Cédula de identidad</th>
+        <th>Teléfono de contacto</th>
+        <th>Producto</th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end -%>
+    </thead>
+    
+    <tbody>
+      <% @clinic_clinic_service.each do |service_service| %>
+      <tr>
+        <% unless service_service.beneficiary.nil? %>
+        <td><%= service_service.beneficiary.buscar_nombre_beneficiario%></td>
+        <td><%= service_service.beneficiary.cedula_beneficiario%></td>
+        <td><%= service_service.beneficiary.contacto%></td>
+        <%else%>
+        <td></td>
+        <td></td>
+        <td></td>
+        <%end%>
+        <td><%= service_service.payment_contracted_product.product_product.name %></td>
+        <td>
+          
+          <% if @permiso_atender == true %>
+          <%unless current_user.employee.provider_provider_id.nil?%>
+          <% if service_service.may_atender? %>
+          <%= link_to "/clinic/clinic_service/#{service_service.id}/atender" , method: :put, data: { confirm: I18n.t('.general.action.question.clinic.atention')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Agendar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-calendar"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.atention")) %>
+          <% end %>
+          <%end%>
+          <% end -%>
+          <%end%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+<%end%>

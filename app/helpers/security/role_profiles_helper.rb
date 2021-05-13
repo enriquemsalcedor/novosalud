@@ -1,0 +1,2 @@
+module Security::RoleProfilesHelper
+end

@@ -1,0 +1,2 @@
+module Colection::PackagesHelper
+end

@@ -1,0 +1,163 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <%= wicked_pdf_stylesheet_link_tag "pdf" -%>
+  <%= wicked_pdf_javascript_include_tag "number_pages" %>
+</head>
+<body onload='number_pages'>
+  <div class="col-12">
+    <div class="col-4">
+      <%= image_tag wicked_pdf_asset_base64('logo-web.png') %>
+    </div>
+  </div>
+  
+  <div class="space-total">
+    <div class="col-6 col-offset-3  text-center">
+      <h1 class="titulo text-center">Cierre de Caja del  <%= $fecha.strftime("%d-%m-%Y") %> </h1>
+    </div>
+    <div class="col-3 text-right text">
+      <p><strong>Fecha: </strong><%= Date.today.strftime("%d-%m-%Y") %>
+        <p><strong>Usuario: </strong><%= current_user.username %></p>
+      </p>
+    </div>
+  </div>
+  <div class="col-12 pl-0">
+    <table class="table table-hover table-metodopago">
+      <thead>
+        <tr class="cab-thead">
+          <th><strong>Modalidad</strong></th>
+          <th><strong>Cantidad</strong></th>
+          <th style="text-align:right"><strong>Monto Bs.</strong></th>
+        </tr>
+      </thead>
+      <tbody>
+       <% @method_payment.each do |method_payment| %>
+       <tr>
+         <td><%= method_payment.name %></td>
+
+         <td class="text-right"><%= method_payment.count_planes($fecha) %> </td>
+         <td class="text-right"><%=   number_with_precision(method_payment.total_montos($fecha).to_f, precision: 2,delimiter:'.',separator: ',') %> </td>
+       </tr>
+
+       <%end%>
+
+     </tbody>
+   </table>
+ </div>
+ <hr class="hr">  
+ <div class="col-12">
+  <div class="col-6"></div>
+  <div class="col-6 right">
+    <strong>Total Pagos: <span class="coin"><%= (number_with_precision(@total_general,  precision: 2,delimiter:'.',separator: ',') || 0)%></span> </strong>
+  </div>
+</div>
+<div class="row table-report-pdf">
+  <h4 class="subtitles">Transacciones de Ventas del Día</h4>
+  <table  class="table table-hover table-pdf-ventas">
+    <thead>
+      <tr class="cab-thead">
+        <th><strong>N° orden de compra</strong></th>
+        <th><strong>Cédula/Rif</strong></th>
+        <th><strong>Titular de la orden de compra</strong></th>
+        <th><strong> Modalidad de Pago</strong></th>
+        <th><strong>Monto Total</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @payment_plans.each do |payment_plan| %>
+      <tr>
+        <td class="text-center">
+          <%= payment_plan.number_plan %>
+        </td>
+        <% unless payment_plan.customer.nil? %>
+        <td class="text-center">
+          <%= payment_plan.customer.identificacion_usuario %>
+        </td>
+        <td class="text-center">
+          <%= payment_plan.customer.nombre_usuario %>
+        </td>
+        <%else%>
+        <td class="text-center">
+          <%= payment_plan.business_company.rif %>
+        </td>
+        <td>
+          <%= payment_plan.business_company.name %>
+        </td>
+        <%end%>
+        <td class="text-right">
+          <%= payment_plan.method_payment.name %>
+        </td>
+        <td class="text-right">
+
+          <%= number_with_precision(payment_plan.total_amount.to_f, precision: 2,delimiter:'.',separator: ',')%>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <hr class="hr">  
+  <div class="col-12">
+    <div class="col-6"></div>
+    <div class="col-6 right">
+      <strong>Total Transacciones del día: <span class="coin"><%= (number_with_precision(@total_general,  precision: 2,delimiter:'.',separator: ',') || 0)%></span> </strong>
+    </div>
+  </div>
+  <h4 class="subtitles">Productos Vendidos</h4>
+  <table class="table table-hover table-report-pdf table-pdf-product">
+    <thead>
+      <tr class="cab-thead">
+        <th><strong>N° orden de compra</strong></th>
+        <th><strong>Producto</strong></th>
+        <th><strong>Cantidad</strong></th>
+        <th><strong>Precio Unitario</strong></th>
+        <th><strong>Sub Total</strong></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @buscar_precio.each do |payment_plan| %>
+      <% payment_plan.payment_plan.sale_quotation.sale_product_quotations.each do |product| %>
+      <% if payment_plan.product_product_id == product.product_product_id %>
+        <tr>
+          <td><%= payment_plan.payment_plan.number_plan %></td>
+          <td><%= payment_plan.product_product.armar_nombre%></td>
+          <td><%= product.quantity %></td>
+          <td><%= (number_with_precision(payment_plan.price_contracted, precision: 2,delimiter:'.',separator: ',') || 0) %> </td>
+          <td><%= (number_with_precision(payment_plan.price_contracted * product.quantity, precision: 2,delimiter:'.',separator: ',') || 0) %> </td>       
+        </tr>
+      <%end%>  
+      <%end%>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+<hr class="hr">  
+<div class="col-12 salto">
+  <div class="col-6"></div>
+  <div class="col-6 right">
+    <strong>Total Productos Vendidos: <span class="coin"><%= (number_with_precision(@total_general,  precision: 2,delimiter:'.',separator: ',') || 0)%></span> </strong>
+  </div>
+</div>
+<div class="final obs">
+  <hr class="hr t">
+  <div class="text-center">Diferencia o Sobrante en Caja Bs.</div>
+  <hr class="hr t">
+  <p class="text obs">Observaciones:</p>
+
+  <hr class="hr t s">
+  <hr class="hr t s">
+  <hr class="hr t s">
+  <hr class="hr t s">
+  <div class="col-12 space-8x">
+
+    <div class="col-6 text-center">
+      <hr class="hr t s col-6 col-offset-3">
+      <p class="col-6 col-offset-3  text-center">Caja</p>
+    </div>
+    <div class="col-6 text-center"><hr class="hr t s  col-6 col-offset-3"><p class="col-6 col-offset-3 text-center">Administradora</p></div>
+  </div>
+</div>
+
+</body>
+</html>
+

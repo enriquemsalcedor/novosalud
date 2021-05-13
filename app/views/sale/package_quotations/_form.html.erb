@@ -1,0 +1,10 @@
+<%= form_for @sale_package_quotation do |f| %>
+<% $paqueteid= params[:id]%>
+<div class="cant ">
+  <p >Cantidad: </p>
+  <%= f.number_field :quantity, min: 1, value: 1, class:"item_Quantity" %>
+</div>
+<div class="col-lg-12 btn-cart">
+  <%= f.submit "Añadir", class: "add-to item_add hvr-skew-backward", data: {disable_with: "Añadiendo ..."} %>
+</div>
+<% end %>

@@ -1,0 +1,50 @@
+<%if session[:layout] == 'admin'%>
+<% unless flash[:errors].nil? %>
+<div class="alert alert-danger notice">
+	<button type="button" class="close" data-dismiss="alert">&times;</button>   
+	<p id="notice margin_left_none"><%= flash[:errors] %></p>
+</div>
+<%end%>
+<div class="container login-container">
+	<div class="col-lg-5 col-sm-6 col-md-6 col-xs-12 cont-sesion " >
+		<h3>Solicitud de desbloqueo de cuenta</h3>
+		<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+		<div class="login-mail">
+			<%= f.label I18n.t ('.devise.new.email') %>
+			<%= f.email_field :email, autofocus: true, placeholder:"ejemplo@xxx.com"%>
+			<i class="glyphicon glyphicon-envelope top-icon-pass"></i>
+
+		</div>
+		<div class="col-lg-12 col-sm-12 col-md-12 col-xs-12 pr-0">
+			<div class="actions pull-left form-group">
+				<%= link_to "Cancelar", admin_path , class:"hvr-skew-backward"%>
+				
+			</div> 
+			<div class='cont- right'>
+				<%= f.submit "Aceptar", data: {disable_with: "Enviando ..."}, class:"hvr-skew-backward" %>
+			</div>
+		</div>
+		<br>
+	</div>
+</div>
+<% end %>
+
+
+<%else%>
+<h2>Reenviar instrucciones de desbloqueo fgsdfg </h2>
+<%= form_for(resource, as: resource_name, url: unlock_path(resource_name), html: { method: :post }) do |f| %>
+<%= devise_error_messages! %>
+
+<div class="field">
+	<%= f.label I18n.t ('.devise.new.email') %>
+	<%= f.email_field :email, autofocus: true %>
+</div>
+
+<div class="actions">
+	<%= f.submit "Aceptar", data: {disable_with: "Enviando ..."} %>
+	<%= link_to "Cancelar", admin_path%>
+</div>
+<% end %>
+<%= render "devise/shared/links" %>
+<%end%>	
+

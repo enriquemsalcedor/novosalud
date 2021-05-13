@@ -1,0 +1,77 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<div>
+</div>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.quotations') %></h1>
+
+    <% if @quotations.present? %>
+  <div class="block">
+  <%= link_to I18n.t('.general.action.export_to_excel'), {controller: "quotations",action: "reporte", format: "xlsx"}, class: "blockr fa fa-download"%>
+  <%= link_to I18n.t('.general.action.transference_payment'), {controller: "quotations",action: "index", format: "xlsx"},class: "blockl fa fa-download"%>
+  </div>
+  <%end%>
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @quotations.each do |sale_quotation| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.code') %></th>
+        <th><%= raw I18n.t('.general.attribute.identification_document') %></th>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.valid_since') %></th>
+        <th><%= raw I18n.t('.general.attribute.valid_until') %></th>
+        <th><%= raw I18n.t('.general.attribute.status') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end -%>
+    </thead>
+    <tbody>
+      <tr>
+      <% @quotations.each do |sale_quotation| %>
+       <% @payment_transference = Payment::Transference.find_by(sale_quotation_id: sale_quotation.id) %>
+       <%if @payment_transference.nil?%>
+        <td><%= sale_quotation.quoting_number %></td>
+       <%else%>
+        <td style= "color: red;" ><%= sale_quotation.quoting_number %></td>
+       <%end%>
+       <% unless sale_quotation.user.customer.nil? %>
+         <td><%= sale_quotation.identificacion_usuario %></td>
+         <td><%= sale_quotation.nombre_usuario %></td>
+       <%else%>
+         <td><%= sale_quotation.user.company.rif %></td>
+         <td><%= sale_quotation.user.company.name %></td>
+       <% end %>
+       <td><%= sale_quotation.valid_since.strftime("%d-%m-%Y") %></td>
+       <td><%= sale_quotation.valid_until.strftime("%d-%m-%Y") %></td>
+       <td><%= sale_quotation.status %></td>
+       <td>
+       <% if @permiso_pagar == true || @permiso_consultar %>
+          <%= link_to sale_quotation, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver"  do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+        <% end -%>
+        <% if @permiso_pagar== true %>
+          <% if sale_quotation.may_pagar? %>
+            <%= link_to "/sale/quotations/#{sale_quotation.id}/pay", { controller: "quotations", action: "pay", id: sale_quotation, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Pagado" }  do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-piggy-bank"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.pay")) %>
+            <% end %>
+          <% end -%>
+        <% end -%>
+      </td>
+    </tr>
+      <% end %>
+  </tbody>
+</table>
+<% if !@quotations.present? %>
+<div class="alert alert-danger notice col-lg-12 ml-0">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+</div>
+<% end %>
+</section>

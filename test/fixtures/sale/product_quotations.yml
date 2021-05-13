@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sale_quotation: one
+  product_product: one
+  quantity: 1
+
+two:
+  sale_quotation: two
+  product_product: two
+  quantity: 1

@@ -1,0 +1,148 @@
+<%= form_for(provider_provider,  validate: true) do |f| %>
+<% if provider_provider.errors.any? %>
+<% end %>
+<form>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100 ">
+    <label class="label-form"><%= I18n.t ('products.attributes.image')%></label>
+    <%= f.file_field :image, class: "file", id:"file-0d",'data-show-upload':"false"  %>
+    <span class="help-block"></span>
+  </div>
+</div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+    <label class="label-form"><%= "#{I18n.t ('.providers.attributes.name')} #{I18n.t ('.providers.attributes.business_name')}" %></label>
+      <%= f.text_field :name, class: "input-text" , minlength: '3', maxlength: '200' %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <label class="label-form col-lg-12"><%= I18n.t('.providers.attributes.rif') %></label>
+    <div class="col-lg-2 col-xs-4 input_100">
+      <%= f.select :type_identification , Provider::Provider::TYPE_PERSONA_OPTIONS %>
+    </div>
+    <div class="col-lg-10 col-xs-8 input_100">
+      <%= f.text_field :rif, class: "input-text" , minlength: '3', maxlength: '15'%>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.phone') %></label>
+      <%= f.text_field :phone, class: "input-text" , minlength: '3', maxlength: '80'
+     %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+    <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.phone') %>2</label>
+      <%= f.text_field :phone2, class: "input-text" , minlength: '3', maxlength: '80'
+     %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+    <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.phone') %>3</label>
+      <%= f.text_field :phone3, class: "input-text" , minlength: '3', maxlength: '80'
+     %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.email') %></label>
+      <%= f.text_field :email,class: "input-text" , validate: true, minlength: '10', maxlength: '50', validate: { presence: true } %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.provider_provider_type_id') %></label>
+      <%= f.collection_select :provider_provider_type_id, Provider::ProviderType.order(:name), :id, :name , validate: true, :prompt=>"Seleccione" %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.address') %></label>
+      <%= f.text_area :address , minlength: '0', maxlength: '140'%>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <h3>Datos del responsable</h3>
+  </div>
+  <div class="col-lg-12 form-group">
+     <label class="label-form col-lg-12"><%= I18n.t('.providers.attributes.identification_document') %></label>
+    <div class="col-lg-2 col-xs-4 input_100">
+      <%= f.select :type_identification_responsable , Provider::Provider::TYPE_IDENTIFICATION_OPTIONS %>
+    </div>
+    <div class="col-lg-10 col-xs-8 input_100">
+      <%= f.text_field :identification_document, class: "input-text" , minlength: '3', maxlength: '10', validate: true%>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.firt_name_responsable') %></label>
+      <%= f.text_field :firt_name_responsable , minlength: '3', maxlength: '50' %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.last_name_responsable') %></label>
+      <%= f.text_field :last_name_responsable , minlength: '3', maxlength: '50' %>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.phone_responsable') %></label>
+      <%= f.text_field :phone_responsable ,class: "input-text" , minlength: '3', maxlength: '15'%>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.position') %></label>
+      <%= f.text_field :position ,class: "input-text" , minlength: '3', maxlength: '50'%>
+      <span class="help-block"></span>
+    </div>
+  </div>
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-12 input_100">
+     <label class="label-form"><%= I18n.t('.providers.attributes.email_responsable') %></label>
+      <%= f.text_field :email_responsable ,class: "input-text" ,validate: true, minlength: '10', maxlength: '60', validate: { presence: true }%>
+      <span class="help-block"></span>
+    </div>
+  </div>  
+  <div class="col-lg-12 form-group">
+    <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+      <%= link_to I18n.t('.general.action.cancel'), provider_providers_path,class: "hvr-skew-backward" %>
+    </div>
+    <div class="col-lg-3 pull-right">
+    <% if @permiso_modificar == true || @permiso_crear == true%> 
+      <%= f.submit I18n.t('.providers.actions.accept'), class: "hvr-skew-backward", data: {disable_with: "Guardando ..."} %>
+    <% end -%>
+    </div>
+  </div>
+</form>
+<% end %>
+<script>
+ <% if @provider_provider.image_file_name.nil? %>
+ $("#file-0d").fileinput({
+  language: 'es',
+  'allowedFileExtensions': ['jpg', 'png', 'gif' ,'pdf']
+    });
+  <%else%>
+  $("#file-0d").fileinput({
+    language: 'es',
+    'allowedFileExtensions': ['jpg', 'png', 'gif' ,'pdf'],
+    initialPreview: [
+    '<%= image_tag provider_provider.image.url(:medium),class: "file", id:"file-0d" %>']
+  });
+  <%end%>
+</script>

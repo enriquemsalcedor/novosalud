@@ -1,0 +1,83 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<h1 class="space-title text-center"><%=raw I18n.t ('.companies.actions.show_company') %></h1>
+<div class="col-lg-10">
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.name') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.name %> 
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.rif') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.type_identification %>-<%= @business_company.rif %>
+      </div>    
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.email') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.email %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.business_company_type_id') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.business_company_type.name %>
+      </div> 
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.address') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.address%>
+      </div> 
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.responsable') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.firt_name_responsable %> 
+        <%=@business_company.last_name_responsable %>
+      </div> 
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-3 col-xs-5 text-right">
+      <strong><%= raw I18n.t('.companies.attributes.phone_responsable') %></strong>
+    </div>
+    <div class="col-lg-9 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @business_company.phone %>
+      </div> 
+    </div>
+  </div>
+  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center">      
+    <%= link_to I18n.t('.general.action.edit'),  edit_business_company_path(@business_company),class: "hvr-skew-backward"  %>
+    <a href="/" class="hvr-skew-backward">Cancelar</a>
+  </div>

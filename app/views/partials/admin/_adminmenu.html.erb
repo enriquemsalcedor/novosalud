@@ -1,0 +1,77 @@
+<header id="header">
+  <div class="header_top clearfix affix-top">
+    <div class="container">
+      <div class="col-lg-4 col-md-4 col-sm-12 logo media-left media-middle padding_left_none">
+        <a href="/">
+          <img src="<%= asset_path 'logo-web-w-1.png' %>" alt="Novosalud" />
+        </a>
+      </div>
+      <div class="col-lg-8 col-md-8 col-sm-10 top_nav media-body media-middle affix-top">
+        <% if user_signed_in? %>
+        <div class="top_nav_wrapper clearfix">
+          <ul id="menu-main-menu" class="main_menu_nav">
+            <% session[:menu].select{|padre| padre.menu_id == nil }.each do |menus| %>
+            <li class="menu-item">
+              <%= raw menus.codemenu %>
+              <ul class="sub-menu">
+                <% session[:menu].select{|hijo| hijo.menu_id == menus.id }.each do |menuh| %>
+                <li class="menu-item" id="<%= menuh.description %>">
+                  <%= render inline: menuh.codemenu %>
+                  <ul class="sub-menu">
+                    <% session[:menu].select{|hijo2| hijo2.menu_id == menuh.id }.each do |menuh2| %>
+                    <li class="menu-item">
+                      <%= render inline: menuh2.codemenu %>
+                    </li>
+                    <% end -%>
+                  </ul> 
+                </li>
+                <% end -%> 
+              </ul> 
+            </li>
+            <% end -%>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="mobile_header">
+    <% if user_signed_in? %>
+    <div class="logo_wrapper clearfix">
+      <div class="logo">
+        <a href="http://novosalud.com.ve/sitio/">
+          <img src="<%= asset_path 'logo-novosalud.svg' %>" alt="Novosalud"/>
+        </a>
+      </div>
+      <div id="menu_toggle">
+        <button></button>
+      </div>
+    </div>
+    <div class="header_info">
+      <div class="top_nav_mobile">
+       <ul id="menu-main-menu-1" class="main_menu_nav">
+        <% session[:menu].select{|padre| padre.menu_id == nil }.each do |menus| %>
+        <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item current-menu-ancestor current-menu-parent current_page_parent current_page_ancestor menu-item-has-children menu-item-1210">
+          <%= raw menus.codemenu %>
+          <ul class="sub-menu">
+            <% session[:menu].select{|hijo| hijo.menu_id == menus.id }.each do |menuh| %>
+            <li class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-9 current_page_item menu-item-1264">
+              <%= render inline: menuh.codemenu %>
+              <ul class="sub-menu">
+                <% session[:menu].select{|hijo2| hijo2.menu_id == menuh.id }.each do |menuh2| %>
+                <li class="menu-item">
+                  <%= render inline: menuh2.codemenu %>
+                </li>
+                <% end -%>
+              </ul> 
+            </li>
+            <% end -%> 
+          </ul> 
+        </li>
+        <% end -%>
+      </ul>
+    </div>
+  </div>
+    <% end -%>
+</div>
+</header>

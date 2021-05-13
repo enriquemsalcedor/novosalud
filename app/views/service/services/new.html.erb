@@ -1,0 +1,162 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<div id= "mensajeProducto">
+  <span></span>
+</div>
+<div class="row">
+  <div class="col-lg-6 col-sm-6 col-md-6">
+    <div class="title-center">
+      <h1 class="space-title">Activación de Servicio</h1>
+    </div>
+    <%= form_tag('/service/services/new', :method => "get", remote: true ) do %>
+    <div class="col-lg-12 form-group">
+      <div class="input_100 col-lg-12">
+        <%= text_field_tag :searchProduct,  params[:searchProduct], placeholder:"Ingrese el certificado del producto"%>
+      </div>
+    </div>
+    <div class="col-lg-12 form-group">
+      <div class="col-lg-offset-7 col-lg-2 col-sm-offset-7 col-sm-2 col-md-offset-7 col-md-2 
+      col-xs-2 col-xs-offset-7"> 
+      <%= link_to I18n.t('.general.action.cancel'), service_services_path, class: "hvr-skew-backward"  %>
+    </div>
+    <div class="col-lg-3 col-sm-3 col-md-3 col-xs-3">
+      <%= submit_tag "Buscar", data: {disable_with: "Buscando ..."}, :code => nil,class: "hvr-skew-backward" %>
+    </div>
+  </div>
+    <%end%>
+</div> 
+</div>
+<div id= "contractedProduct" class="row space-4x">
+  <div class="col-lg-6 col-sm-6">
+    <div class="col-lg-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Titular %>
+      </div>
+      <div class="col-lg-6 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+         <p id="Titular" class="capitalize"></p>
+       </div>
+     </div>
+   </div>
+   <div class="col-lg-12">
+    <div class="col-lg-5 col-xs-6 text-right">
+      <%= label_tag "Identificación del titular" %>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <p id="CedulaTilular"></p>
+      </div>
+    </div>
+  </div>
+  <% unless @payment_contracted_product.nil? %>
+    <%= payment_contracted_product.customer_id %>
+  <%end%>
+  <div class="col-lg-12">
+    <div class="col-lg-5 col-xs-6 text-right">
+      <%= label_tag :Orden_de_compra %>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <p id="Plan"></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-5 col-xs-6 text-right">
+      <%= label_tag :Producto %>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <p id="producto"></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-5 col-xs-6 text-right">
+      <%= label_tag :Clínica %>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <p id="Centro_medico"></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-5 col-xs-6 text-right">
+      <%= label_tag :Certificado %>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <p id="Certificado"></p>
+        <%= text_field_tag :Certificado, nil, disabled:  true,class:"color-none"  %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-5 col-xs-6 text-right">
+      <%= label_tag :Estatus %>
+    </div>
+    <div class="col-lg-6 col-xs-6 rdown">
+      <div class="col-lg-10 ">
+        <p id="Estatus"></p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-6 col-sm-6 col-md-6 form-group ">
+  <div id="mensaje-beneficiario-creado"></div>
+  <%= form_tag('/service/services/new', :method => "get", remote: true) do %>
+  <div class="col-lg-12 input_100 form-group">
+    <%= label_tag "beneficiary", "Ingrese cédula del beneficiario", class:"label-form" %>
+    <div class="col-lg-2 input_100 pr-0 pl-0">
+      <div class="col-sm-4 pl-0">
+        <%= select_tag "search_type_identification" , options_for_select(People::TYPE_IDENTIFICATION_OPTIONS,"V") %>
+      </div>
+    </div>
+    <div class="col-lg-10 input_100 pr-0 pl-0">
+      <%= text_field_tag :searchBeneficiary,  params[:searchBeneficiary], minlength: '3', maxlength: '9'%>
+    </div> 
+    <div id= "mensajeBeneficiario">
+      <span></span>
+    </div>
+  </div>
+  <div>
+    <div class="col-lg-12 form-group">
+      <div id="btn-beneficiario" ></div>
+      <%= submit_tag "Buscar", data: {disable_with: "Buscando ..."},:identification_document => nil,class: "hvr-skew-backward" %>
+    </div>
+  </div>
+  <%end%>
+  <div id="beneficiary">
+    <div class="col-lg-12 col-sm-12 col-md-12 form-group">
+      <div class="col-lg-12">
+        <div class="col-lg-6 col-xs-6 text-right">
+         <%= label_tag :Cédula_de_identidad %>
+       </div>
+       <div class="col-lg-6 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p id="Cedula"></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="col-lg-6 col-xs-6 text-right">
+        <%= label_tag :Nombre %>
+      </div>
+      <div class="col-lg-6 col-xs-6 rdown">
+        <div class="col-lg-10   capitalize">
+          <p id="Nombre"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div id ="formService">
+  <%= render 'form', service_service: @service_service %>
+</div>
+</div>
+</div>

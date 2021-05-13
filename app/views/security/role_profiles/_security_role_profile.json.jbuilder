@@ -1,0 +1,2 @@
+json.extract! security_role_profile, :id, :security_profile_id, :security_role_id, :start_date, :end_date, :created_at, :updated_at
+json.url security_role_profile_url(security_role_profile, format: :json)

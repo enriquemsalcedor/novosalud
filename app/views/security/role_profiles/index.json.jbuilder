@@ -1,0 +1,1 @@
+json.array! @security_role_profiles, partial: 'security_role_profiles/security_role_profile', as: :security_role_profile

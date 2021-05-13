@@ -1,0 +1,323 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+#Banco
+es:
+  activerecord:
+    attributes:
+      users:
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmación de contraseña"
+        remember_me: "Recordar"
+    errors:
+      models:
+        initial_value:
+          attributes:
+            days_validity:
+              greater_than_or_equal_to: "Por favor, introduzca números positivos"
+            max_refech_service:
+              greater_than_or_equal_to: "Por favor, introduzca números positivos"
+            number_employee:
+              greater_than_or_equal_to: "Por favor, introduzca números positivos"
+            max_quantity_product:
+              greater_than_or_equal_to: "Por favor, introduzca números positivos" 
+            days_validity_service:
+              greater_than_or_equal_to: "Por favor, introduzca números positivos"
+        colection/package:
+          attributes:
+            total_amount:
+              not_a_number: "Debe ingresar un monto total"
+              greater_than_or_equal_to: "Monto debe ser mayor a 0"
+        product/product:
+          attributes:
+            valid_days: 
+              greater_than: "La cantidad debe ser mayor a 0."
+        user:
+          attributes:
+            login:
+              blank: "Debe ingresar un correo electrónico"
+            email:
+              blank: "Debe ingresar un correo electrónico"
+              taken: "Correo electrónico ya esta registrado"
+            password:
+              blank: "Por favor, introduzca nueva contraseña."
+              too_short: "Debe introducir minimo 8 caracteres."
+            password_confirmation:
+              blank: "No debe dejar campos vacios"
+              confirmation: "Por favor, introduzca confirmación de nueva contraseña."
+              too_short: "Debe introducir minimo 8 caracteres."
+            current_password:
+              invalid: "Contraseña actual es incorrecta."
+              blank: "Por favor, introduzca contraseña actual."
+        employee:
+          attributes:
+            usuario:
+              invalid: "Existe un empleado con este usuario."
+            date_valid:
+              invalid_date: "Debe ser mayor a la fecha de hoy"
+      messages:
+        record_invalid: "La validación falló: %{errors}"
+        restrict_dependent_destroy:
+          has_one: No se puede eliminar el registro porque existe un %{record} dependiente
+          has_many: No se puede eliminar el registro porque existen %{record} dependientes
+  date:
+    abbr_day_names:
+    - dom
+    - lun
+    - mar
+    - mié
+    - jue
+    - vie
+    - sáb
+    abbr_month_names:
+    - ene
+    - feb
+    - mar
+    - abr
+    - may
+    - jun
+    - jul
+    - ago
+    - sep
+    - oct
+    - nov
+    - dic
+    day_names:
+    - domingo
+    - lunes
+    - martes
+    - miércoles
+    - jueves
+    - viernes
+    - sábado
+    formats:
+      default: "%d/%m/%Y"
+      long: "%A, %d de %B de %Y"
+      short: "%d de %b"
+    month_names:
+    -
+    - Enero
+    - Febrero
+    - Marzo
+    - Abril
+    - Mayo
+    - Junio
+    - Julio
+    - Agosto
+    - Septiembre
+    - Octubre
+    - Noviembre
+    - Diciembre
+    order:
+    - :day
+    - :month
+    - :year
+  helpers:
+    select:
+      prompt: Seleccione
+  will_paginate:
+    previous_label: "&#8592; Anterior"
+    next_label: "Siguiente &#8594;"
+    page_gap: "&hellip;"
+  datetime:
+      distance_in_words:
+        about_x_hours:
+          one: alrededor de 1 hora
+          other: alrededor de %{count} horas
+        about_x_months:
+          one: alrededor de 1 mes
+          other: alrededor de %{count} meses
+        about_x_years:
+          one: alrededor de 1 año
+          other: alrededor de %{count} años
+        almost_x_years:
+          one: casi 1 año
+          other: casi %{count} años
+        half_a_minute: medio minuto
+        less_than_x_minutes:
+          one: menos de 1 minuto
+          other: menos de %{count} minutos
+        less_than_x_seconds:
+          one: menos de 1 segundo
+          other: menos de %{count} segundos
+        over_x_years:
+          one: más de 1 año
+          other: más de %{count} años
+        x_days:
+          one: 1 día
+          other: "%{count} días"
+        x_minutes:
+          one: 1 minuto
+          other: "%{count} minutos"
+        x_months:
+          one: 1 mes
+          other: "%{count} meses"
+        x_years:
+          one: 1 año
+          other: "%{count} años"
+        x_seconds:
+          one: 1 segundo
+          other: "%{count} segundos"
+      prompt: Seleccione
+  general:
+    attribute:
+      welcome: "Bienvenido"
+      number: "Número"
+      rif: "RIF"
+      image: "Imagen"
+      code: "Código"
+      name: "Nombre"
+      surname: "Apellido"
+      first_name: "Primer nombre"
+      last_name: "Segundo Nombre"
+      action: "Acción"
+      phone: "Teléfono"
+      created_by: "Creado por"
+      total_amount: "Cantidad total"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      phone: "Teléfono"
+      description: "Descripción"
+      created_at: "Fecha de creación"
+      valid_since: "Fecha de publicación"
+      valid_until: "Fecha de expiración"
+      status: "Estatus"
+    attributes:
+      numbers: "Números"
+      names: "Nombres"
+      surnames: "Apellidos"
+      see: "Ver"
+      editing: "Editar"
+      enable: "Habilitar"
+      disable: "Inhabilitar"
+      actions: "Acciones"
+    model:
+      login: "Inicio de Sesión"
+      role: "Rol"
+      role_type: "Tipo de Rol"
+      profile: "Perfil"
+      bank: "Banco"
+      companie: "Empresa"
+      quotation: "Cotización"
+      beneficiary: "Beneficiario"
+      employee: "Empleado"
+      doctor: "Médico"
+      person: "Persona"
+      package: "Paquete"
+      specialty: "Especialidad"
+      organization: "Organización"
+      provider: "Proveedor"
+      motive: "Motivo"
+      customer: "Cliente"
+      method_payment: "Modalidad de Pago"
+      product: "Producto"
+      product_type: "Tipo de Producto"
+      provider_type: "Tipo de Proveedor"
+    models:
+      roles: "Roles"
+      roles_types: "Tipos de Roles"
+      profiles: "Perfiles"
+      companies: "Empresas"
+      banks: "Bancos"
+      quotations: "Cotizaciones"
+      beneficiaries: "Beneficiarios"
+      employees: "Empleados"
+      doctors: "Médicos"
+      persons: "Personas"
+      packages: "Paquetes"
+      specialities: "Especialidades"
+      providers: "Proveedores"
+      motives: "Motivos"
+      customers: "Clientes"
+      methods_payment: "Modalidades de Pago"
+      products: "Productos"
+      products_types: "Tipos de Productos"
+      providers_types: "Tipos de Proveedores"
+    action:
+      see: "Ver"
+      new: "Nuevo"
+      examine: "Examinar"
+      remove: "Quitar"
+      back: "Atrás"
+      register: "Registrar"
+      return: "Regresar"
+      edit: "Editar"
+      enable: "Habilitar"
+      disable: "Inhabilitar"
+      question:
+        profile:
+          enable: "¿Desea habilitar este perfíl?"
+          disable: "¿Desea inhabilitar este perfíl?"
+        role:
+          enable: "¿Desea habilitar este rol?"
+          disable: "¿Desea inhabilitar este rol?"
+        role_type:
+          enable: "¿Desea habilitar este tipo de rol?"
+          disable: "¿Desea inhabilitar este tipo de rol?"
+        specialty:
+          enable: "¿Desea habilitar esta especialidad?"
+          disable: "¿Desea inhabilitar esta especialidad?"
+        package:
+          enable: "¿Desea habilitar este paquete?"
+          disable: "¿Desea inhabilitar este paquete?"
+        product:
+          enable: "¿Desea habilitar este producto?"
+          disable: "¿Desea inhabilitar este producto?"
+        product_type:
+          enable: "¿Desea habilitar este tipo de producto?"
+          disable: "¿Desea inhabilitar este tipo de producto?"
+        doctor:
+          enable: "¿Desea habilitar este médico?"
+          disable: "¿Desea inhabilitar este médico?"
+        role_type:
+          enable: "¿Desea habilitar este típo de rol?"
+          disable: "¿Desea inhabilitar este típo de rol?"
+        method_payment:
+          enable: "¿Desea habilitar esta modalidad de pago?"
+          disable: "¿Desea inhabilitar esta modalidad de pago?"
+        bank:
+          enable: "¿Desea habilitar este banco?"
+          disable: "¿Desea inhabilitar este banco?"
+        employee:
+          enable: "¿Desea habilitar este empleado?"
+          disable: "¿Desea inhabilitar este empleado?"
+        customer:
+          enable: "¿Desea habilitar este cliente?"
+          disable: "¿Desea inhabilitar este cliente?"
+        beneficiary:
+          enable: "¿Desea habilitar este beneficiario?"
+          disable: "¿Desea inhabilitar este beneficiario?"
+        provider:
+          enable: "¿Desea habilitar este proveedor?"
+          disable: "¿Desea inhabilitar este proveedor?"
+        provider_type:
+          enable: "¿Desea habilitar este tipo de proveedor?"
+          disable: "¿Desea inhabilitar este tipo de proveedor?"
+        motive:
+          enable: "¿Desea habilitar este motivo?"
+          disable: "¿Desea inhabilitar este motivo?"
+        quotation:
+          enable: "¿Desea habilitar esta cotización?"
+          disable: "¿Desea inhabilitar esta cotización?"
+          delete: "¿Desea eliminar esta cotización?"
+        decision:
+          question: "Usted ha seleccionado producto(s) que no pertenecen a su segmento. Estos serán eliminados de su compra. ¿Deséa continuar?"

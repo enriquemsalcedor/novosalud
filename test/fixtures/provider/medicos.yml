@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  code_medico: MyString
+  people: one
+
+two:
+  code_medico: MyString
+  people: two

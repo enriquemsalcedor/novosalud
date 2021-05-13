@@ -1,0 +1,9 @@
+<tr id="<%=  role_menu.security_menu.id %>">
+  <td><%= role_menu.security_menu.description %></td>
+  <% if @permiso_modificar == true || @permiso_crear == true%>
+  <td><%= link_to "", { controller: "security/role_type_menus", :action => :new, id_menu: role_menu.security_menu_id, id_role: role_menu.security_role_id}, remote: true, class: "btn btn-primary pull-right fa fa-key" %></td>
+  <% end -%>
+  <% if @permiso_eliminar == true %>
+  <td><%= link_to 'Eliminar', role_menu, remote: true, :class => 'deleteRoleMenu', method: :delete, data: { confirm: '¿Desea eliminar este menú para este rol?' } %></td>
+  <% end -%>
+</tr>

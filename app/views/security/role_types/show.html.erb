@@ -1,0 +1,14 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p> 
+</div>
+<% end -%> 
+<p>
+  <strong> <%= raw I18n.t('.role_types.attributes.name') %> </strong>
+  <%= @security_role_type.name %>
+</p>
+<% if @permiso_modificar == true %>
+  <%= link_to  I18n.t('.general.action.edit'), edit_security_role_type_path(@security_role_type) %>
+<% end -%> |
+<%= link_to  I18n.t('.general.action.cancel'), security_role_types_path %>

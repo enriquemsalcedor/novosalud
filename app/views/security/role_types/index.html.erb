@@ -1,0 +1,69 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <table class="table table-hover">
+    <thead>
+      <% @security_role_types.each do |security_role_type| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attribute.name') %></th>
+        <th><%= raw I18n.t('.general.attribute.created_at') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @security_role_types.each do |security_role_type| %>
+      <tr>
+        <td><%= security_role_type.name %></td>
+        <td><%= security_role_type.created_at.strftime("%d-%m-%Y") %></td>
+        <td>
+        <% if @permiso_consultar == true %>
+          <%= link_to security_role_type, class: "hvr-skew-backward" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+        <% end -%>
+        <% if @permiso_modificar == true %>
+          <%= link_to edit_security_role_type_path(security_role_type), class: "hvr-skew-backward" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+          <% end %>
+        <% end -%>
+        <% if @permiso_activar == true %>
+          <% if security_role_type.may_inhabilitar? %>
+            <%= link_to "/security/role_types/#{security_role_type.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.role_type.disable')}, class: "hvr-skew-backward" do %>
+              <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+              <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+            <% end %>
+          <%else%>
+            <%= link_to "/security/role_types/#{security_role_type.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.role_type.enable')}, class: "hvr-skew-backward" do %>
+              <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+              <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+            <% end %>
+        <% end -%>
+        </td>
+        <%end%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @permiso_crear == true %>
+    <%= link_to new_security_role_type_path,  class: "hvr-skew-backward"  do %>
+      <%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.role_type')) %>
+    <% end %>
+  <% end -%>
+  <% if !@security_role_types.present? %>
+  <div class="alert alert-danger notice col-lg-12 ml-0">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+  </div>
+  <% end %>
+  <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+    <%= will_paginate @security_role_types %>
+  </div>
+</section>
+

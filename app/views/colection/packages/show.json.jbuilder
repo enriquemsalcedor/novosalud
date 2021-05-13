@@ -1,0 +1,1 @@
+json.partial! "colection_packages/colection_package", colection_package: @colection_package

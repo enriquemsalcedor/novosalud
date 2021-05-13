@@ -1,0 +1,103 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      companies:
+        one: "Empresa"
+        other: "Empresas"
+    attributes:
+      companies:
+        name: "Nombre(s) y apellido(s)/razón social."
+        type_identification: "Tipo de identificación"
+        rif: "RIF"
+        phone: "Teléfono de contacto"
+        email: "Correo electrónico"
+        business_company_type_id: "Tipo de Empresa"
+        territory_country_id: "País"
+        territory_state_id: "Estado"
+        territory_city_id: "Ciudad"
+        firt_name_responsable: "Nombre(s)"
+        last_name_responsable: "Apellido(s)"
+        phone_responsable:  "Teléfono de contacto del responsable"
+        responsable: "Responsable"
+        address: "Dirección"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+    errors:
+      models:
+        provider:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+            rif:
+              blank: "Debe ingresar un RIF."
+              taken: "Existe un registro con este RIF."
+            phone:
+              blank: "Debe ingresar un teléfono."
+            email:
+              blank: "Debe ingresar un correo electrónico."
+              uniqueness: "Existe un registro con este correo electrónico."
+            phone:
+              blank: "Debe ingresar un número teléfonico"
+  companies:
+    title: "Empresas"
+    attributes:
+      name: "Razón social"
+      type_identification: "Tipo de identificación"
+      rif: "RIF"
+      phone: "Teléfono de contacto"
+      email: "Correo electrónico"
+      business_company_type_id: "Tipo de empresa"
+      territory_country_id: "País"
+      territory_state_id: "Estado"
+      territory_city_id: "Ciudad"
+      firt_name_responsable: "Nombre(s)"
+      last_name_responsable: "Apellido(s)"
+      phone_responsable:  "Teléfono de contacto"
+      responsable: "Responsable"
+      address: "Dirección"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+    actions: 
+      new_company: "Registre su empresa"
+      edit_company: "Editar Empresa"
+      show_company: "Datos de la Empresa"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este empresa?"
+        enable: "¿Desea habilitar este empresa?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito la empresa, recibirás un correo electrónico con las instrucciones para confirmar tu correo electrónico en unos minutos."
+      update: "Se actualizó con éxito la empresa."
+      update_email: "Se actualizó con éxito sus datos, recibirás un email para confirmar tu nuevo correo."
+      destroy: "Se eliminó con éxito la empresa."
+      disable: "Se inhabilitó con éxito la empresa."
+      enable: "Se habilitó con éxito la empresa."
+
+

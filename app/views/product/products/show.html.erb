@@ -1,0 +1,181 @@
+<%unless notice.nil?%>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<%end%>
+
+<div class="title-center">
+  <h1 class="space-title texs"><%=raw I18n.t ('.products.actions.show_product') %></h1>
+</div>
+<div class="col-lg-2 col-xs-12">
+  <div class="col-lg-12 col-xs-12 img-center pro-img">
+    <% if @product_product.image_file_name.nil? %>
+    <i class="fa fa-cube"></i>
+    <%else%>
+    <%= image_tag @product_product.image.url(:medium) %>
+    <%end%>
+  </div>
+</div>
+<div class="col-lg-5  col-xs-12">
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.code')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.code %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.name')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.name %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.description')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown area">
+      <div class="col-lg-10 ">
+        <%= @product_product.description %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.speciality')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.speciality.name %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.product_type')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.product_product_type.name %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.category')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.category %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.terms')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown area">
+      <div class="col-lg-10 ">
+        <%= @product_product.terms %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.publication_date')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.publication_date.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="col-lg-5 col-xs-12">
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.expiration_date')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.expiration_date.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.provider')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.proveedor %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.price')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10  coin">
+        <%= number_with_precision(@product_product.price.to_f , precision: 2,delimiter:'.',separator: ',') %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.valid_days')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.valid_days %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.created_at')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.created_at.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.updated_at')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.updated_at.strftime("%d-%m-%Y") %>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-12 col-xs-12">
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-5 text-right">
+      <strong><%=raw I18n.t ('.products.attributes.status')%></strong>
+    </div>
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-7 rdown">
+      <div class="col-lg-10 ">
+        <%= @product_product.status %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center spac-2x">
+  <% if @permiso_modificar == true %> 
+    <%= link_to I18n.t('.general.action.edit'), edit_product_product_path(@product_product),class: "hvr-skew-backward" %>
+  <% end -%>
+  <%= link_to I18n.t('.general.action.cancel'), product_products_path,class: "hvr-skew-backward" %>
+</div>

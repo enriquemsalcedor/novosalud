@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="breadcrumbs">
+      <%= render_breadcrumbs :separator => ' / '%>
+    </div>
+  </div>
+</div>
+<div class="center-flex">
+<h1>Contactos y sugerencias</h1>
+</div>
+<br>
+<p id="notice"><%= notice %></p>
+<br>
+<%= render 'form', contact: @contact %>

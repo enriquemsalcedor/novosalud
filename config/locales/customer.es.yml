@@ -1,0 +1,105 @@
+
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      customers:
+        one: "Cliente"
+        other: "Clientes"
+    attributes:
+      customers:
+        first_name: "Nombres"
+        surname: "Apellidos"
+        type_identification: "Tipo de identificación"
+        identification_document: "Cédula de identidad"
+        email: "Correo electrónico"
+        date_birth: "Fecha de nacimiento"
+        sex: "Sexo"
+        phone: "Teléfono"
+        cellphone: "Celular"
+        phones: "Teléfonos"
+        territory_country_id: "País"
+        territory_state_id: "Estado"
+        territory_city_id: "Ciudad"
+        address: "Dirección"
+        customer_code: "Código cliente"
+        legal_representative: "¿Eres representante legal?"
+        created_at: "Fecha de creación"
+        user_created: "Creado por"
+    errors:
+      models:
+        people:
+          attributes:
+            first_name:
+              blank: "Debe ingresar un nombre."
+            surname:
+              blank: "Debe ingresar un apellido."
+            identification_document:
+              blank: "Debe ingresar una cédula de identidad."
+              taken: "Existe un registro con esta cédula de identidad."
+            phone:
+              blank: "Debe ingresar un teléfono."
+            email:
+              blank: "Debe ingresar un correo electrónico."
+              uniqueness: "Existe un registro con este correo electrónico."
+  customers:
+    title: "Clientes"
+    attributes:
+      first_name: "Nombres"
+      surname: "Apellidos"
+      type_identification: "Tipo de identificación"
+      identification_document: "Cédula de identidad"
+      email: "Correo electrónico"
+      date_birth: "Fecha de nacimiento"
+      sex: "Sexo"
+      phone: "Teléfono"
+      cellphone: "Celular"
+      phones: "Teléfonos"
+      territory_country_id: "País"
+      territory_state_id: "Estado"
+      territory_city_id: "Ciudad"
+      address: "Dirección"
+      customer_code: "Código de cliente"
+      legal_representative: "¿Eres representante legal?"
+      created_at: "Fecha de creación"
+      user_created: "Creado por"
+    actions:
+      new_customer: "Registrarse"
+      edit_customer: "Editar Datos personales"
+      show_customer: "Datos Personales"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea inhabilitar este cliente?"
+        enable: "¿Desea habilitar este cliente?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el cliente, recibirás un correo electrónico con las instrucciones para confirmar tu correo en unos minutos."
+      update: "Se actualizó con éxito sus datos personales."
+      update_email: "Se actualizó con éxito sus datos personales, recibirás un correo electrónico para confirmar tu nuevo correo"
+      destroy: "Se eliminó con éxito el cliente."
+      disable: "Se inhabilitó con éxito el cliente."
+      enable: "Se habilitó con éxito el cliente."

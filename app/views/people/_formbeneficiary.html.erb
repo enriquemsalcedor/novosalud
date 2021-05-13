@@ -1,0 +1,178 @@
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.people.attributes.first_name') %></label>
+    <%= f.text_field :first_name,  :input_html => {:maxlength => 50, :size => 60},  class: "input-text",  validate: true, onchange:"sololetras(this,'first_name')",id:"first_name" %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.people.attributes.surname') %></label>
+    <%= f.text_field :surname , minlength: '3', maxlength: '50', validate: true,id:"surname", onchange:"sololetras(this,'surname')",id:"surname" %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <label class="label-form col-lg-12"><%= I18n.t ('.people.attributes.identification_document') %></label>
+  <div class="col-lg-2 col-xs-4 input_100">
+    <%= f.select :type_identification,People::TYPE_IDENTIFICATION_OPTIONS %>
+    <span class="help-block"></span>
+  </div>
+  <div class="col-lg-10 col-xs-8 input_100">
+    <% if params[:document].nil? %>
+    <%= f.text_field :identification_document ,minlength: '3', maxlength: '9', validate: true,onchange:"solonumeros(this,'identification_document')",id:"identification_document" %>
+    <%else%>
+    <%= f.text_field :identification_document ,minlength: '3', maxlength: '9', validate: true, value: params[:document],onchange:"solonumeros(this,'identification_document')",id:"identification_document" %>
+    <% end -%>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-6 col-xs-12">
+    <label class="label-form"><%= I18n.t ('.people.attributes.date_birth') %></label>
+    <div class="input-daterange calendar div-calendar" id="calendar">
+      <%= f.text_field :date_birth, validate: true,id:"date_birth",onchange:"SeleccionFecha(this,'date_birth')"%>
+    </div>
+    <div class="icon-fecha">
+      <span class="glyphicon glyphicon-calendar icon"></span>
+    </div>
+    <span class="help-block-fecha"></span>
+  </div>
+
+  <div class="col-lg-6 col-xs-12 input_100">
+    <label class="label-form"><%= I18n.t ('.people.attributes.sex')%></label>
+    <%= f.select :sex,People::SEX_OPTIONS, validate:{presence: true},:prompt=>"Seleccione" , id:"sex",onchange:"SeleccionFecha(this,'date_birth')"  %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-6 input_100">
+    <label class="label-form"><%= I18n.t ('.people.attributes.phone') %></label>
+    <%= f.text_field :phone, validate:{presence: true, numericality: true},onchange:"solonumeros(this,'phone')", id:"phone" %>
+    <span class="help-block"></span>
+  </div>
+  <div class="col-lg-6 input_100">
+    <label class="label-form"><%= I18n.t ('.people.attributes.cellphone') %></label>
+    <%= f.text_field :cellphone, validate:{presence: true, numericality: true},id:"cellphone",onchange:"solonumeros(this,'cellphone')",id:"cellphone" %>
+    <span class="help-block"></span>
+  </div>
+</div>
+<script>
+  $("#capa").click(function(){
+    $('#myModal').remove();
+    $(".modal-backdrop").remove();
+    $("body").removeClass("modal-open");
+  });
+  $("#close").click(function(){
+    $('#myModal').modal('toggle');
+    $(".modal").remove();
+    $(".modal-backdrop").remove();
+    $('#myModal').remove();
+    $("body").removeClass("modal-open");
+  });
+    $("#button-equis").click(function(){
+    $('#myModal').modal('toggle');
+    $(".modal").remove();
+    $(".modal-backdrop").remove();
+    $('#myModal').remove();
+    $("body").removeClass("modal-open");
+  });
+  
+  var first_name=$("#first_name").val();
+  var surname=$("#surname").val();
+  var identification_document=$("#identification_document").val();
+  var date_birth=$("#date_birth").val();
+  var sex=$("#sex").val();
+  var phone=$("#phone").val();
+  var cellphone=$("#cellphone").val();
+  $('.input-daterange').datepicker(
+  {
+    format: 'dd-mm-yyyy',
+    language: 'es'
+  });
+  $.fn.datepicker.dates['es'] = 
+  {
+    days: ["Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sábado"],
+    daysShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+    daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+    months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Dicimbre"],
+    monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+    today: "Hoy",
+    clear: "Clear",
+    format: "mm/dd/yyyy",
+    titleFormat: "MM yyyy", /* Leverages same syntax as 'format' */
+    weekStart: 0
+  };
+  $(".help-block").hide();
+  $(".help-block-fecha").hide();
+  function sololetras(valor,atributo){
+    var m = valor.value;
+    var expreg = /^[a-zA-ZñÑáéíóú']{1,50}$/;
+    if(!expreg.test(m)){
+      $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").show();
+      $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").html("Debe agregar solo letras");
+
+    }else{
+      $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").hide();
+    }
+    if(m==""){
+      $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").show();
+      $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").html("el campo no puede estar vacio");
+    }
+
+  }
+
+  $("#beneficiary_people_attributes_sex").change(function(){
+    var sex=$(this).val();
+    if(sex=="" || sex==null){
+      $("#beneficiary_people_attributes_sex + .help-block").show();
+      $("#beneficiary_people_attributes_sex + .help-block").html("Debe selecionar una opción");
+    }else{
+       $("#beneficiary_people_attributes_sex + .help-block").hide();
+    }
+
+  });
+  function SeleccionFecha(valor,atributo){
+
+    if (valor.value=='') {
+     $(".help-block-fecha").html("Debe agregar una Fecha");
+   }else{
+    $(".help-block-fecha").hide();
+  }
+} 
+function solonumeros(valor,atributo){
+  var m = valor.value;
+  var expreg = /^[0-9]{1,20}$/;
+  if(!expreg.test(m)){
+    $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").show();
+    $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").html("Debe agregar solo numeros");
+
+  }else{
+    $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").hide();
+    $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").html("");
+  }
+  if(m==""){
+    $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").show();
+    $("input[name='beneficiary[people_attributes]["+atributo+"]'] + .help-block").html("el campo no puede estar vacio");
+  }
+}
+function validacion() {
+  var first_name=$("#first_name").val();
+  var surname=$("#surname").val();
+  var identification_document=$("#identification_document").val();
+  var date_birth=$("#date_birth").val();
+  var sex=$("#sex").val();
+  var phone=$("#phone").val();
+  var cellphone=$("#cellphone").val();
+  if (first_name=='' || surname=='' || identification_document=='' || date_birth=='' || sex=='' || phone=='' || cellphone=='') {
+    // Si no se cumple la condicion...
+
+    return false;
+  }else{
+
+    return true;
+
+  }
+
+}
+</script>

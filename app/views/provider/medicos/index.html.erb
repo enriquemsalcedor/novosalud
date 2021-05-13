@@ -1,0 +1,72 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end -%>
+<section class="container table_flex_five">
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.medicos') %></h1>
+  <table id="datatable" class="table table-hover table_provider_medico">
+    <thead>
+      <% @provider_medicos.each do |provider_medico| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attributes.names') %></th>
+        <th><%= raw I18n.t('.general.attributes.surnames') %></th>
+        <th><%= raw I18n.t('.general.attribute.identification_document') %></th>
+        <th><%= raw I18n.t('.general.attribute.phone') %></th>
+        <th><%= raw I18n.t('.general.attribute.created_at') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+     <% @provider_medicos.each do |provider_medico| %>
+     <tr>
+      <td><%= provider_medico.people.first_name %></td>
+      <td><%= provider_medico.people.surname %></td>
+      <td><%= provider_medico.people.type_identification %>-<%= provider_medico.people.identification_document %></td>
+      <td><%= provider_medico.phone_medico %></td>
+      <td><%= provider_medico.created_at.strftime("%d-%m-%Y")%></td>
+      <td>
+        <% if @permiso_consultar == true %>
+        <%= link_to provider_medico, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.see")) %>
+        <% end %>
+        <% end -%>
+        <% if @permiso_modificar == true %>
+        <%= link_to edit_provider_medico_path(provider_medico), class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+        <% end %>
+        <% end -%>
+        <% if @permiso_activar == true %>
+        <% if provider_medico.may_inhabilitar? %>
+        <%= link_to "/provider/medicos/#{provider_medico.id}/inhabilitar", method: :put, data: { confirm: I18n.t('.general.action.question.doctor.disable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+        <% end %>
+        <%else%>
+        <%= link_to "/provider/medicos/#{provider_medico.id}/habilitar", method: :put, data: { confirm: I18n.t('.general.action.question.doctor.enable')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Activar" do %>
+        <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+        <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+        <% end %>
+        <% end -%>
+        <%end%>
+      </td> 
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<% if @permiso_crear == true %>
+<%= link_to new_provider_medico_path,  class: "hvr-skew-backward"  do %>
+<%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.doctor')) %>
+<% end %>
+<% end -%>
+<% if !@provider_medicos.present? %>
+<div class="alert alert-danger notice col-lg-12 ml-0">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+</div>
+<% end %>
+</section>

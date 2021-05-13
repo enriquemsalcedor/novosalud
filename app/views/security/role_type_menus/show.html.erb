@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Security role type:</strong>
+  <%= @security_role_type_menu.security_role_type %>
+</p>
+
+<p>
+  <strong>Security role menu:</strong>
+  <%= @security_role_type_menu.security_role_menu %>
+</p>
+
+<%= link_to 'Edit', edit_security_role_type_menu_path(@security_role_type_menu) %> |
+<%= link_to 'Back', security_role_type_menus_path %>

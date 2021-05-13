@@ -1,0 +1,1 @@
+json.partial! "initial_values/initial_value", initial_value: @initial_value

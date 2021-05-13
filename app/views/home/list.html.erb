@@ -1,0 +1,94 @@
+ <div class="row">
+   <% if !@products.present? %>
+   <div class="alert alert-danger notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>   
+    <p id="notice margin_left_none">No se han encontrado resultados.</p>
+  </div>
+  <% end %>
+</div>
+<div class="row">
+  <% unless notice.nil? %>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>   
+    <p id="notice margin_left_none"><%= notice %></p>
+  </div>
+  <% end %>
+</div>
+<% unless alert.nil? %>
+<div class="row">
+  <div class="alert alert-danger notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice margin_left_none"><%= alert %></p>
+  </div>
+</div>
+<% unless @product_quotation.nil? %>
+<p>
+  <strong>Paquete </strong>
+  <%= @product_quotation.product_product.name %>
+</p>
+<p>
+  <strong>Cantidad </strong>
+  <%= @product_quotation.quantity %>
+</p>
+<% end %>
+<% end -%>
+<div class="row">
+  <div class="col-lg-12">
+    <div class="breadcrumbs">
+      <%= render_breadcrumbs :separator => ' / '%>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <div class="row display-flex">
+    <% @products.each do |product| %>
+    <div class="col-xs-6 col-sm-4 col-md-3 flexbox">
+      <div class="thumbnail wow slideInLeft">
+        <%= link_to controller: "home" , action: "details", id: product do %>
+        <div class="cont-img img-responsive center">
+          <% if product.image_file_name.nil? %>
+          <i class="fa fa-cube"></i>
+          <%else%>
+          <%= image_tag product.image.url(:large) %>
+          <%end%>
+        </div>
+        
+        <div class="mid-1">
+          <div class="special_produc">
+            <span>Bs. <%= number_with_precision(product.price.to_f, precision: 2,delimiter:'.',separator: ',') %></span>
+          </div>
+          <div class="special_produc product_soberano">
+            <span>Bs. S <%= number_with_precision(product.price.to_f/100000, precision: 2,delimiter:'.',separator: ',') %></span>
+          </div>
+          <div class="name_product">
+            <h6 class="p-0 m-0"><%= "#{product.name} "%></h6>
+            <h6 class="p-0 m-0"><%= "#{product.provider_provider.name}" %></h6>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+    <%end%>
+</div>
+
+</div>
+  <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+    <%= will_paginate @products %>
+  </div>
+
+<script>
+/*  $(document).ready(function(){
+    var altura_arr = [];//CREAMOS UN ARREGLO VACIO
+      $('.thumbnail').each(function(){//RECORREMOS TODOS LOS CONTENEDORES DE LAS IMAGENES, DEBEN TENER LA MISMA CLASE
+      var altura = $(this).height(); //LES SACAMOS LA ALTURA
+      console.log(altura);
+      altura_arr.push(altura);//METEMOS LA ALTURA AL ARREGLO
+    });
+  altura_arr.sort(function(a, b){return b-a}); //ACOMODAMOS EL ARREGLO EN ORDEN DESCENDENTE
+  $('.thumbnail').each(function(){//RECORREMOS DE NUEVO LOS CONTENEDORES
+    var newheight = altura_arr[0] + 20;
+    console.log(newheight);
+    $(this).css('height',newheight);//LES PONEMOS A TODOS LOS CONTENEDORES EL PRIMERO ELEMENTO DE ALTURA DEL ARREGLO, QUE ES EL MAS GRANDE.
+    });
+  });*/
+</script>

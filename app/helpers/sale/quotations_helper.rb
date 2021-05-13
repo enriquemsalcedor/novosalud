@@ -1,0 +1,2 @@
+module Sale::QuotationsHelper
+end

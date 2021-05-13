@@ -1,0 +1,11 @@
+<% if session[:rol] == 'Caja'%>
+  <%= render "/partials/partials_menu/menu_caja" %>
+<%elsif session[:rol] == 'Clinica'%>
+  <%= render "partials/partials_menu/menu_clinica" %>
+<%elsif session[:rol] == 'Configurador'%>
+  <%= render "partials/partials_menu/menu_configurador" %>
+<%elsif session[:rol] == 'Servicio'%>
+  <%= render "partials/partials_menu/menu_servicio" %>
+<%else%>
+  <%= render "partials/admin/adminmenu" %>
+<%end%>

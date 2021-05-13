@@ -1,0 +1,133 @@
+<div class="title-center">
+  <h1 class="space-title">Editar Servicio</h1>
+</div>
+<div id= "editarContractedProduct" class="col-lg-12 col-md-12 col-sm-12 col-xs-12 editarContractedProduct">
+    <% if @service_service.payment_contracted_product.payment_plan.customer.nil? %>
+    <div class="title-center"></div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Titular %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p> <%= @service_service.payment_contracted_product.payment_plan.business_company.name %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag "RIF" %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= "#{@service_service.payment_contracted_product.payment_plan.business_company.type_identification}-#{@service_service.payment_contracted_product.payment_plan.business_company.rif}" %></p>
+        </div>
+      </div>
+    </div>
+    <%else%>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Titular %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p> <%= @service_service.payment_contracted_product.payment_plan.nombre_titular %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag "Cédula de identidad" %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.payment_contracted_product.payment_plan.cedula_titular  %></p>
+        </div>
+      </div>
+    </div>
+    <%end%>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Orden_de_compra %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.payment_contracted_product.payment_plan.number_plan %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Producto %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p> <%= @service_service.payment_contracted_product.product_product.name %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Descripcion %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.payment_contracted_product.product_product.description %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Proveedor %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.payment_contracted_product.product_product.proveedor %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Certificado %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.payment_contracted_product.code %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag "Estatus del producto" %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p>     <%= @service_service.payment_contracted_product.status %></p>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag :Beneficiario %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.beneficiary.buscar_nombre_beneficiario %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6 col-sm-6 col-md-6 col-xs-12">
+      <div class="col-lg-5 col-xs-6 text-right">
+        <%= label_tag "Cédula de identidad" %>
+      </div>
+      <div class="col-lg-7 col-xs-6 rdown">
+        <div class="col-lg-10 ">
+          <p><%= @service_service.beneficiary.cedula_beneficiario   %></p>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+  <%= render 'form', service_service: @service_service %>
+</div>

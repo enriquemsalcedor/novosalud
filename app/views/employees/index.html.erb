@@ -1,0 +1,116 @@
+<% unless notice.nil? %>
+<div class="alert alert-success notice">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <p id="notice"><%= notice %></p>
+</div>
+<% end %>
+<section class="container table_flex_five">
+  <%if $empleado == "externo"%>
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.employees_clinic') %></h1>
+  <%else%>  
+  <h1 class="space-title"><%=raw I18n.t ('.general.titles.employees') %></h1>
+  <%end%>  
+  <table id="datatable" class="table table-hover">
+    <thead>
+      <% @employees.each do |employee| %>
+      <tr>
+        <th><%= raw I18n.t('.general.attributes.names') %></th>
+        <th><%= raw I18n.t('.general.attributes.surnames') %></th>
+        <th><%= raw I18n.t('.general.attribute.username') %></th>
+        <th><%= raw I18n.t('.general.attribute.email') %></th>
+        <th><%= raw I18n.t('.employees.attributes.security_profiles_id') %></th>
+        <th><%= raw I18n.t('.employees.attributes.position') %></th>
+        <th><%= raw I18n.t('.general.attribute.confirmed') %></th>
+        <th><%= raw I18n.t('.general.attributes.actions') %></th>
+      </tr>
+      <% end %>
+    </thead>
+    <tbody>
+      <% @employees.each do |employee| %>
+      <tr>
+        <%if employee.confirmed == true %>
+        <td><%= employee.first_name %> <%= employee.second_name %></td>
+        <td><%= employee.surname %> <%= employee.second_surname %></td>
+        <td><%= employee.user.username %></td>
+        <td class="correo"><%= employee.email %></td>
+        <td><%= employee.security_profile.name %></td>
+        <td><%= employee.position.name %></td>
+        <td>Si</td>
+        <td>
+          <% if @permiso_consultar == true %>
+          <%= link_to employee, class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+          <% end -%>
+          <% if @permiso_modificar == true %>
+          <%= link_to edit_employee_path(employee), class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Modificar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-pencil"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.edit")) %>
+          <% end %>
+          <% end -%>
+          <% if @permiso_activar == true %>
+          <% if employee.may_inhabilitar? %>
+          <%= link_to "/employees/#{employee.id}/motive", class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Desactivar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.disable")) %>
+          <%end%>
+          <%else%>
+          <%= link_to "/employees/#{employee.id}/motive", class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Activar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-off"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.enable")) %>
+          <% end %>
+          <%end%>
+          <% end -%>
+          <% if @permiso_eliminar == true %>
+          <%= link_to "/employees/#{employee.id}/redireccionamiento_eliminar", class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Eliminar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-trash"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.delete")) %>
+          <%end%>
+          <% end -%>
+        </td> 
+        <%else%>
+        <td><%= employee.first_name %> <%= employee.second_name %></td>
+        <td><%= employee.surname %> <%= employee.second_surname %></td>
+        <td><%= employee.user.username %></td>
+        <td class="correo"><%= employee.email %></td>
+        <td><%= employee.security_profile.name %></td>
+        <td><%= employee.position.name %></td>
+        <td>No</td>
+        <td>
+          <% if @permiso_consultar == true %>
+          <%= link_to employee, class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.see")) %>
+          <% end %>
+          <% end -%>
+          <% if @permiso_eliminar == true %>
+          <%= link_to "/employees/#{employee.id}/redireccionamiento_eliminar", class: "hvr-skew-backward icon-small", :data => {:toggle=>"tooltip"}, 'title' => "Eliminar" do %>
+          <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-trash"] ) %>
+          <%= content_tag(:span, I18n.t(".general.action.delete")) %>
+          <%end%>
+          <% end -%>
+        </td> 
+        <%end%>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% if @permiso_crear == true %>
+  <%if $empleado == "externo"%>
+  <%= link_to new_employee_path,  class: "hvr-skew-backward"  do %>
+  <%= content_tag(:span, I18n.t('.general.action.register_clinic')) %>
+  <% end %>
+  <%else%>  
+  <%= link_to new_employee_path,  class: "hvr-skew-backward"  do %>
+  <%= content_tag(:span, I18n.t('.general.action.register') << " " << I18n.t('.general.model.employee')) %>
+  <% end %>
+  <%end%>  
+  <% end -%>
+  <% if !@employees.present? %>
+  <div class="alert alert-danger notice col-lg-12 ml-0">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+  </div>
+  <% end %>
+</section>

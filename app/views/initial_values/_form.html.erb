@@ -1,0 +1,70 @@
+<%= form_for(initial_value) do |f| %>
+<% if initial_value.errors.any? %>
+<% end %>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+  <label class="label-form"><%= I18n.t ('.initial_value.attributes.days_validity') %></label>
+    <%= f.number_field :days_validity  %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+
+  <div class="col-lg-12 input_100">
+   <label class="label-form"><%= I18n.t ('.initial_value.attributes.max_refech_service') %></label>
+    <%= f.number_field :max_refech_service %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+   <label class="label-form"><%= I18n.t ('.initial_value.attributes.number_employee') %></label>
+    <%= f.number_field :number_employee %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+   <label class="label-form"><%= I18n.t ('.initial_value.attributes.max_quantity_product') %></label>
+    <%= f.number_field :max_quantity_product %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+        <label class="label-form">Correo electrónico para notificación de cantidad máxima superada</label>
+        <%= f.text_field :email_max_quantity, validate: true,  minlength: '10', maxlength: '50' %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+        <label class="label-form">Correo electrónico del administrador de seguridad</label>
+        <%= f.text_field :email_security, validate: true,  minlength: '10', maxlength: '50' %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+        <label class="label-form">Correo electrónico para notificación de transferencias(Administración)</label>
+        <%= f.text_field :administration_email, validate: true,  minlength: '10', maxlength: '50' %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+        <label class="label-form">Correo electrónico para notificación de transferencias(Central telefónica)</label>
+        <%= f.text_field :call_center_email, validate: true,  minlength: '10', maxlength: '50' %>
+  </div>
+</div>
+
+<div class="col-lg-12 form-group">
+  <div class="col-lg-12 input_100">
+    <label class="label-form"><%= I18n.t ('.initial_value.attributes.days_validity_service') %></label>
+    <%= f.number_field :days_validity_service %>
+  </div>
+</div>
+<div class="col-lg-12 form-group">
+  <div class="col-lg-2 col-lg-offset-7 col-sm-2 col-sm-offset-7 col-md-2 col-md-offset-7">
+    <%= link_to I18n.t('.general.action.cancel'),root_path,class: "hvr-skew-backward"   %>
+  </div>
+  <% if @permiso_modificar == true %>
+    <div class="col-lg-2 pull-right">
+      <%= f.submit :Aceptar,class: "hvr-skew-backward", data: {disable_with: "Guardando ..."} %>
+    </div>
+  <% end -%>
+</div>
+<% end %>

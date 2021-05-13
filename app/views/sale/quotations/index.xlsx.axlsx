@@ -1,0 +1,47 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+	styled_cell_th =  s.add_style  :bg_color => "00A1E1",:width=>50, :fg_color => "FF", :sz => 14, :alignment => { :horizontal=> :center }
+	styled_cell_tr =  s.add_style  :width=>50, :fg_color => "00", :sz => 12, :alignment => { :horizontal=> :center }
+      titulo =  s.add_style   :fg_color => "000000", :sz => 15, :alignment => { :horizontal=> :center,:width=>50 }
+	wb.add_worksheet(:name => "BA_#{params[:desde]}_#{params[:hasta]} ") do |sheet|
+		img = File.expand_path('../../../../assets/images/logo-web.png', __FILE__)
+		sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+			image.width=200
+			image.height=50
+			image.hyperlink.tooltip = "Labeled Link"
+			image.start_at 0, 0
+		end
+		sheet.add_row ["","","","","Fecha: #{Date.today.strftime("%d-%m-%Y")}"]
+		sheet.add_row ["","","","","Hora: #{DateTime.now.strftime("%H:%M")}"]
+		sheet.add_row ["","","","","Usuario: #{current_user.username}"]
+		sheet.add_row ["","", "Servicios"],:style => [titulo,titulo,titulo,titulo], :height => 30
+		sheet.add_row []
+      # Applies the black_cell style to the first and third cell, and the blue_cell style to the second.
+
+
+      sheet.add_row [     
+        "Orden de compra",
+        "Titular",
+        "Producto",
+        "Número de servicio",
+        "Estatus"
+        ], :style => [styled_cell_th ,styled_cell_th ,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th ]
+
+      # Applies the thin border to all three cells
+      unless @quotations.nil?
+        @quotations.each do |quotation|
+           sheet.add_row [ "asdf"
+
+           ],:style => [styled_cell_tr ,styled_cell_tr ,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr ]
+        end
+
+        sheet.add_row []
+
+     end
+  end
+end
+
+
+
+
+

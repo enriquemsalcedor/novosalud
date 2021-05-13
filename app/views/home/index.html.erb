@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="page-header">
+    <h3 class="titles">Nuevos productos</h3>
+  </div>
+  <div>
+    <h4 class="">Individuales</h4>
+  </div>
+  <div class="row display-flex">
+    <% @products.each do |product| %>
+    <div class="col-xs-6 col-sm-4 col-md-3 flexbox">
+      <div class="thumbnail wow slideInLeft">
+        <%= link_to controller: "home" , action: "details", id: product do %>
+        <div class="cont-img img-responsive center">
+          <% if product.image_file_name.nil? %>
+          <div class="ribbon new img-responsive">                                     
+            <div class="theribbon"><%= I18n.t('.general.attribute.new_label') %>
+            </div>
+            <div class="ribbon-background">        
+            </div>
+          </div>
+          <i class="fa fa-cube"></i>
+          <%else%>
+          <div class="ribbon new img-responsive">                                     
+            <div class="theribbon"><%= I18n.t('.general.attribute.new_label') %>
+            </div>
+            <div class="ribbon-background">        
+            </div>
+          </div>
+          <%= image_tag product.image.url(:large) %>
+          <%end%>
+        </div>
+        <div class="mid-1">
+          <div class="special_produc">
+            <span>Bs. <%= number_with_precision(product.price.to_f, precision: 2,delimiter:'.',separator: ',') %></span>
+          </div>
+          <div class="special_produc product_soberano">
+            <span>Bs. S <%= number_with_precision(product.price.to_f/100000, precision: 2,delimiter:'.',separator: ',') %></span>
+          </div>
+          <div class="name_product">
+            <h6 class="p-0 m-0"><%= "#{product.name}"%></h6>
+            <h6 class="p-0 m-0"><%= "#{product.provider_provider.name}" %></h6>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+    <%end%>
+
+  </div>
+  <div class="col-lg-12 col-md-12">
+    <%= link_to I18n.t('.general.attribute.see_more') ,list_path, class: "float_right" %>
+  </div>
+  <div class="page-header">
+    <h4>Empresas<!-- <small>Click add to cart</small> --></h4>
+  </div>
+  <div class="row display-flex" >
+    <% @products2.each do |product| %>
+    <div class="col-xs-6 col-sm-4 col-md-3 flexbox">
+      <div class="thumbnail">
+        <%= link_to controller: "home" , action: "details", id: product do %>
+        <div class="cont-img img-responsive center">
+          <% if product.image_file_name.nil? %>
+          <div class="ribbon new img-responsive">                                     
+            <div class="theribbon"><%= I18n.t('.general.attribute.new_label') %>
+            </div>
+            <div class="ribbon-background">        
+            </div>
+          </div>
+          <i class="fa fa-cube"></i>
+          <%else%>
+          <div class="ribbon new img-responsive">                                     
+            <div class="theribbon"><%= I18n.t('.general.attribute.new_label') %>
+            </div>
+            <div class="ribbon-background">        
+            </div>
+          </div>
+          <%= image_tag product.image.url(:large) %>
+          <%end%>
+        </div>
+        <div class="mid-1">
+          <div class="special_produc">
+            <span>Bs. <%= number_with_precision(product.price.to_f, precision: 2,delimiter:'.',separator: ',') %></span>
+          </div>
+          <div class="special_produc product_soberano">
+            <span>Bs. S <%= number_with_precision(product.price.to_f/100000, precision: 2,delimiter:'.',separator: ',') %></span>
+          </div>
+
+          <div class="name_product">
+            <h6 class="p-0 m-0"><%= "#{product.name}"%></h6>
+            <h6 class="p-0 m-0"><%= "#{product.provider_provider.name}" %></h6>
+          </div>
+        </div>
+        <%end%>
+      </div>
+    </div>
+    <%end%>
+
+  </div>
+  <div class="col-lg-12 col-md-12">
+    <%= link_to I18n.t('.general.attribute.see_more') ,plist_path, class: "float_right" %>
+  </div>
+
+</div>
+
+<div style="text-align: center; margin-bottom: 30px; margin-top: 60px;">
+          <video controls=""  controlslist="nodownload" autoplay="" width="50%" height="50%"><source src="http://novosalud.com.ve/wp-content/uploads/2015/12/Novo-en-línea.mp4" type="video/mp4"></video>
+</div>

@@ -1,0 +1,16 @@
+<% if current_user %>
+  <%= auto_session_timeout_js %> <!-- me ejecutara la gema auto-session-timeout-->
+<%end%>  
+    <ul class="nav navbar-nav">
+      <%if current_user.present? %>
+        <%if @user_employee.security_profiles_id == 5 %>
+
+          <%= render "partials_security/menu_caja" %>
+        <%else%>
+          
+        <%= render "partials/admin/adminmenu" %>  
+        <%end%>
+      <%end%>
+    </ul>
+  </div>
+</nav>

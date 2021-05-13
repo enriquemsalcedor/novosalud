@@ -1,0 +1,2 @@
+class MovementService < ApplicationRecord
+end

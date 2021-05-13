@@ -1,0 +1,1 @@
+json.array! @business_company_types, partial: 'business_company_types/business_company_type', as: :business_company_type

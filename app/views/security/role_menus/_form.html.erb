@@ -1,0 +1,16 @@
+<%= form_for(@security_role_menu) do |f| %>
+
+  <div class="field">
+    <%= f.label :security_role_id,class:"label-form" %>
+    <%= f.text_field :security_role_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :security_menu_id,class:"label-form" %>
+    <%= f.text_field :security_menu_id %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :Aceptar, :id=>'btnAceptarRoleMenu', data: {disable_with: "Guardando ..."} %>
+  </div>
+<% end %>

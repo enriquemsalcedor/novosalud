@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  user_created_id: 1
+  user_updated_id: 1
+  product_product: one
+  colection_package: one
+
+two:
+  quantity: 1
+  user_created_id: 1
+  user_updated_id: 1
+  product_product: two
+  colection_package: two

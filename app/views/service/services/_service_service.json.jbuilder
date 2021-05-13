@@ -1,0 +1,2 @@
+json.extract! service_service, :id, :date_service, :code, :appointment_date, :user_created_id, :user_updated_id, :beneficiary_id, :provider_medico_provider_id, :motive_id, :payment_contracted_product_id, :status, :created_at, :updated_at
+json.url service_service_url(service_service, format: :json)

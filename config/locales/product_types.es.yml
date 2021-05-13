@@ -1,0 +1,76 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+es:
+  activerecord:
+    # Nombres de Modelos
+    models:
+      product_types:
+        one: "Tipo de Producto"
+        other: "Tipo de Productos"
+
+    attributes:
+      product_types:
+        name: "Nombre"
+        description: "Descripción"
+        created_at: "Fecha de creación"
+        updated_at: "Fecha de modificación"
+        user_created: "Creado por"
+        status: "Estatus"
+
+    errors:
+      models:
+        product/product_type:
+          attributes:
+            name:
+              blank: "Debe ingresar un nombre."
+              taken: "Existe un registro con este nombre."
+            description:
+              blank: "Debe ingresar una descripción."
+
+  product_types:
+    title: "Tipo de Productos"
+    attributes:
+      name: "Nombre"
+      description: "Descripción"
+      created_at: "Fecha de creación"
+      updated_at: "Fecha de modificación"
+      user_created: "Creado por"
+      status: "Estatus"
+    actions:
+      new_product_type: "Registrar Tipo de Producto"
+      edit_product_type: "Editar Tipo de Producto"
+      show_product_type: "Datos del Tipo de Producto"
+      disable: "Inhabilitar"
+      enable: "Habilitar"
+      editing: "Editar"
+      see: "Ver"
+      question:
+        disable: "¿Desea desactivar este tipo de producto?"
+        enable: "¿Desea activar este tipo de producto?"
+      back: "Regresar"
+      accept: "Aceptar"
+    controller:
+      create: "Se creó con éxito el tipo de producto."
+      update: "Se actualizó con éxito el tipo de producto."
+      destroy: "Se eliminó con éxito el tipo de producto."
+      disable: "Se desactivó con éxito el tipo de producto."
+      enable: "Se activó con éxito el tipo de producto."

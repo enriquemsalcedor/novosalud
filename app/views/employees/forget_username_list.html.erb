@@ -1,0 +1,56 @@
+  <% unless notice.nil? %>
+  <div class="alert alert-success notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <p id="notice"><%= notice %></p>
+  </div>
+  <% end %>
+  <%$forget = params[:action]%>
+  <section class="container table_flex_five">
+    <h1 class="space-title"><%=raw I18n.t ('.general.titles.forget_username_list') %></h1>
+    <table class="table table-hover" id="datatable">
+      <thead>
+        <% @employees.each do |employee| %>
+        <tr>
+          <th><%= raw I18n.t('.general.attributes.names') %></th>
+          <th><%= raw I18n.t('.general.attributes.surnames') %></th>
+          <th><%= raw I18n.t('.general.attribute.identification_document') %></th>
+          <th><%= raw I18n.t('.general.attribute.username') %></th>
+          <th><%= raw I18n.t('.general.attributes.actions') %></th>
+        </tr>
+        <% end %>
+      </thead>
+      <tbody>
+         <% @employees.each do |employee| %>
+        <tr>
+          <td><%= employee.first_name %> <%= employee.second_name %></td>
+          <td><%= employee.surname %> <%= employee.second_surname %></td>
+          <td><%= employee.type_identification %>-<%= employee.identification_document %></td>
+          <td><%= employee.user.username %></td>
+          <td>
+            <% if @permiso_consultar == true %>
+            <%= link_to "/employees/#{employee.id}/show_list", class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Ver" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-eye-open"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.see")) %>
+            <% end %>
+            <% end -%>
+            <% if @permiso_reenviar_usuario == true %>
+            <%= link_to "/employees/#{employee.id}/resend_username", method: :put, data: { confirm: I18n.t('.general.action.question.employee.forget')}, class: "hvr-skew-backward", :data => {:toggle=>"tooltip"}, 'title' => "Reenviar usuario" do %>
+            <%= content_tag(:i, nil, class: ["glyphicon", "glyphicon-envelope"] ) %>
+            <%= content_tag(:span, I18n.t(".general.action.forget")) %>
+            <%end%>
+            <% end -%>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% if !@employees.present? %>
+    <div class="alert alert-danger notice col-lg-12 ml-0">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <p><%= raw I18n.t('.general.attribute.list_empty') %></p>
+    </div>
+    <% end %>
+    <div class="col-md-4 item-grid1 simpleCart_shelfItem">
+      <%= will_paginate @employees %>
+    </div>
+  </section>

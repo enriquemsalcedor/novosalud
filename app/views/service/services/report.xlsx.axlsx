@@ -1,0 +1,77 @@
+wb = xlsx_package.workbook
+wb.styles do |s|
+      styled_cell_th =  s.add_style  :bg_color => "00A1E1",:width=>50, :fg_color => "FF", :sz => 14, :alignment => { :horizontal=> :center }
+      styled_cell_tr =  s.add_style  :width=>50, :fg_color => "00", :sz => 12, :alignment => { :horizontal=> :center }
+      styled_cell_tr_right =  s.add_style  :width=>50, :fg_color => "00", :sz => 12, :alignment => { :horizontal=> :right }
+      titulo =  s.add_style   :fg_color => "000000", :sz => 15, :alignment => { :horizontal=> :center,:width=>60 }
+      wb.add_worksheet(:name => "SA_#{params[:desde]}_#{params[:hasta]} ") do |sheet|
+            img = File.expand_path('../../../../assets/images/logo-web.png', __FILE__)
+            sheet.add_image(:image_src => img, :noSelect => true, :noMove => true, :hyperlink=>"http://axlsx.blogspot.com") do |image|
+                  image.width=200
+                  image.height=50
+                  image.hyperlink.tooltip = "Labeled Link"
+                  image.start_at 0, 0
+            end
+            sheet.add_row ["","","","","","","","","","","","","Fecha: #{Date.today.strftime("%d-%m-%Y")}"]
+            sheet.add_row ["","","","","","","","","","","","","Hora: #{Time.now.strftime("%H:%M")}"]
+            sheet.add_row ["","","","","","","","","","","","","Usuario: #{current_user.username}"]
+            sheet.add_row ["","","","","", "Servicios Activados"],:style => [titulo,titulo,titulo,titulo,titulo,titulo], :height => 30
+            sheet.add_row []
+      # Applies the black_cell style to the first and third cell, and the blue_cell style to the second.
+
+      sheet.add_row ["Número del servicio", "Número orden de compra", "Código cotización","Cédula de identidad/RIF","Nombre(s) y apellido(s)/Razón social", "Cédula de identidad (Beneficiario)","Nombre del beneficiario","Teléfono del beneficiario","Fecha de nacimiento del beneficiario", "Servicio","Centro médico","Fecha de cita","Precio"],
+      :style => [styled_cell_th ,styled_cell_th ,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th,
+            styled_cell_th,styled_cell_th,styled_cell_th,styled_cell_th, styled_cell_th, styled_cell_th,styled_cell_th ],
+      :widths=>[25, 20, 15,70,40, 40, 40,40,45, 45, 60, 31, 20]
+      # Applies the thin border to all three cells
+      @service_services.each do |service_service|
+            sheet.add_row [service_service.code, service_service.payment_contracted_product.payment_plan.number_plan, service_service.payment_contracted_product.payment_plan.sale_quotation.quoting_number,
+                  unless service_service.payment_contracted_product.payment_plan.customer.nil?
+                        service_service.payment_contracted_product.payment_plan.customer.identificacion_usuario
+
+                  else
+                        service_service.payment_contracted_product.payment_plan.business_company.identificacion_company
+                  end,
+                  unless service_service.payment_contracted_product.payment_plan.customer.nil?
+                        service_service.payment_contracted_product.payment_plan.customer.nombre_usuario
+                  else
+                        service_service.payment_contracted_product.payment_plan.business_company.name
+                  end,
+                  unless service_service.beneficiary.nil?
+                        "#{service_service.beneficiary.people.type_identification} #{service_service.beneficiary.people.identification_document}"
+                  end,
+                  unless service_service.beneficiary.nil?
+                        "#{service_service.beneficiary.people.first_name} #{service_service.beneficiary.people.surname}"
+                  end,
+                  unless service_service.beneficiary.nil?
+                        "#{service_service.beneficiary.people.phone}"
+                  end,
+                  unless service_service.beneficiary.nil?
+                        "#{service_service.beneficiary.people.date_birth.strftime("%d-%m-%Y")}"
+                  end,
+                  service_service.payment_contracted_product.product_product.name,
+                  service_service.payment_contracted_product.product_product.provider_provider.name,
+                  if service_service.appointment_date.nil?
+                  else
+                        service_service.appointment_date.strftime("%d-%m-%Y")
+                  end,
+                   number_with_precision(service_service.payment_contracted_product.price_contracted.to_f, precision: 2, delimiter:'.',separator: ',')
+
+                  ],:style => [styled_cell_tr ,styled_cell_tr ,styled_cell_tr,styled_cell_tr,styled_cell_tr,
+                        styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr, styled_cell_tr]
+
+      end
+      sheet.add_row []
+      sheet.add_row ["","","","","","","","","","","","Monto total de servicios activados: ","Bs. #{number_with_precision($total_servicios_activados.to_f, precision: 2, delimiter:'.',separator: ',')}"],
+      :style => [styled_cell_tr ,styled_cell_tr ,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,
+        styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr_right, styled_cell_tr,styled_cell_tr]
+      sheet.add_row ["","","","","","","","","","","","Total servicios activados:"," #{@service_services.count}"],
+      :style => [styled_cell_tr ,styled_cell_tr ,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,
+        styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr_right, styled_cell_tr,styled_cell_tr]
+      sheet.add_row [],
+      :style => [styled_cell_tr ,styled_cell_tr ,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,
+        styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr,styled_cell_tr, styled_cell_tr,styled_cell_tr],
+      :widths=>[:auto, :auto, :auto,:auto, :auto, :auto,:auto, :auto, :auto,:auto, :auto, :auto, :auto]
+      sheet.column_widths nil, 35,35,35,50,40
+  end
+end
